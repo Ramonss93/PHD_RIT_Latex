@@ -1,0 +1,77 @@
+%% CHAPTER
+\chapter{Background and Theory}
+\section{Water Quality Parameters Retrieval}
+\cite{Jensen}
+\cite{Mustard2001}
+\subsection{Governing Equation}
+
+\hl{The comparison is performed in the reflectance domain.}
+
+\hl{CHL, SM and CDOM explanation}
+
+From the total energy coming from the sun, only approximately 1390 $\left[\frac{W}{m^2}\right]$ reaches the Earth's atmosphere \cite{Schott}. This integrated value is known as the \emph{exoatmospheric irradiance}, or $E_S'$, and represents the total energy per unit area just outside the Earth's atmosphere due to the solar energy. Recall that \emph{irradiance} is the rate at which the radiant flux ($\Phi$) is delivered to a surface ($A$), defined as
+
+\begin{equation} \label{eq:irradiance}
+E = \frac{d\Phi}{dA}   \indent   \indent  \left[\frac{W}{m^2}\right]  
+\end{equation} 
+
+So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point source at the center of the sun such that it would produce an existence at the sun's surface, producing a flux at the mean Earth-sun distance of 1390 $\left[\frac{W}{m^2}\right]$ . For the present work, it is more convenient to express the irradiance spectrally, or other words as a function of wavelength, so we can describe the energy at desired wavelength, or spectral band.
+
+The light source, usually the sun, interact with the target and then reach the sensor. This interaction will help us to extract about the target, in this case the water body. That is why in order to understand how the water quality parameter are retrieved, first it is necessary to introduce the concept of sensor reaching radiance. The sensor reaching radiance is defined as the accumulation of photons at the front of a sensor that one wishes to collect in an effort to obtain information about the target \cite{Gerace}. The total sensor-reaching radiance is the sum of the radiances due to the individual solar and thermal paths.  \cite{Schott} shows that in the VNIR region (approximately 0.3-2.5 [$\mu m$]), the solar energy is so many orders of the magnitude higher than the self-emitted energy, so the thermal paths are negligible for this study. Also, we consider that radiance from the background is negligible because the water bodies are typically several kilometers wide. Assuming that the target is approximately Lambertian (radiance is equal in all directions), the total sensor-reaching radiance, $L$, is defined as
+
+\begin{equation} \label{eq:gov1}
+L(\lambda) = \frac{E'_S(\lambda)cos(\sigma')r(\lambda)\tau_1(\lambda)\tau_2(\lambda)}{\pi} +
+                        \frac{E_{ds}(\lambda)r(\lambda)\tau_2(\lambda)}{\pi} + L_{us}(\lambda)
+\end{equation} 
+where:
+\begin{tabbing}
+\indent \indent \indent  $L(\lambda)$ \hspace{1mm}\=:  \indent \= total sensor-reaching radiance\\
+\indent \indent \indent  $E'_S(\lambda)$\>: \>exoatmospheric spectral irradiance\\
+\indent \indent \indent $\sigma'$\>:\>solar-zenith angle\\
+\indent \indent \indent $r(\lambda)$\>:\>spectral reflectance target\\
+\indent \indent \indent $\tau_1(\lambda)$\>:\>Sun-target path transmission of atmosphere\\
+\indent \indent \indent $\tau_2(\lambda)$\>:\>target-sensor path transmission of atmosphere\\
+\indent \indent \indent $E_{ds}(\lambda)$\>:\>solar downwelling irradiance\\
+\indent \indent \indent $L_{u}(\lambda)$\>:\>solar upwelling irradiance\\
+\end{tabbing}
+
+Equation \eqref{eq:gov1} is the solar term of the "big equation" described by \cite{Schott}.
+
+\subsection{Constituent Retrieval}
+
+When imaging water body, a set of new paths need to be taken in account to determine the sensor-reaching radiance.
+ \begin{figure}[H]
+	\centering
+    	\includegraphics[width=100mm]{/Users/javier/Desktop/Javier/MASTER_RIT/2011_THESIS/LaTeX/Thesis/Images/WaterColumn.eps}
+ 	\caption{Contributions to sensor-reaching radiance from the water column \label{fig:WaterColumn}}
+  \end{figure}
+
+
+Each sensor-reaching radiance curve is associated with a specific combination of water components (CHL, SM and CDOM). HidroLight provides us the \hl{remote sensing reflectance}, $R_{RS}$, which describes how much of the total incident downwelling irradiance is ultimately returned from a water column in a given direction, defined as
+
+\begin{equation} \label{eq:Rrs}
+R_{RS}(\theta,\phi,\lambda,z=a) = \frac{L(\theta,\phi,\lambda,z=a)}{E_d(\lambda,z=a)}   \indent   \indent  \left[\frac{1}{sr}\right]  
+\end{equation} 
+where:
+\begin{tabbing}
+\indent \indent \indent  $\theta$ \hspace{1.5mm}\=:  \indent \= sensor-zenith angle\\
+\indent \indent \indent  $\phi$\>: \>sensor-azimuth angle\\
+\indent \indent \indent $L$\>:\>water-leaving radiance\\
+\indent \indent \indent $E_d$\>:\>total downwelling irradiance\\
+\indent \indent \indent $\lambda$\>:\>wavelength dependent\\
+\indent \indent \indent $a$\>:\>height just above the water's surface\\
+\end{tabbing}
+
+
+
+\section{Shallow Water Retrieval}
+\section{LUT Method}
+\subsection{Population}
+\subsection{Optimization Algorithm  - lsqnonlin}
+
+\section{State of the Research}
+
+As shown in \cite{Gerace}
+and \cite{Mobley} and \cite{Lesser}
+
+\section{Atmospheric Compensation}
