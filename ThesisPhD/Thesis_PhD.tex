@@ -26,13 +26,13 @@
 
 
 
-\title{Atmospheric Compensation for WorldView-2 Satellite and In-Water Component Retrieval}
+\title{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
 \author{
-	\textsc{J.A. Concha}%\thanks{Contact Author}
+	\textsc{Javier A. Concha}%\thanks{Contact Author}
 	\mbox{}\\
 	Center for Imaging Science\\ 
 	Rochester Institute of Technology\\
-	Rochester, NY, \underline{USA}\\
+	Rochester, NY, USA\\
 	\mbox{}\\
 	\normalsize
 		\texttt{jxc4005@rit.edu}
@@ -91,8 +91,13 @@
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 
+The Landsat Data Continuity Mission (LDCM; a.k.a. Landsat-8), recently launched (February 2013), is the next generation of Landsat satellite and continues with more than 40 years of continuing imaging acquisition, playing a critical role in monitoring, understanding and managing natural resources such as water. Landsat-8, with its improved spectral bands and radiometric resolution, has the potential to dramatically improve our ability to simultaneously retrieve the three primary coloring agents, chlorophyll (Chl), colored dissolved organic material (CDOM) and suspended material (SM) from water bodies. This work presents the results obtained so far. To date, the method has been tested on Landsat-5 images because Landsat-8 images are still not available.
 
-In the present work, the WorldView-2 (WV2) capability for retrieving Case 2 water components is analyzed. The WV2 sensor characteristics, such as a 11-bit quantization, 8 bands in the VNIR and high Signal-to-Noise Ratio (SNR) make WV2 potentially suitable for a retrieval process. In the Case 2 water problem, the sensor-reaching signal due to water is very small when compared to the signal due to the atmospheric effects. Therefore, adequate atmospheric compensation becomes an important first step to accurately retrieving water parameters. The problem becomes more difficult when using multispectral imagery as there are typically only a handful of bands suitable for performing atmospheric compensation. In this work, we develop atmospheric compensation techniques designed specifically for the WV2 satellite, enabling it to be used for water constituent retrieval in both deep and shallow water. A look-up-table (LUT) methodology is implemented to retrieve the water parameters Chlorophyll, Suspended Materials, Colored Dissolved Organic Matter, bathymetry, bottom type and water clarity for a simulated case study. The in-water radiative transfer code HydroLight is used to simulate reflectance data in this study while the MODTRAN code is used to simulate atmospheric effects. The resulting modeled sensor-reaching radiance can be sampled to a WV2 sensor model to simulate WV2 image data. This data is used to test the described methodology. Finally, a sensitivity analysis is performed to evaluate how sensitive the retrieval process is to adequate atmospheric compensation.
+In the Case 2 water problem, the sensor-reaching signal due to water is very small when compared to the signal due to the atmospheric effects. Therefore, adequate atmospheric correction becomes an important first step to accurately retrieving water parameters. As a first approach, a model based empirical line method (ELM) atmospheric correction method converts sensor-reaching radiance to water leaving reflectance. This model employs pseudo invariant feature (PIF) pixels extraction from Landsat images along with an in water radiative transfer model (HydroLight) to obtain the field spectra. Further atmospheric compensation technique will be investigated.
+
+A look-up-table (LUT) methodology is implemented to retrieve the water parameters. The LUT is created using HydroLight.
+
+Collections of water samples when the satellite passes over the Rochester area are planned for summer 2013. Concentration and inherent optical properties (IOPs) measurement will help to validate the methods.
 
 \chapter*{Acknowledgements}
 
