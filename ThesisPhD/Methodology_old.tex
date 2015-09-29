@@ -1,0 +1,410 @@
+% !TEX root=ProposalJavier.tex 
+% the previous is to reference main .bib
+%% CHAPTER
+\chapter{Methodology and Approach}
+\label{ch:method}
+
+The methodology is separated into the specific objectives mentioned in Section \ref{ch:objectives}. In this work, a look-up-table (LUT) methodology was implemented to retrieve concentration of water constituents using Landsat 8 imagery. Figure~\ref{fig:retrieval} shows a diagram of this retrieval process. First, the Landsat 8 image data (shown at the top of the figure) needs to be atmospherically corrected. Then, a non-linear optimization routine uses the water pixels (reflectance values) and a LUT of reflectance spectra to estimate concentrations for each water pixels in the scene. The outputs to the process are concentration maps for each water constituents, as shown in Figure~\ref{fig:retrieval}. This process is explained in details in Subsections \ref{sec:atmcorr} and \ref{sec:retrieval} below.
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/Retrieval.pdf}
+  \caption{Retrieval process diagram. \label{fig:retrieval} } 
+\end{figure}
+
+\section{Over-Water Atmospheric Correction} 
+\label{sec:atmcorr}
+The first objective in this research is to identify a suitable approach to atmospherically correct the type of dataset provided by the OLI sensor. This is a complex task to perform over water because the signal leaving the water that reaches the sensor is very small compared to the signal reaching the sensor from atmospheric scattering. Most of the atmospheric correction algorithms applied to ocean color satellites are not suitable for highly turbid coastal waters because the {\it black pixel assumption} cannot be applied to these types of waters~\cite{Patt2003}. Two methods are be investigated in this research.
+
+\subsection{Solar-Glint Removal Algorithm}
+{\todo{Complete this section}}
+
+\subsection{Model-based ELM}
+The first method will be a model-based empirical line method (ELM) based on previous work done by \cite{Gerace:2013} and \cite{Gerace:2012}  for simulated OLI data. While this new method is based on the traditional ELM method (see Section \ref{subsec:ELM}), this model-based ELM method tries to avoid the measurement of ground truth at every sensor passover over the scene by using pseudo-invariant features (PIF) \index{pseudo-invariant features (PIF)} in the scene as one target along with a estimation of water reflectivity for an open lake region for the other target. The two targets used in this model-based ELM to solve the regression in \autoref{eq:ELM} are referred to in this documents as the {\it bright pixel} \index{bright pixel} and the {\it dark pixel}\index{dark pixel}.
+
+This method employs a PIF pixel extraction \cite{Schott:1988} to mask urban landscape from both the reflectance product and the Landsat 8 image for the bright pixel determination. Pseudo-invariant targets are defined as targets whose reflectivity properties do not change rapidly between different times of collection. Examples of pseudo-invariant target are urban features in the scene.  The PIF extraction isolates the pseudoinvariant features from the digital imagery. In our case, the PIF are the man-made urban features in a scene. A flowchart of the process is shown in \autoref{fig:PIFflowchart}. 
+
+\begin{figure}[htb]
+	\centering
+  \begin{tikzpicture}[node distance=0.75cm, auto]
+          \tikzset{
+                  basenode/.style={rectangle,rounded corners,draw=black,very thick, inner sep=1em, minimum size=3em, text centered,text width=2cm},
+                  productnode/.style={ellipse,rounded corners,draw=black, very thick, text centered,text width=1.5cm},
+                  myarrow/.style={->,>=stealth',thick, double = black},
+                  mylabel/.style={text width=7em, text centered}
+          }
+          % SWIR branch
+          \node[basenode] (SWIR) {SWIR 2\\ Band};
+          \node[basenode, below=of SWIR] (TS1) {Mask by Threshold (upward)};
+          \node[align=left, right=0.0 of TS1] (C1) {Urban\\Veget.\\Water};
+          \node[align=left, right=-0.15 of C1] (C2) {ON\\ON\\OFF};
+
+          % Ratio branch
+          \node[basenode, right=2.5cm of SWIR] (Ratio) {Ratio\\ NIR Band/ Red Band};
+          \node[basenode, below=of Ratio] (TS2) {Mask by Threshold (downward)};
+          \node[align=left, right=0.0 of TS2] (C3) {Urban\\Veget.\\Water};
+          \node[align=left, right=-0.15 of C3] (C4) {ON\\OFF\\ON};
+
+          % AND
+          \path (TS1.south)--(TS2.south) node[pos=.5,below=2cm] (AND) {.AND.};
+
+
+          % PIF Mask
+          \node[basenode, below=of AND] (PIFMask){PIF Mask};
+          \node[align=left, left=0.85 of PIFMask] (C5) {Urban\\Veget.\\Water};
+          \node[align=left, right=-0.15 of C5] (C6) {ON\\OFF\\OFF};
+
+          \node[basenode, below=of TS2,right=2.0cm of AND] (Image) {Image};
+          \path (Image.south)--(PIFMask.east) node[below=of Image,right=2cm of PIFMask] (AND2) {.AND.};
+          \node[basenode, right=2cm of AND2] (PIFIm){PIF Image};
+
+          \draw[myarrow] (SWIR)--(TS1);
+          \draw[myarrow] (Ratio)--(TS2);
+          \draw[myarrow] (TS1)--(AND);
+          \draw[myarrow] (TS2)--(AND);
+          \draw[myarrow] (AND)--(PIFMask);
+          \draw[myarrow] (Image)--(AND2);
+          \draw[myarrow] (PIFMask)--(AND2);
+          \draw[myarrow] (AND2)--(PIFIm);
+  \end{tikzpicture}
+\caption{Illustration of the logic used to segment PIF features. \label{fig:PIFflowchart}}
+\end{figure}
+
+The PIF extraction from digital imagery proceeds in the following fashion. An infrared-to-red ratio image is very effective in the classification of water, vegetation, and urban features. The vegetation in this ratio image will tend to have a high brightness when compared to the urban features and water brightness. This infrared-to-red ratio image can be derived from the quotient of the NIR band (band 4 for Landsat-5; band 5 for Landsat-8) and the red band (band 3 for Landsat-5,band 4 for Landsat-8), as seen in \autoref{fig:PIFflowchart}. This ratio image is thresholded from the high digital count values downward to create a mask so the high brightness pixels are eliminated (vegetation pixels) from the image, that is, these pixels are set to a value of zero and the rest (water and urban pixels) to a value of one. The SWIR 2 band (band 7 in Landsat-5 and Landsat-8) is used to eliminate the water pixels from the previous mask since water has nearly zero reflectance in this spectral region. This SWIR 2 band is thresholded from the low brightness values upward. Water pixels will exhibit a low value when compare to the rest of the pixels. A mask is created by assigning a value of zero to the low brightness pixels (water pixels) and a value of one to the rest (urban features and vegetation). Finally, the two mask created are combined using a logical .AND. resulting in a mask that will have a value of one only in the urban feature pixels, i.e. the PIFs, as shown in \autoref{fig:PIFflowchart}. This mask will be named PIF mask for the rest of this document. An example of a PIF mask is illustrated in \autoref{fig:PIFmask}. A false color image of the Downtown Rochester, NY is shown on the left (vegetation in red) and a RGB image of the same area with the PIF mask applied is shown on the right (urban features in bright color while masked pixels in black).
+
+% \vspace{-.3cm}
+\begin{figure}[htb]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[trim=30 0 30 0,clip,height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/DTROCL8falsecolor.jpg}  
+    % \vspace{1.5cm}
+    \centerline{(a)}\medskip
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.48\linewidth}
+    \centering
+      \includegraphics[trim=30 0 30 0,clip,height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFmaskApplied.jpg}
+    % \vspace{1.5cm}
+    \centerline{(b)}\medskip
+  \end{minipage}
+  \caption{PIF mask determination. (a) False color image, with vegetation in red and (b) PIF mask over downtown Rochester. \label{fig:PIFmask} } 
+\end{figure}
+
+The PIF mask is used to determine the bright pixel spectra in both radiance (from the Landsat 8 image) and reflectance values (from the Landsat Surface Reflectance CDR \cite{LandsatCDR} image). See Section~\ref{sec:CDR} for more details about the Landsat reflectance product. The Landsat reflectance product was available for a total of 9 Landsat 5 scenes where clear sky conditions were acceptable. One PIF mask for each of these 9 scenes was created using ENVI. In addition, one PIF mask was created from the Landsat 8 radiance image. Finally, these 10 PIF masks were combined to create a ``master'' PIF mask \index{master PIF mask}. Then, the statistics were calculated in ENVI for each scene using this master PIF mask. An example of the statistical results obtained from ENVI are shown in \autoref{fig:PIFstats}.(a) and \autoref{fig:PIFstats}.(b) for one scene of the Landsat reflectance product (in reflectance units) and for the Landsat 8 image (in radiance units), respectively. The mean value is shown in black solid line, the green solid lines are the mean plus standard deviation and the mean minus standard deviation, and the red solid lines are the maximum and minimum values for each band. The mean values for each one of the 9 scenes are shown in \autoref{fig:ZenithCorr}. 
+
+\begin{figure}[!ht]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFstatCDR.png}  
+    % \vspace{1.5cm}
+    \centerline{(a)}\medskip
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.48\linewidth}
+    \centering
+      \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFstatL8.png}
+    % \vspace{1.5cm} 
+    \centerline{(b)}\medskip
+  \end{minipage}
+  \caption{Bright pixel determination using the PIF mask in ENVI. Statistics with the PIF mask applied for (a) Landsat reflectance product (in reflectance units) and (b) statistics for Landsat 8 image (in radiances units). \label{fig:PIFstats} } 
+\end{figure}
+
+As seen in \autoref{fig:ZenithCorr}, the PIF reflectance values for each scene are not the same, but a high correlation between the reflectance values and the solar zenith angle for each band was found. A linear relationship was determined for each band by applying a linear regression in MATLAB and the $R^2$ and root mean square error (RMSE) values were calculated as a way to measure this correlation. This linear relationship has the form 
+\begin{equation}
+	y = m*x + y_0
+	\label{eq:linear}
+\end{equation}
+where $x$ represents the solar zenith angle and $m$ the reflectance value. \autoref{fig:Band1Corr} shows the reflectance values versus the solar zenith angle for band 1 for the 9 Landsat reflectance scenes and the calculated linear relationship. The values $m$ and $y_0$ found for all the bands are shown in \autoref{tab:ZenithCorr} along with the $R^2$ and RMSE values for each band. It can been seen in \autoref{tab:ZenithCorr} the $R^2$ values are bigger than $90\%$ for all bands, which suggests there are a high correlation between the reflectance values and the solar zenith angle. As a conclusion, these results show that the reflectance values remain constant over time and depend of the solar zenith angle of the sensor. 
+
+The Landsat 8 image has associated a particular solar zenith angle. The previous linear relationships calculated will help to estimate the values for the reflectance value of the bright pixel for that particular solar zenith angle. For example, the solar zenith angle for the 09-19-13 Landsat 8 scene is equal to $45^\circ$, and therefore $x=45^\circ$ in \autoref{eq:linear}. The reflectance values for $x=45^\circ$ are shown in the last column of \autoref{tab:ZenithCorr} and plotted in \autoref{fig:ZenithCorr} in red asterisks.
+%--------------------------------------
+\vspace{.5cm}
+\begin{table}[!ht]
+\caption{ Zenith angle correction parameters. \label{tab:ZenithCorr} } 
+\centering
+\begin{tabular}{c|c|c|c|c|c} 
+ \bfseries{Band n} & \bfseries{$m$}      & \bfseries{$y_0$}    & \bfseries{$R^2$}     & \bfseries{$RMSE$} & $y(x=45^\circ)$   \\ \hline \hline
+ Band 1 & -0.000412 & 0.122631 & 0.937155 & 0.001705 &  0.1041\\
+ Band 2 & -0.000634 & 0.147424 & 0.934344 & 0.002685 &  0.1189\\
+ Band 3 & -0.000756 & 0.161421 & 0.976599 & 0.001869 &  0.1274\\
+ Band 4 & -0.001316 & 0.220031 & 0.906946 & 0.006733 &  0.1608\\
+ Band 5 & -0.001148 & 0.217231 & 0.903702 & 0.005984 &  0.1656\\
+ Band 6 & -0.001159 & 0.206725 & 0.929626 & 0.005096 &  0.1546\\  
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ZenithCorrelation.eps}
+  \caption{Correlation for band 1. \label{fig:Band1Corr} } 
+\end{figure}
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ZenithCorrection.eps}
+  \caption{Bright pixel for 9 different scenes. \label{fig:ZenithCorr} } 
+\end{figure}
+Because the Landsat reflectance products was not available for Landsat 8 at the moment of writing this documents, it was necessary to estimate a theoretical reflectance value for the coastal band for Landsat 5 in order to match with the Landsat 8 bands. To accomplish this, it was assumed that the coastal band would exhibit a similar trend than the blue and green bands. Hence, a straight-line that passes over the blue and green band values was used to extrapolate the value of the coastal band, as seen in \autoref{fig:Extrapol}, where the estimation of this reflectance value for the coastal band is shown at $443 [nm]$ and the straight-line is shown as a black solid line. It is expected the Landsat reflectance product will be available for Landsat 8 in the future, so the previous step would not be necessary. Finally, the reflectance spectra for the bright pixel is shown in \autoref{tab:brightref}. As was mentioned previously, the radiance spectra for the bright pixel is obtained by applying the master PIF mask to the Landsat 8 image (see \autoref{fig:PIFstats}.(b)).
+\vspace{.5cm}
+\begin{table}[!ht]
+\caption{ Reflectance spectra for the bright pixel. \label{tab:brightref} } 
+\centering
+\begin{tabular}{l|c} 
+ \bfseries{Band} & \bfseries{Reflectance values}\\ \hline \hline
+ Band 1 (Coastal Band) &  0.0965 \\
+ Band 2 (Blue Band) &  0.1039 \\
+ Band 3 (Green Band) &  0.1186 \\
+ Band 4 (Red Band) &  0.1270 \\
+ Band 5 (NIR Band) &  0.1601 \\
+ Band 6 (SWIR 1 Band) &  0.1650 \\ 
+ Band 7 (SWIR 2 Band) &  0.1539 \\ 
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/Extrapolation.eps}
+  \caption{Extrapolation for the coastal band. \label{fig:Extrapol} } 
+\end{figure}
+
+The reflectance spectra for the dark pixel is obtained from {\todo{define Ecolight} Ecolight}. This Ecolight run represents a ROI present in the Landsat 8 radiance image. IOPs and concentrations measurements taken in the field from the same ROI are input to Ecolight. The Case 2 model in Ecolight is used to generate a remote sensing reflectance ($R_{rs}$). This model is a generic four-component (pure water, chlorophyll-bearing particles, CDOM, and mineral particles) IOP model \cite{MobleyHEtech}. The Case 2 model in Ecolight requires to specify the IOPs of each component one at a time. This includes concentration, absorption and scattering coefficient spectra and phase function for each component. The IOPs for each component provided to Ecolight to generate the reflectance spectra for the dark pixel are explained below.
+
+\autoref{tab:ONTNSconc} shows the constituent concentration for two different water samples from the data collection on September, 19th, 2013. These water samples were collected from the nearshore of the Lake Ontario (labeled as ONTNS) and from the southern part of Long Pond (labeled as LONGS), and they represent two scenarios with totally different characteristics. The water sample ONTNS was used to generate the reflectance spectra for the dark pixel in Ecolight. The concentrations for each component were set to be constant with depth with the values shown in \autoref{tab:ONTNSconc}. 
+\vspace{.5cm}
+\begin{table}[!ht]
+\caption{ Water samples concentration for the September, 19th, 2013 collections. \label{tab:ONTNSconc} } 
+\centering
+\begin{tabular}{c|c|c|c} 
+ \bfseries{Sample} & \bfseries{$X_{Chl}$} & \bfseries{$a(\lambda_0=440)$}& \bfseries{$X_{SM}$}\\
+ & $[\mu g/L]$ & $[1/m]$ & $[mg/L]$ \\ \hline \hline
+ONTNS & 0.48 & 0.1151 & 1.6\\ 
+LONGS & 112.76 & xxx & 46.0\\ 
+ \end{tabular}
+\end{table}
+
+The absorption properties for the component chlorophyll were input by user-supplied data files containing mass-specific absorption coefficient as a function of wavelength. This mass-specific absorption spectra is shown in \autoref{fig:CHLaast}. This data was obtained from lab measurements of absorption coefficient spectra for the water sample ONTNS with a {\todo{describe method} spectrophotometric method}. The spectrophotometric method yields absorption coefficients, which are converted to mass-specific absorption coefficient by dividing the absorption coefficient spectra by the concentration. This chlorophyll concentration was determined in lab by a {\todo{describe method} spectrophotometric method} as well. For the chlorophyll scattering properties, the same mass-specific scattering coefficient data used in \cite{Raqueno:2000} and \cite{Raqueno:2003} were utilized. This data is shown in \autoref{fig:CHLbast}. A Fournier-Forand (FF) phase function with backscatter fraction 0.010 was selected a phase function for the chlorophyll. The details about the selection of this phase function will be described {\todo{correct?!} further down}.
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/CHLaastJavier.eps}
+  \caption{Chlorophyll mass-specific absorption spectra used for the determination of the reflectance spectra of the dark pixel in HydroLight. \label{fig:CHLaast} } 
+\end{figure}
+
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/CHLbastRolo.eps}
+  \caption{Chlorophyll mass-specific scattering spectra used for the determination of the reflectance spectra of the dark pixel in HydroLight. \label{fig:CHLbast} } 
+\end{figure}
+
+For the CDOM component, the absorption specification was the following. First, the absorption coefficients were determined by spectrophotometric measurements in lab for the ONTNS water sample. This data is shown in \autoref{fig:CDOMa}. Then, the data were normalized by the absorption value $a(\lambda_0)=0.1151[1/m]$ at the reference wavelength $\lambda_0=440nm$, so that $a^*(\lambda_0)=1$. This normalized data is shown in \autoref{fig:CDOMaast} as purple dots. An exponential curve with the following equation
+\begin{equation}
+	\label{eq:CDOMabs}
+	a^*(\lambda)=a^*(\lambda_0)exp(-\gamma(\lambda-\lambda_0))
+\end{equation}
+was fitted to the normalized data. It was determined that the decay constant $\gamma=0.0126$. The fitted curve is illustrated in \autoref{fig:CDOMaast} in solid line. The parameters of this fitted curve are input in Ecolight to specify the CDOM specific absorption $a^*$, and $a(\lambda_0)=0.1151[1/m]$ to specify the dependence of the CDOM absorption at a reference wavelength.
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ONTNS_CDOMabs.eps}
+  \caption{CDOM absorption coefficient spectra used for the determination of the reflectance spectra of the dark pixel in HydroLight. \label{fig:CDOMa} } 
+\end{figure}
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ONTNS_CDOMfitting.eps}
+  \caption{CDOM mass-specific absorption spectra used for the determination of the reflectance spectra of the dark pixel in HydroLight. \label{fig:CDOMaast} } 
+\end{figure}
+
+The mineral mass-specific absorption coefficient was determined in the same fashion as for the chlorophyll mass-specific absorption coefficient from lab measurements of the ONTNS water sample. The mineral mass-specific absorption coefficient are shown in \autoref{fig:SMaast}. The mineral mass-specific scattering coefficient was the same used by \cite{Raqueno:2000} and \cite{Raqueno:2003} and are shown in \autoref{fig:SMbast}.
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/SMaastJavier.eps}
+  \caption{Mineral mass-specific absorption spectra used for the determination of the reflectance spectra of the dark pixel in HydroLight. \label{fig:SMaast} } 
+\end{figure}
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/SMbastRolo.eps}
+  \caption{Mineral mass-specific scattering spectra used for the determination of the reflectance spectra of the dark pixel in HydroLight. \label{fig:SMbast} } 
+\end{figure}
+
+The following approach was used to determine phase function for both the chlorophyll and mineral particle components. Ecolight was run several times with the different phase function from the library of discretized Fournier-Forand phase functions files supplied with Ecolight 5.2 to created a LUT of reflectance spectra, but maintaining the rest of the parameters the same. These parameters are the corresponding to the ONTNS water sample. The different reflectance spectra generated as output were compared with the reflectance measured in situ. The best match was determining by choosing the lowest root mean squared error (RMSE) between the reflectance measured in situ and the simulated reflectance spectra. It was determined that the best matched corresponds to the discretized Fournier-Forand phase function with a backscatter equal to $0.010$, i.e. $1\%$ of backscatter fraction (FFbb010.dpf). Therefore, this discretized Fournier-Forand phase function is used for both the chlorophyll and mineral particle. \autoref{fig:BestMatchONTNS} illustrated the reflectance measured in situ (red solid line) and the best match reflectance from the LUT (blue solid line), generated with a discretized Fournier-Forand phase function of 0.010 backscatter fraction. It can be seen in \autoref{fig:BestMatchONTNS} that both spectra agree in values above $550nm$, but not below this wavelength. This suggests that there is still need for improvement in the determination of the phase function and rest of the parameters in the Ecolight model.
+
+
+This best matched is used as the reflectance spectra of the dark pixel in the model-based ELM method. This reflectance is further spectrally sample to the Landsat 8 response. 
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RefWithFFbbONTNS.eps}
+  \caption{Reflectance for ONTNS sample and best matching from HydroLight. \label{fig:BestMatchONTNS} } 
+\end{figure}
+
+
+The radiance spectra for the dark pixel is obtained from a ROI in the water present in the Landsat 8 image that could be considered a dark region (i.e. open lake). Statistics are computed in this dark region, and the mean values in each band is used as radiance spectra for the dark pixel.
+
+\missingfigure{figure showing and ROI in the Landsat 8 image and statistic in ENVI}
+
+As a resume, \autoref{fig:ELMpxsENVI} shows the different spectra used to perform the model-based ELM, where four different spectra can be seen: one reflectance and one radiance spectra for the bright pixel (obtained using the PIF extraction over the Landsat reflectance product and Landsat 8 image, respectively), one reflectance spectra for the dark pixel (obtained from HydroLight), and one radiance spectra for bright pixel (obtained from the statistics of a ROI over water in the Landsat 8 image). These spectra are used to atmospherically correct the Landsat 8 image using the ENVI Classic software \cite{ENVIUserGuide}. This is performed using the ``Empirical Line'' algorithm of the ``Calibration Utilities'' in ENVI classic, where the Landsat 8 image is used as the input image, and the reflectance spectra are labeled as ``field spectra'' and the radiance spectra are labeled as ``data spectra.'' The product of this process is an image in reflectance values, which will be used to perform the retrieval of water constituents described in Section \ref{sec:retrieval} below. 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=14cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ELMpixelsENVI.pdf}
+  \caption{Bright and Dark pixels used in ENVI to apply ELM. \label{fig:ELMpxsENVI} } 
+\end{figure}
+
+Preliminary results of the model-based ELM atmospheric correction methods for an area of water in the Rochester, NY region are shown in Figure~\ref{fig:waterpxs}. This figure shows the spectrum of the water pixels after atmospheric correction (in reflectance values), and these exhibit shapes that correspond with the shapes of typical water pixels. Figure~\ref{fig:refcomp} shows water surface reflectance spectra as preliminary results from the model-based ELM method (solid lines) compared with results from a traditional ELM method (dashed lines) for four different regions of interest (ROIs) in the Rochester area (Cranberry Pond, Long Pond, and nearshore and offshore of the Lake Ontario). As can be seen, the atmospheric correction algorithm proposed exhibits less than one reflectance unit of difference in comparison to the results from the traditional ELM algorithm. While small, these differences have a significant impact on the retrieved water constituents. Therefore, the proposed atmospheric correction algorithm will be improved by this research. A further validation with ground-truth data is anticipated at the end of this research.
+% \vspace{-.3cm}
+\begin{figure}[htb]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/WaterPixels_2.eps}
+      \caption{Water pixel spectra after applying the model-based ELM atmospheric correction method.}
+      \label{fig:waterpxs}
+    % \vspace{1.5cm}
+    % \centerline{(a)}\medskip
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.48\linewidth}
+    \centering
+      \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/WaterPixelComparisonELMELMbased}
+      \caption{Comparison between traditional ELM (dashed lines) and model-based ELM (solid lines).}
+      \label{fig:refcomp}
+    % \vspace{1.5cm}
+    % \centerline{(b)}\medskip
+  \end{minipage}
+  % \caption{Water pixel spectra: (a) after atmospheric correction and (b) comparison with traditional ELM method.}
+\end{figure}
+
+\subsection{Gordon's method for atmospheric compensation over water}
+The second atmospheric correction method will be based in the method developed by Gordon~\cite{Gordon:1997} for ocean color satellites (i.e. SeaWiFS, MODIS).
+
+% \subsection{Gordon's method for turbid water}
+% The second atmospheric correction method will be an extension of a method developed for SeaWiFS over turbid coastal and inland waters \cite{Ruddick:2000bs}. This method is a modified version of the methods developed by Gordon \cite{Gordon:1997} for ocean color satellites, but when the signal leaving the water does contribute to the overall signal beyond the NIR part of the spectrum. By using longer wavelengths and restricting the input pixels to open waters, these methods can be  applied to many fresh and coastal regions. The water surface reflectance values obtained after atmospheric correction will be validated through comparison to water surface reflectance measured in situ. 
+
+\subsection{OLI Algorithm for Case 2 Waters (Blue Band)}
+
+\subsection{OLI Algorithm for Case 2 Waters (Band Ratios)}
+% -----------------------------------------------
+\section{LUT generation}
+\begin{table}[!ht]
+\caption{ Concentration for the LUT generation. \label{tab:LUTconc} } 
+\centering
+		\begin{tabular}{c|c|c}
+        		\bfseries{$<CHL>$}  	& \bfseries{$<SM>$}  & \bfseries{$a_{CDOM}(440)$} \\
+		$[ug/L]$  		& $[mg/L]$ & 	$[1/m]$		\\ \hline \hline
+			0.1		& 0.5 	& 0.05	\\
+			0.5		& 1.5	  &	0.1		\\
+			1.0		& 5.0	  &	0.3		\\
+			2.5		& 10.0	&	0.5		\\
+			5.0		& 30.0	&	0.8		\\
+			15.0	& 40.0	&	1.0		\\
+			60.0	& 50.0	&	1.2		\\
+			90.0	& --	  &	1.5		\\
+			120.0	& --	  &	--		\\
+			150.0	& --	  &	-- 		\\    
+	 	\end{tabular}
+	\end{table}
+
+
+ 
+
+\begin{table}[!ht]
+\caption{ Concentration for the LUT generation. \label{tab:LUTconc2} } 
+\centering
+		\begin{tabular}{c|c|c|c|c}
+        		\bfseries{$<CHL>$}  	& \bfseries{$<SM>$}  & \bfseries{$a_{CDOM}(440)$} & \bfseries{$Backscatter$} & IOPs Input\\
+		$[ug/L]$  		& $[mg/L]$ & 	$[1/m]$ &	\bfseries{$Fraction$}, $[\%]$	\\ \hline \hline
+0.1   & 1.0  &  0.11 &  0.5 & ONTNS\\
+0.5   & 2.0  &  0.15 &  1.0 & LONGS\\
+1.0   & 5.0  &  0.21 &  1.5 & --\\
+3.0   & 10.0 &  0.6  &  2.0 & --\\
+10.0  & 25.0 &  1.0  &  --  & --\\
+20.0  & 45.0 &  1.2  &  --  & --\\
+40.0  & 50.0 &  --   &  --  & --\\
+60.0  & --   &  --   &  --  & --\\  
+90.0  & --   &  --   &  --  & --\\  
+110.0 & --   &  --   &  --  & --\\  
+135.0 & --   &  --   &  --  & --\\  
+150.0 & --   &  --   &  --  & --\\     
+	 	\end{tabular}
+	\end{table}
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/CHLaastLONGSJavier.eps}
+  \caption{Chlorophyll mass-specific absorption spectra used to create the LUT in HydroLight. \label{fig:CHLaastLONGS} } 
+\end{figure}
+
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/astar_CDOM_LONGS091913.eps}
+  \caption{CDOM mass-specific absorption spectra used to create the LUT in HydroLight. \label{fig:CDOMaastLONGS} } 
+\end{figure}
+
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/astar_SM_LONGS091913.eps}
+  \caption{SM mass-specific absorption spectra used to create the LUT in HydroLight. \label{fig:SMaastLONGS} } 
+\end{figure}
+
+% -----------------------------------------------
+\section{In-Water Constituent Retrieval Process}
+\label{sec:retrieval}
+\todo{Mention: water mask}The retrieval algorithm will be based on previous work done by Gerace {\it et al.} \cite{Gerace:2013} and Raqueno {\it et al.} \cite{Raqueno:2000}. The water surface reflectance product obtained after atmospheric correction from the previous stage is used as input to the retrieval algorithm. Each pixel in the reflectance product has an unknown concentration. A spectral matching technique is applied to predict this concentration by comparing the spectral shape of each pixel with the elements in a look-up table (LUT). The LUT is generated in HydroLight \cite{MobleyHE} for different triplets of water constituent concentrations. The spectral matching is made by a least square error minimization algorithm using the ``lsqnonlin'' package of the MATLAB's Optimization Toolbox. The output of this process is a concentration mapping for each water constituent that spans the range of constituents levels in the scene. An example of a LUT created in HydroLight is shown in Figure~\ref{fig:results1}. Preliminary results for concentration maps on a logarithmic scale over the area of study are shown in Figure~\ref{fig:results2} (Chlorophyll-{\it a} (CHL) in $[\mu g/L]$, SM in $[mg/L]$, and CDOM in $[1/m]$).
+
+\begin{figure}[htb]
+    \centering
+      \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/LUTPixels_2.eps}
+      \caption{LUT created in HydroLight\label{fig:results1}}
+\end{figure}
+
+\begin{figure}[htb]
+    \centering
+      \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/RetrievalResultLog_2.eps}
+      \caption{Concentration mapping (Log scale).\label{fig:results2}}
+\end{figure}
+
+
+
+\section{Ground Truth Data Collection}
+The area of study for this research is the Lake Ontario Rochester Embayment (latitude: 43°15'32.53"N and longitude: 77°36'13.10"W), which includes some nearby ponds (Long and Cranberry Ponds), the Genesee River plume, the Irondequoit Bay and the southern end of Lake Ontario, as shown in Figure~\ref{fig:areaofstudy1} and Figure~\ref{fig:areaofstudy2}. This area was selected because it exhibits a wide range of variability in concentration of water constituents, so the retrieval algorithm can be tested with different scenarios. Landsat 8 images from this area of study and corresponding water samples collected at the time of the satellite's overpass will be used to test the retrieval algorithm. So far, there are only three satisfactory images available from the summer 2013. This project contemplates performing one new ground truth data collection during 2014. Therefore, images from the 2013-2014 spring and summer collection seasons will be used to test the methodology. Note that a difficult challenge of this research is to obtain images with relatively clear weather conditions (i.e. cloud free) over the area of study.
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy1.pdf}
+  \caption{Area of Study. \label{fig:areaofstudy1} } 
+\end{figure}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy2.pdf}
+  \caption{Area of Study. \label{fig:areaofstudy2} } 
+\end{figure}
+
+In order to have outputs in HydroLight that are representative of the water bodies that are being studied, inherent optical properties (IOPs) of those specific waters have to be defined as input to the HydroLight model. After collection, these water samples need to be analyzed in the lab to obtain IOPs for the main water constituents. Furthermore, apparent optical properties (AOPs) (i.e. water surface reflectance) and backscattering measurements will be also collected for further comparison and to pursue closure between the HydroLight AOPs results and in-situ AOPs measurements.
+
+\section{Validation}
+The results from the retrieval process will be validated by comparison with the concentration of water samples taken during field campaigns in the spring and summer of 2013, 2014 and 2015. These concentrations will be obtained from lab measurements made at the Rochester Institute of Technology. For further validation, the results will be compared with products derived from ocean color satellites such as MODIS (e.g. MODIS Chl-{\it a} product), in regions where it is possible.
+% \section{OLI Sensor}
+% \subsection{Sensor Response}
+% Noise level. Quantization. SNR.
+
+% \section{Retrieval Process}
+% \subsection{The Look-Up Table}
+
+
+% \subsubsection{Real Atmosphere Conditions}
+
+% \section{Over-Water Atmospheric Compensation}
+% \subsection{Model Based Empirical Line Method}
+
+% \subsubsection{Pseudo Invariant Features}
+
+% This model employs pseudo-invariant feature (PIF) pixels extraction from the Landsat Climate Data Record (CDR) Surface Reflectance product along with an in-water radiative transfer model (HydroLight) to obtain the field spectra to be used in the ELM method. 
+%  A mask is created applying a threshold a the ratio between the NIR band and the red band. 
+%  A mask is created applying a threshold to the SWIR 2 band. 
+
+% The model based empirical line method (MBELM) atmospheric correction method is based in the well known empirical line method (ELM).
+
+% \subsection{LUT Method}
+
+\section{Concluding Remarks}

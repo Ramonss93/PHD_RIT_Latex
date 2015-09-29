@@ -1,0 +1,348 @@
+% **********************************************
+%  This is the RIT, Center for Imaging Science *
+%  style file that creates front matter for    *
+%  the Ph.D and M.S. degrees in both thesis    *
+%  and proposal form                           *
+%                                              *
+%  Front matter pages created are:             *
+%   -Declaration page                          *
+%   -Approval page                             *
+%   -Copyright page                            *
+%   -Abstract page                             *
+%   -Acknowledgements page                     *
+%   -Dedication page                           *
+%                                              *
+%  Created by:                                 *
+%  Emmett J. Ientilucci                        *
+%  Rochester Institute of Technology           *
+%  Center for Imaging Science                  *
+%  Rochester, NY 14623                         *
+%  emmett@cis.rit.edu                          *
+%                                              *
+%  Modification History                        *
+%    Original code: 11/18/2002                 *
+%    7/23/04:                                  *
+%       Added committee members on the         *
+%       PhD proposal page                      *
+%    7/12/05:  Fixed typo on certification pg  *
+% **********************************************
+
+\NeedsTeXFormat{LaTeX2e}[1996/12/01]
+\ProvidesPackage{thesisfrontmatter}[2002/11/18 v1.0 RIT Thesis Frontmatter Creation]
+
+%\setlength{\textwidth}{15cm} %Default page width for book class is about 13cm
+%\setlength{\textheight}{18cm}  %Default page height for book class is about 19cm
+
+\DeclareOption{phd}{\newcommand{\kind}{dissertation}
+                    \newcommand{\kindcap}{Dissertation}
+                    \newcommand{\kindallcap}{DISSERTATION}
+                    \newcommand{\kindspelledout}{Doctor of Philosophy}
+                    \newcommand{\letters}{Ph.D.}}
+\DeclareOption{ms}{ \newcommand{\kind}{thesis}
+                    \newcommand{\kindcap}{Thesis}
+                    \newcommand{\kindallcap}{THESIS}
+                    \newcommand{\kindspelledout}{Master of Science}
+                    \newcommand{\letters}{M.S.}}
+\ProcessOptions*
+
+\newcommand{\degreetitle}[1]{\gdef \@degreetitle{#1}}
+\newcommand{\degreeauthor}[1]{\gdef \@degreeauthor{#1}}
+\newcommand{\prevdegreeA}[1]{\gdef \@prevdegreeA{#1}}
+\newcommand{\prevdegreeB}[1]{\gdef \@prevdegreeB{#1}}
+\newcommand{\prevdegreeC}[1]{\gdef \@prevdegreeC{#1}}
+\newcommand{\degreedate}[1]{\gdef \@degreedate{#1}}
+\newcommand{\advisor}[1]{\gdef \@advisor{#1}}
+\newcommand{\memberA}[1]{\gdef \@memberA{#1}}
+\newcommand{\memberB}[1]{\gdef \@memberB{#1}}
+\newcommand{\memberC}[1]{\gdef \@memberC{#1}}
+\newcommand{\memberD}[1]{\gdef \@memberD{#1}}
+
+% **********************************************
+% *  Lets make the "proposal" declaration page *
+% **********************************************
+\newcommand*{\makeproposaldeclaration}{
+    \thispagestyle{empty}
+    \setcounter{page}{1}
+    \setlength{\topskip}{2cm}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{14.4}{20}\selectfont
+        \@degreetitle \\
+        \vspace{0.8cm}
+        \fontsize{12}{20}\selectfont
+        by \\
+        \vspace{0.8cm}
+        \@degreeauthor \\
+        \vspace{1cm}
+        \@prevdegreeA \\        
+        \vspace{1cm}
+        A \kind ~proposal submitted in partial fulfillment of the \\
+        requirements for the degree of \kindspelledout \\
+        in the Chester F. Carlson Center for Imaging Science \\
+        Rochester Institute of Technology \\
+        \bigskip
+        \@degreedate
+        \vspace{1cm}
+    \end{center}
+}
+
+% ***********************************************
+% * Lets make the "MS proposal" approval page   *
+% ***********************************************
+\newcommand*{\makeMSproposalapproval}{
+    \newpage
+    \thispagestyle{plain}
+    \setlength{\topskip}{1cm}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{20}\selectfont
+        CHESTER F. CARLSON CENTER FOR IMAGING SCIENCE \\
+        ROCHESTER INSTITUTE OF TECHNOLOGY \\
+        ROCHESTER, NEW YORK \\
+        \vspace{0.5cm}
+        \underline{CERTIFICATE OF APPROVAL} \\
+        \vspace{0.5cm}
+        \rule{14.5cm}{0.5pt} \\ \medskip
+        \letters ~DEGREE PROPOSAL \\
+        \rule{14.5cm}{0.5pt} \\ \medskip
+        \vspace{0.5cm}
+        \fontsize{12}{15}\selectfont
+        The \letters ~Degree Proposal ~of \@degreeauthor \\
+        has been examined and approved by the \\
+        \kind ~committee as satisfactory for the \\
+        \kind ~required for the \\
+        \letters ~degree in Imaging Science
+        \vspace{1cm}
+    \end{center}
+    \begin{flushleft}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{24}\selectfont
+        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
+        \hspace*{4cm} \@advisor, \kindcap ~Advisor \\
+        \vspace{1cm}
+        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
+        \hspace*{4cm} Coordinator \letters ~Degree Program \hspace*{2.5cm} Date \\
+    \end{flushleft}
+}
+
+% ***********************************************
+% * Lets make the "PhD proposal" approval page  *
+% ***********************************************
+\newcommand*{\makePHDproposalapproval}{
+    \newpage
+    \thispagestyle{plain}
+    \setlength{\topskip}{1cm}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{20}\selectfont
+        CHESTER F. CARLSON CENTER FOR IMAGING SCIENCE \\
+        ROCHESTER INSTITUTE OF TECHNOLOGY \\
+        ROCHESTER, NEW YORK \\
+        \vspace{0.5cm}
+        \underline{CERTIFICATE OF APPROVAL} \\
+        \vspace{0.5cm}
+        \rule{14.5cm}{0.5pt} \\ \medskip
+        \letters ~DEGREE PROPOSAL \\
+        \rule{14.5cm}{0.5pt} \\ \medskip
+        \vspace{0.5cm}
+        \fontsize{12}{15}\selectfont
+        The \letters ~Degree Proposal ~of \@degreeauthor \\
+        has been examined and approved by the \\
+        \kind ~committee as satisfactory for the \\
+        \kind ~required for the \\
+        \letters ~degree in Imaging Science
+        \vspace{1cm}
+    \end{center}
+    \begin{flushleft}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{24}\selectfont
+        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
+        \hspace*{4cm} \@advisor, \kindcap ~Advisor \hspace*{1.5cm} Date \\
+        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
+        \hspace*{4cm} Coordinator \letters ~Degree Program \hspace*{2.5cm} Date \\
+        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
+        \hspace*{4cm} \@memberA \\
+        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
+        \hspace*{4cm} \@memberB \\
+        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
+        \hspace*{4cm} \@memberC \\
+        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
+        \hspace*{4cm} \@memberD \\        
+    \end{flushleft}
+}
+
+
+
+% ***********************************************
+% * Lets make the "thesis" declaration page     *
+% ***********************************************
+\newcommand*{\makedeclaration}{
+    \thispagestyle{empty}
+    \setcounter{page}{1}
+    \setlength{\topskip}{2cm}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{14.4}{20}\selectfont
+        \@degreetitle \\
+        \vspace{0.8cm}
+        \fontsize{12}{20}\selectfont
+        by \\
+        \vspace{0.8cm}
+        \@degreeauthor \\
+        \vspace{1cm}
+        \@prevdegreeA \\
+%        \@prevdegreeB \\
+ %       \@prevdegreeC \\ % YOU SHOULD COMMENT OUT THIS LINE IF ONLY 2 DEGREES
+        \vspace{1cm}
+        A \kind ~submitted in partial fulfillment of the \\
+        requirements for the degree of \kindspelledout \\
+        in the Chester F. Carlson Center for Imaging Science \\
+        Rochester Institute of Technology \\
+        \bigskip
+        \@degreedate
+        \vspace{1cm}
+    \end{center}
+    \begin{flushleft}
+        \fontsize{12}{8}\selectfont
+        ~Signature of the Author \hrulefill \\
+        \mbox{ \rule{0cm}{1.5cm}Accepted by } \hrulefill \\
+        \mbox{ \hspace{2.5cm} } Coordinator, \letters ~Degree Program \hspace{3cm} Date
+    \end{flushleft}
+}
+
+
+
+% ***********************************************
+% *  Lets make the "thesis" approval page       *
+% ***********************************************
+\newcommand*{\makeapproval}{
+    \newpage
+    \thispagestyle{plain}
+    \setlength{\topskip}{1cm}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{20}\selectfont
+        CHESTER F. CARLSON CENTER FOR IMAGING SCIENCE \\
+        ROCHESTER INSTITUTE OF TECHNOLOGY \\
+        ROCHESTER, NEW YORK \\
+        \vspace{0.5cm}
+        \underline{CERTIFICATE OF APPROVAL} \\
+        \vspace{0.5cm}
+        \rule{14.5cm}{0.5pt} \\ \medskip
+        \letters ~DEGREE \kindallcap \\
+        \rule{14.5cm}{0.5pt} \\ \medskip
+        \vspace{0.5cm}
+        \fontsize{12}{15}\selectfont
+        The \letters ~Degree \kindcap ~of \@degreeauthor \\
+        has been examined and approved by the \\
+        \kind ~committee as satisfactory for the \\
+        \kind ~required for the \\
+        \letters ~degree in Imaging Science
+        \vspace{0.5cm}
+    \end{center}
+    \begin{flushleft}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{24}\selectfont
+        \hspace*{5cm} \rule[-2.5ex]{9.4cm}{0.5pt} \\
+        \hspace*{5cm} \@advisor, \kindcap ~Advisor \\
+        \hspace*{5cm} \rule[-2.5ex]{9.4cm}{0.5pt} \\
+        \hspace*{5cm} \@memberA \\
+        \hspace*{5cm} \rule[-2.5ex]{9.4cm}{0.5pt} \\
+        \hspace*{5cm} \@memberB \\
+        \hspace*{5cm} \rule[-2.5ex]{9.4cm}{0.5pt} \\
+        \hspace*{5cm} \@memberC \\
+        \hspace*{5cm} \rule[-2.5ex]{9.4cm}{0.5pt} \\
+        \hspace*{5cm} \@memberD \\
+        \hspace*{5cm} \rule[-2.5ex]{9.4cm}{0.5pt} \\        
+        \hspace*{5cm} Date
+    \end{flushleft}
+}
+
+
+
+
+% ***********************************************
+% *      Lets make the copyright page           *
+% ***********************************************
+\newcommand*{\makecopyright}{
+    \newpage
+    \thispagestyle{plain}
+    \setlength{\topskip}{1cm}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{20}\selectfont
+        \kindallcap ~RELEASE PERMISSION \\
+        ROCHESTER INSTITUTE OF TECHNOLOGY \\
+        CHESTER F. CARLSON CENTER FOR IMAGING SCIENCE \\
+        \vspace{2.5cm}
+        Title of \kindcap: \\
+        \bfseries{\@degreetitle} \\
+        \vspace{2.5cm}
+    \end{center}
+    \begin{sloppypar}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{20}\selectfont
+        I, \@degreeauthor, hereby grant permission to Wallace Memorial Library
+        of R.I.T.  to reproduce my thesis in whole or in part. Any reproduction
+        will not be for commercial use or profit. \par
+        \vspace{2.5cm}
+        \noindent
+        Signature \hrulefill \\
+        \fontsize{12}{8}\selectfont
+        \hspace*{12cm} Date
+    \end{sloppypar}
+}
+
+% ***********************************************
+% *      Lets make the abstract page            *
+% ***********************************************
+\newcommand*{\abstract}{
+    \newpage
+    \thispagestyle{plain}
+    \setlength{\topskip}{1cm}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{14.4}{20}\selectfont
+        \@degreetitle \\
+        \bigskip
+        \fontsize{12}{20}\selectfont
+        by \\
+        \@degreeauthor \\
+        \bigskip
+        \fontsize{12}{15}\selectfont
+        Submitted to the \\
+        Chester F. Carlson Center for Imaging Science \\
+        in partial fulfillment of the requirements \\
+        for the \kindspelledout \ Degree \\
+        at the Rochester Institute of Technology \\
+        \vspace{1cm}
+        \textbf{Abstract}
+        \medskip
+    \end{center}
+}
+
+% ***********************************************
+% *      Lets make the acknowledgements page    *
+% ***********************************************
+\newcommand*{\acknowledgements}{
+    \newpage
+    \thispagestyle{plain}
+    \setlength{\topskip}{1cm}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.0}
+        \fontsize{12}{20}\selectfont
+        \textbf{Acknowledgements}
+        \medskip
+    \end{center}
+}
+
+% ***********************************************
+% *      Lets make the dedication page          *
+% ***********************************************
+\newcommand*{\dedication}{
+\newpage
+\thispagestyle{plain}
+\setlength{\topskip}{1cm}
+\center
+\it
+}

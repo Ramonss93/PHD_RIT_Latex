@@ -1,10 +1,109 @@
+% !TEX root=Thesis_PhD.tex
+% the previous is to reference main .bib
 \chapter{Objectives}
+\label{ch:objectives}
+\vspace{-0.5cm}
+
+The retrieval of water constituent concentration using multispectral satellite imagery in a effort to monitor fresh and coastal water (referred to as Case 2 waters) is a complex problem because there is not a direct relationship between pixel values and water constituent concentration. However, since this problem possesses different links that depend on each other, it can be addressed in smaller tasks to make it easier to solve. 
+
+The purpose of this chapter is precisely to define these tasks as an outline that will help to make the problem manageable. This chapter is divided in four sections in an effort to describe each of these tasks. Section \ref{sec:problemstatement} details the problem being approached. In Section \ref{sec:objectives}, the problem is outlined in three separate objectives as well as some future objectives. Section \ref{sec:tasks} describes the tasks needed to accomplish these objectives. Finally, this chapter closes with Section \ref{sec:contributiontofield} that delineates this work's original contribution to the field of remote sensing, imaging science and ocean optics. 
+% -----------------------------------------------------------------
 \section{Problem Statement}
+\label{sec:problemstatement}
+The hypothesis addressed in this thesis is the following: 
 
+{ \bf ``The Landsat 8 sensor can be utilized to simultaneously quantify the concentration of the water color producing agents (CPAs) (i.e. chlorophyll-{\it a}, sediments, and colored dissolved organic matter (CDOM)) in fresh and coastal waters.''} 
+
+This leads to the goal of our work: to develop a process to retrieve water constituents (CPAs) from Landsat 8 imagery to evaluate this satellite performance. Specifically, the algorithm will be used over Case 2 water, which includes fresh and coastal water. The retrieval algorithm compares a water leaving reflectance with unknown concentrations to water leaving reflectance whose concentrations are known. Because the comparison is made in the reflectance domain, the process first requires atmospherically correcting the Landsat 8 image and one approach was investigated to do so. The approach was the \acrfull{mobelm} algorithm \cite{Concha2014SPIE}.
+
+% -----------------------------------------------------------------
 \section{Statement of Objectives}
+\label{sec:objectives}
+The successful completion of this research effort will be marked by completion of the following primary requirements. Future objectives will be addressed if time permits.
 
+\subsection{Primary Requirements:}
+\begin{enumerate}
+	\item To develop over-water atmospheric correction algorithms for Landsat 8 reflective imagery.
+	\item To design a water constituent concentration retrieval algorithm that can be applied to a specific study area.
+	\item To validate results by comparing with {\it in situ} measurements and products from ocean color satellites.
+\end{enumerate}
+
+\subsection{Future Objectives:}
+\begin{enumerate}
+	\item To demo this process to a second study site.
+	\item To include a glint correction.
+	\item To integrate with Hydrodynamics models.
+	\item To make the processes and algorithms more user friendly.
+	\item To investigate {\it in situ} AOPs and IOPs relationship to calculate backscattering.
+\end{enumerate}
+% -----------------------------------------------------------------
 \section{Description of Tasks}
-\subsection{Primary Requirements}
-\subsection{Future Objectives}
+\label{sec:tasks}
 
+\subsection{Primary Requirements:}
+\begin{enumerate} 
+	{\bf \item To develop over-water atmospheric correction algorithms for Landsat 8 reflective imagery.} 
+
+The first objective in this research is to identify the best approach to atmospherically correct the type of dataset provided by the OLI sensor. Two approaches were investigated. The first method is based on previous work done on simulated OLI data \cite{Gerace:2013,Gerace:2012,GeraceThesis,Pahlevan:2012} that consists of an \acrfull{elm}-based (ELM-based) method that combines the Landsat reflectance product (Landsat Surface Reflectance \acrshort{cdr};\cite{LandsatCDR}) and a physics-based numerical model for water (HydroLight;\cite{MobleyHEtech}) to determine both the bright and dark pixel reflectance. The second method is based on the methods developed for ocean color satellite based on \cite{Gordon:1994}. This method is based on the fact that the signal leaving the water does not contribute to the overall signal beyond the NIR part of the spectrum of light (black pixel assumption), so the signal reaching the sensor is caused only by atmospheric scattering. This concept can be expanded to the SWIR bands when the black pixel assumption is not valid in the NIR bands, which is the case for Case 2 and high productive Case 1 waters (\cite{Wang:2007}).
+
+	{\bf \item To design a water constituent concentration retrieval algorithm that can be applied to a specific study area.}
+
+The retrieval algorithm is based on previous work done by \cite{Raqueno:2003}, \cite{GeraceThesis}, and \cite{Pahlevan:2012}. The water-leaving reflectance product obtained after atmospheric correction from the previous stage is used as input to the retrieval algorithm. Each pixel of reflectance product has an unknown concentration. A spectral matching technique is applied to predict this concentration by comparing the spectral shape of each pixel with the elements in a LUT. The spectral matching is made by a least square error minimization along with a trilinear interpolation. This utilizes a combination of \acrfull{rmse} and the non-linear optimization code ``lsqnonlin'' provided in the Optimization Toolbox of the MATLAB software \cite{MatlabHelp} to find the best match in a LUT of \gls{rrs} spectra. The output of this process is a concentration mapping for each water constituent.
+
+The LUT is generated using the ``Case 2'' algorithm in HydroLight for different triplets of water constituent concentrations. In order to generate congruent result from HydroLight, the user needs to input IOPs characteristic of the water bodies to be studied. Consequently, IOPs measured spectrophotometrically in the lab from water samples from the field are used as input to HydroLight. These measurements were collected when the Landsat 8 sensor passed over the area of study.
+
+The area of study is the Lake Ontario Rochester Embayment that includes some nearby ponds (Long and Cranberry ponds), the Genesee River plume, the Irondequoit bay and part of Lake Ontario. This area was selected because it exhibits a wide range of variability in concentration of water constituents, so the retrieval algorithm can be tested against a wide range of water conditions.
+ 
+	{\bf \item To validate results by comparing with {\it in situ} measurements and standard products from ocean color satellites.}
+
+The results from the retrieval process were validated by comparison with measurements taken from the water bodies being studied. Before this process, the measurements needed to be validated with measurements analyzed by a credible lab (Monroe County Environmental Laboratory). This comparison with this lab shows agreement between the measurements. 
+
+For further validation, the results were compared with products derived from ocean color satellites such as MODIS (e.g. MODIS Chl{\it a} product in SeaDAS).
+
+
+\end{enumerate}
+
+% \subsection{Primary Requirements}
+\subsection{Future Objectives}
+	\begin{enumerate}
+
+			{\bf \item To demo this process to a second study site.}
+
+After validation of the retrieval algorithm over the study area, the next step would be to make it applicable to a second study site. To do so, a more general LUT should be created with elements representative of the different water bodies present in both study sites.
+
+			{\bf \item To include a glint correction.}
+
+Some contribution to the sensor-reaching signal could be potentially the reflected sun and sky into the water surface. This signal become more important for the spatial resolution of Landsat 8, where even some waves can be seen in the images. To quantify and correct these effects could improve the retrieval results.
+
+			{\bf \item To integrate with Hydrodynamics models.} 
+
+The next step would be to use the validated results from the retrieval process for training hydrodynamics models to predicts future behavior of the water bodies. This would be based on previous work made by \cite{Pahlevan:2012} and \cite{GeraceThesis}, who used concentration maps obtained from the retrieval process using satellite imagery to train hydrodynamic models. For example, the hydrodynamic model would allow us to monitor the dynamics of coastal and inland waters near river discharges. The maps of water constituent concentrations on the surface can be used to feed into the hydrodynamic models in order to initiate and/or calibrate them. 
+
+			{\bf \item To make the processes and algorithms more user friendly.} 
+
+The retrieval process described here requires integration of different modules from different software and use of different programming languages. The next step would be to create a \gls{gui} in Python to make the process more user friendly and automatized, so that anyone with basic remote sensing knowledge could use the methods describe in this thesis. We suggest Python because it is a free platform.
+
+			{\bf \item To investigate {\it in situ} AOPs and IOPs relationship to calculate backscattering.}
+
+In this study, the \gls{b_boverb} was determined by finding the best match for measured \gls{rrs} in a LUT of \gls{rrs} generated in Hydroligth with IOPs measured in field but varying the \gls{b_boverb}. The bio-optical measurements (i.e. absorption and scattering) combined with {\it in situ} \gls{rrs} could be used to have a better estimation of \gls{b_boverb}, and therefore, more representative LUTs. To accomplish this, an IOP-$R_{rs}$ inversion algorithm can be utilized \cite{Morel:1977rw,Lee2002_invQAA,Werdell2013_inv}.	
+
+	\end{enumerate}	
+
+		
+
+% -----------------------------------------------------------------
 \section{Contribution to Field}
+\label{sec:contributiontofield}
+This research will make several contributions to the field of remote sensing.
+
+First, one important contribution is to demonstrate that Landsat satellites, which have been historically underestimated for the use of water quality measurements, could have a good performance in the estimation of water constituent concentrations.
+
+Second, Landsat 8 was just launched in February 2013 and therefore there are few studies done about its performance so far, specially in its applications related to water assessments. Hence, this is the perfect time to investigate how its new upgrades will improve/impact our capability of retrieving water parameters. Therefore, this research present one of the first results of Landsat 8 performance over water studies.  
+
+Third, while there are other global water constituent concentrations products, Landsat provides a unique combination of temporal (16 days repeat cycle) and spatial resolution (30 m pixel size). Most of the retrieval algorithms available in the literature use ocean color satellites (e.g. SeaWiFS), which have spatial resolution of about $250 m$ to $1 km$, but with products with $4km$ spatial resolution (e.g. MODIS Chlorophyll-{\it a} product). Even though this resolution is suitable for large scale studies, they fail to cover small scale studies (less than 100 m). On the other hand, high spatial resolution sensors carried on aircraft (e.g. AVIRIS) or even satellite (e.g. WorldView-2) although they can be used for small scale studies, their imagery tends to be expensive or not frequently available. Here is where Landsat 8 has the potential of filling that gap because its spatial resolution (30 m) could allow study of medium size targets, a river plume, for instance, and it is free to the international scientific community.
+
+This research also contributes to the field of remote sensing by developing a novel approach to correct the atmospheric effect in Landsat 8 images over Case 2 waters via the developed \gls{mobelm}. In spite of the fact that the ELM method is widely used to correct satellite image, it needs measurements in the field that are not always available. We developed the \gls{mobelm} algorithm that overcomes this issue by estimating these measurements. Additionally, the standard atmospheric correction algorithms were tested over Case 2 waters, and they were compared with {\it in situ} data in order to compare with the \gls{mobelm}. This made this study one of the first to compare with {\it in situ} data. The same applies for the retrieval algorithm.
+
+Finally, a dataset is made available for potential water quality studies through this research. Landsat 8 collects images all around the world where there is land including fresh and coastal waters. Such wide-reaching temporal and spatial coverage is not being broadly exploited for water quality studies.
+
+The background material necessary to attain these goals is described in the following chapter.

@@ -1,4 +1,48 @@
+% !TEX root=Thesis_PhD.tex  
+% the previous is to reference main .bib
 %% CHAPTER
-\chapter{Summary and Recommendations}
-\section{Summary}
+\chapter{Conclusions/Summary and Recommendations}
+\section{Conclusions}
+
+% ----- added From SPIE SD
+\label{sec:conc}  % \label{} allows reference to this section
+\subsection{Spectral-Matching and LUT retrieval}
+% copied from RS of Env. paper
+The retrieval results shown in this study are promising for the use of Landsat 8 for monitoring of coastal and inland waters. The retrieval process was applied to two Landsat 8 scenes over the same study area and compared with field measurements. Maps of CPA concentrations show the expected trends of low concentration in the lake and higher concentration in the ponds. The retrieval was validated with ground-truth data taken at the same time as the satellite overpass, as opposed to comparison with historical field measurements. The comparison with field measurements exhibit error comparable with previous performance predictions for Landsat 8. An advantage of this retrieval algorithm is that it retrieves simultaneously all three CPAs.
+
+The MoB-ELM atmospheric correction algorithm presented here tries to avoid the use of field reflectance ground-truth as commonly used in the traditional ELM method. In the MoB-ELM, the bright pixel is obtained from either the Landsat reflectance product over a bright target in the scene or from an Ecolight run simulating a water body with high concentration of CPAs in the scene. The dark pixel is obtained from an Ecolight run simulating a water body with low concentration of CPAs present in the scene. This algorithm does not require zero water signal in the NIR bands, so it could be applied to highly turbid waters. This algorithm assumes that the atmosphere is the same over the area of study.
+
+ % and that the water signal in the SWIR bands is zero, which is commonly the case since water has a high absorption in the SWIR wavelengths, even in highly turbid waters
+% Practical applications  
+% Disadvantages and Advantages
+% Limitations
+
+One of the limitation of the developed retrieval algorithm is that the MoB-ELM needs some knowledge of the water body (e.g. IOPs and concentration of constituents at at least one point), which is often available but not always, and therefore, it will not work in every case because of the need for this knowledge. However, it is still a good answer for many cases where this knowledge is indeed available. Future work is aiming for an approach with good atmospheric correction without the need for ground-truth. For example, IOPs are often stable and could be estimated from previous studies (perhaps seasonally in some water bodies).
+
+% Inclusion of a new red edge band in the future Landsat 9 will improve the results. 
+Some pixels from the lake shoreline include signal from the bottom causing outliers in the retrieval results since the bottom reflectance was not accounted for in the process. The next version of this retrieval algorithm should address this issue. Glint and adjacency effects were also not addressed in this work, and they could affect the atmospheric correction.
+
+For further validation, this method needs to be applied to more scenes over the same area of study or to a different area of study where sufficient ground-truth data are available to increase the number of samples to be compared. Additionally, the results from the MoB-ELM and the retrieval algorithm will be compared with standard products derived from ocean color satellites.
+
+To date, there are no other sources of free access, open to the international science community, satellite imagery with similar spatial resolution or similar standard product (e.g. MODIS chl-a product) to compare with. Therefore, a direct comparison of results from our approach with typical algorithms over water bodies smaller than one kilometer is not possible. This is a challenge that needs to be addressed since there is a particular interest from local communities for monitoring water bodies that are not resolvable by current ocean color satellites. This is the case of the ponds included in this study, which are less than one kilometer in size. This fact makes Landsat 8 a pioneer in the retrieval of water quality parameters over medium to small water bodies. This also opens a need for more field measurement collection (i.e. IOPs, $R_{rs}$ and concentrations) on a regular basis where water quality needs to be assessed for the validation of products derived from moderate spatial resolution sensors such a Landsat 8 and the upcoming Sentinel 2. 
+% ----- End copy
+
+
+\subsection{Comparison with Standard Algorithms}
+There were four different atmospheric correction algorithms analyzed in this study. Three of them are based in the NASA's standard algorithms based on the methods developed by Gordon and Wang\cite{Gordon:1994}. The fourth algorithm is based on the MoB-ELM algorithm developed by Concha and Schott\cite{Concha2014SPIE}. The remote-sensing reflectances retrieved from these atmospheric correction algorithms were compared against each other. There are better agreements in band 3 and 4 than in bands 1 and 2 for all algorithms, which can be concluded from the RMSE (\autoref{tab:Sites}). When compared with {\it in situ} data, the MoB-ELM and Gordon and Wang's algorithm from SeaDAS (SeaDAS-SWIR) show similar results for all bands (\autoref{fig:NRMSE130919_RRS}). The results from the Gordon and Wang's algorithm from Acolite (Acolite-SWIR) shows the largest disagreement (\autoref{fig:NRMSE130919_RRS}).
+
+When retrieved chlorophyll-{\it a} concentrations ($C_a$) are compared with {\it in situ}, the results from the Concha and Schott's approach performed better than the rest of the algorithms(\autoref{fig:NRMSE130919CHL}). This was expected since the ocean color algorithms were developed with the lack of {\it in situ} data representative of Case 2 waters with high concentration of color producing agents (CPAs).
+
+These results demonstrate that for Case 2 waters, the solution for the ocean color measurements likely needs to be local and not global, as opposed to Case 1 waters. This local solution as implemented here, the combined MoB-ELM algorithm with Concha and Schott's $C_a$ retrieval algorithm, requires some knowledge of the waters to be studied, such as inherent optical properties (IOPs) and CPA concentration in at least one site.
+
+The presented work is a very limited study using only a single data set. The results need to be tested on a much larger set of data to see if the can be generalized. This implies that more {\it in situ} data need to be collected.
+% --------- end SPIE SD
+% -------------------------------------
 \section{Future Work}
+\subsection{Hydrodynamics models} 
+The next step will be to use the validated results from the retrieval process for training hydrodynamics models to predict the future behavior of the water bodies. This would be based on previous work done by Pahlevan~{\it et al.} \cite{Pahlevan:2012b}, who used concentration maps obtained from the retrieval process using satellite imagery to train the ALGE hydrodynamic model. For example, the hydrodynamic model would allow us to monitor the dynamics of coastal and inland waters near river discharges. The maps of water constituent concentrations on the surface can be used to calibrate the hydrodynamic models.
+
+\subsection{Investigate New Sensor Enhancements for Future Missions}
+Water pixel spectra from a hyperspectral image (e.g. Hyperspectral Imager for the Coastal Ocean (HICO),  Airborne Visible/InfraRed Imaging Spectrometer (AVIRIS)) will be modified to simulate data similar to Landsat 8 but with the addition of a new NIR band. The retrieval process will be performed with these simulated data with and without the new NIR band in order to evaluate performance improvement. A similar analysis will be done to evaluate narrower spectral bandwidths available in Landsat 8 compared to those found in the MEdium Resolution Imaging Spectrometer (MERIS) and MODIS, for instance. 
+
+\section{Concluding Remarks}
