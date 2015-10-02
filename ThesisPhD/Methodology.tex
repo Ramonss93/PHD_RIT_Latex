@@ -4,7 +4,7 @@
 \chapter{Methodology and Approach}
 \label{ch:method}
 
-The methodology is separated into the specific objectives mentioned in \S\ref{ch:objectives}. The retrieval process described in this work was first introduced by \cite*{Concha2013IGARSS} and is based on previous work done by \cite{Raqueno:2000}, \cite{Gerace:2012}, \cite{Pahlevan:2012b} and \cite{Gerace:2013}. A flow diagram of the process is illustrated in \autoref{fig:retrieval}. In short, the retrieval process works as follows. First, the radiance image from the satellite is atmospherically corrected and transformed to $R_{rs}$ spectra, as shown in the diagram. At this point the $R_{rs}$ spectra of water pixels in the scene with unknown CPAs concentrations are compared with a LUT of $R_{rs}$ spectra with known CPAs concentrations. This comparison is made by using a spectrum-matching technique (\cite{Raqueno:2000,Mobley:2005}) that calculates the root mean squared error (RMSE) to find the closest match in the LUT. The end products are maps of CPAs concentrations (see \autoref{fig:retrieval}). Each step in this retrieval process is described in more detail below.
+The methodology is separated into the specific objectives mentioned in \S\ref{ch:objectives}. The retrieval process described in this work was first introduced by \cite{Concha2013IGARSS} and is based on previous work done by \cite{Raqueno:2000}, \cite{Gerace:2012}, \cite{Pahlevan:2012b} and \cite{Gerace:2013}. A flow diagram of the process is illustrated in \autoref{fig:retrieval}. In short, the retrieval process works as follows. First, the radiance image from the satellite is atmospherically corrected and transformed to $R_{rs}$ spectra, as shown in the diagram. At this point the $R_{rs}$ spectra of water pixels in the scene with unknown CPAs concentrations are compared with a LUT of $R_{rs}$ spectra with known CPAs concentrations. This comparison is made by using a spectrum-matching technique (\cite{Raqueno:2000,Mobley:2005}) that calculates the root mean squared error (RMSE) to find the closest match in the LUT. The end products are maps of CPAs concentrations (see \autoref{fig:retrieval}). Each step in this retrieval process is described in more detail below.
 
 In this work, a look-up-table (LUT) methodology was implemented to retrieve concentration of water constituents using Landsat-8 imagery. Figure~\ref{fig:retrieval} shows a diagram of this retrieval process. First, the Landsat-8 image data (shown at the top of the figure) needs to be atmospherically corrected. Then, a non-linear optimization routine uses the water pixels (reflectance values) and a LUT of reflectance spectra to estimate concentrations for each water pixels in the scene. The outputs from the process are concentration maps for each water constituents, as shown in Figure~\ref{fig:retrieval}. This process is explained in detail in \S\ref{sec:atmcorr} and \S\ref{sec:retrieval} below.
 
@@ -13,6 +13,148 @@ In this work, a look-up-table (LUT) methodology was implemented to retrieve conc
     \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/Retrieval_RMSE.pdf}
     \caption{Retrieval process flow diagram. The radiance image from the satellite is first corrected for atmospheric effects, having as result $R_{rs}$ spectra for each water pixel in the image. Then, a spectrum-matching methodology is used to find the closest match in the least-squared sense for the water pixels with unknown CPAs concentration in the LUT of water pixels with known CPAs concentration. The final result is a concentration map for each CPA.  \label{fig:retrieval} }
 \end{figure}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[!ht]
+  \centering
+% \resizebox{9cm}{!}{%
+% Define block styles
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=2em, minimum height=2em,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=1em, minimum height=3em, text width=1.0cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=2em, minimum height=2em, text width=2.0cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=2em, minimum height=2em, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{tikzpicture}[node distance=3cm]
+
+% \node (start) [startstop] {Start};
+
+\node (L8image) [io] {Landsat \\Image};
+\node (prepro) [process, right of=L8image] {Image \\pre-processing};
+\node (AtmCorr) [process, right of=prepro] {Atmospheric Correction};
+\node (RetProc) [process, right of=AtmCorr] {Retrieval Process};
+\node (CPAmap) [io, right of=RetProc] {CPA \\maps};
+
+\node[align=left, below=0.0 of prepro] (List1) {\scriptsize - Cloud/Land/Water Mask\\\scriptsize - Radiometric Calibration};
+
+\draw [arrow] (L8image) -- (prepro);
+\draw [arrow] (prepro) -- (AtmCorr);
+\draw [arrow] (AtmCorr) -- (RetProc);
+\draw [arrow] (RetProc) -- (CPAmap);
+
+
+
+\end{tikzpicture}
+
+
+% } % resizebox end
+
+\caption{High-level flowchart of the process. \label{fig:highlevelflowchart}}
+
+\end{figure}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[!ht]
+  \centering
+% \resizebox{9cm}{!}{%
+% Define block styles
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=2em, minimum height=2em,text centered, draw=black, fill=red!30]
+
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=1em, minimum height=3em, text width=2.0cm, text centered, draw=black, fill=blue!30]
+
+\tikzstyle{iosmall} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=1em, minimum height=1em, text width=1.0cm, text centered, draw=black, fill=blue!30]
+
+\tikzstyle{process} = [rectangle, minimum width=2em, minimum height=2em, text width=2.0cm, text centered, draw=black, fill=orange!30]
+
+\tikzstyle{decision} = [diamond, minimum width=2em, minimum height=2em, text centered, draw=black, fill=green!30]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{arrowdashed} = [thick,dashed,->,>=stealth]
+
+\begin{tikzpicture}[node distance=2cm]
+
+% \node (start) [startstop] {Start};
+
+\node (L8image) [io] {Landsat \\Image (DN)};
+\node (radcal) [process, below of=L8image] {Radiometric \\Calibration};
+\node (resize) [process, below of=radcal] {Resize};
+\node (mask) [process, below of=resize] {Cloud/Land \\Mask};
+\node (AtmCorr) [process, below of=mask] {Atmospheric \\Correction \\(MoB-ELM)};
+\node (rrs) [io, below of=AtmCorr] {$R_{rs}$ \\Image};
+\node (RetProc) [process, below of=rrs] {Retrieval \\Process \\(RMSE \\lsqnonlin)};
+\node (CPAmap) [io, below of=RetProc] {CPA \\maps};
+
+\node (CDRImage) [io, left of=L8image, xshift=-1.5cm] {Landsat \\Reflectance \\Product};
+\node (PIFmask) [process, below of=CDRImage] {PIF \\Mask};
+\node (brightpx) [io, below of=PIFmask] {Bright\\Pixel};
+
+\node (AOPs) [iosmall, right of=L8image, xshift=0.8cm] {{\it in situ} \\AOPs \\($R_{rs}$)};
+
+\node (samples) [io, right of=AOPs, xshift=0.8cm] {Water \\Samples};
+\node (labmea) [process, below of=samples] {Lab \\Mea.};
+\node (IOPs) [iosmall, below of=labmea, xshift=-1cm] {IOPs};
+\node (conc) [iosmall, below of=labmea, xshift=1cm] {Conc.};
+\node (hydro) [process, below of=IOPs, xshift=1cm] {Hydrolight};
+\node (darkpx) [iosmall, below of=hydro, xshift=-1.5cm] {Dark \\Pixel};
+\node (LUT) [iosmall, below of=hydro, xshift=1.5cm] {LUT};
+
+\node (bb_b) [iosmall, right of=hydro, xshift=1cm] {$b_b/b$};
+
+
+\node (Comp) [process, right of=CPAmap, xshift=1.5cm] {Comparison};
+\node (NRMSE) [io, below of=Comp] {NRMSE};
+
+% \node[align=left, right=0.0 of prepro] (List1) {\scriptsize - Cloud/Land/Water Mask\\\scriptsize - Radiometric Calibration};
+
+\draw [arrow] (L8image) -- (radcal);
+\draw [arrow] (radcal) -- (resize);
+\draw [arrow] (resize) -- (mask);
+\draw [arrow] (mask) -- (AtmCorr);
+\draw [arrow] (AtmCorr) -- (rrs);
+\draw [arrow] (rrs) -- (RetProc);
+\draw [arrow] (RetProc) -- (CPAmap);
+
+\draw [arrowdashed] (L8image) -- (CDRImage);
+\draw [arrow] (CDRImage) -- (PIFmask);
+\draw [arrow] (PIFmask) -- (brightpx);
+\draw [arrow] (brightpx) |- (AtmCorr);
+
+\draw [arrow] (samples) -- (labmea);
+\draw [arrow] (labmea) |- (IOPs);
+\draw [arrow] (labmea) |- (conc);
+\draw [arrow] (IOPs) -- (hydro);
+\draw [arrow] (conc) -- (hydro);
+\draw [arrow] (hydro) |- (darkpx);
+\draw [arrow] (hydro) |- (LUT);
+\draw [arrow] (darkpx) -- (AtmCorr);
+\draw [arrow] (LUT) |- (RetProc);
+
+\draw [arrowdashed] (AOPs) |- (hydro);
+
+\draw [arrow] (conc.east) |- ([xshift=2.5cm]conc.east)  |- (Comp);
+\draw [arrow] (CPAmap) -- (Comp);
+\draw [arrow] (Comp) -- (NRMSE);
+
+\draw [arrow] (hydro) -- (bb_b);
+
+\draw [arrow] (bb_b.south) -- ([yshift=-0.8cm]bb_b.south) -| ([xshift=-0.5cm]hydro.south east);
+
+% \draw [arrow] (hydro) |- (AtmCorr);
+
+\end{tikzpicture}
+
+
+% } % resizebox end
+
+\caption{Detailed flowchart of the process. \label{fig:detailflowchart}}
+
+\end{figure}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Over-Water Atmospheric Correction} 
 \label{sec:atmcorr}

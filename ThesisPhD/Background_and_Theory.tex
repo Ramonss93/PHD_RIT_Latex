@@ -399,7 +399,7 @@ where $L_{sg}(\lambda)$ is the TOA radiance due to sky glint, $\rho_F(\lambda)$ 
 \subsection{Water Constituents Retrieval}
 % See \cite{Jensen} and \cite{Mustard2001}.
 % ----------------------------------------------------
-\subsubsection{In Water Radiative Transfer}
+\subsubsection{In-Water Radiative Transfer}
 % ------------------------------------------------
 \subsubsection*{IOPs}
 \addcontentsline{toc}{subsubsection}{IOPs}
@@ -561,12 +561,18 @@ where $K_d(z,\lambda)$ is the {\it spectral diffuse attenuation coefficient} for
           &=-\frac{1}{E_d(z,\lambda)}\frac{dE_d(z,\lambda)}{dz} ~~\left[m^{-1} \right].
 \end{align}
 % Other $K$ functions such as $K_u$, $K_o$, or $K_L$ can be obtained using similar definition with the corresponding radiometric quantities such $E_u$, $E_o$, or $L$.
-\todo{not to forget this paragraph}
 
-It is important to note that AOPs are not additive as the IOPs. Also, AOPs can not be measured in the lab or on a water sample, therefore they must be measured in situ.
+It is important to note that AOPs are not additive as the IOPs. Also, AOPs can not be measured in the lab or on a water sample, therefore they must be measured {\it in situ}.
 
 % ------------------------------------------
-\subsection{AOP and IOP Relationship}
+\subsection{Deriving IOPs from AOPs}
+The reflectance inversion methods refer to method to derive IOPs (e.g. absorption $a$ and scattering $b$ coefficients) from AOPs (e.g. $R_{rs}$). There two kinds of inversion methods: empirical and semi-analytic models. The general expression of optical closure relationships is well known \{$R_{rs}(\lambda)~or~L_{wN} = f[b_b(\lambda)/a(\lambda)]$\} with $R_{rs}=L_w/E_d$ the remote-sensing reflectance and $L_{wN}$ the normalized water-leaving radiance \cite{Morel:1977rw,Maritorena:02}. \cite{Gordon:1988qv} derived this relationship as
+\begin{equation}\label{eq:semianal}
+  \hat{L}_{wN} = \frac{tF_0(\lambda)}{n_w^2} \sum_{i=1}^2g_i\left[\frac{b_b(\lambda)}{b_b(\lambda)+a(\lambda)}\right]^i
+\end{equation}
+\noindent where $t$ is the sea-air transmission factor, $F_0(\lambda)$ is the extraterrestrial solar irradiance, $n_w$ is the index of refraction of the water, and the $g_i$ terms are fitting coefficients from Monte Carlo simulations of an idealized ocean by \cite{Gordon:1986fr}. If \autoref{eq:semianal} is used at first order only, the $g_1$ term becomes the $f/Q$ factor, which is dependent on the viewing geometry and not constant \cite{Maritorena:02}.
+
+This was extended by \cite{Lee2002_invQAA} and \cite{Werdell2013_inv}. 
 % ------------------------------------------
 \subsection{Standard Algorithms (NASA)}
 \subsubsection{$C_a$}
@@ -687,6 +693,9 @@ An ELM target needs to have a size at least three times the ground instantaneous
     file {linereg2.data};
 
 \end{tikzpicture}
+
+% } % resizebox end
+
 \caption{MoB-ELM atmospheric correction method. The MoB-ELM method is based on the traditional empirical line method (ELM). Two pixels from the image, the bright and dark pixel, are used to solve a liner regression with a slope $m$ and offset $b$ in the $R_{rs}$, $L$ space. Once this relationship is established, each $L$ value in the image can be converted to $R_{rs}$ through $R_{rs}=(L-b)/m$. \label{fig:ELMregression}}
 \end{figure}
 
@@ -725,6 +734,9 @@ The LEDAPS algorithm works in the following fashion. First, calibrated images fr
 where $\rho_s$ is the surface reflectance, $T_g$ is the gaseous transmission due to the atmospheric gases, $T_{R+A}$ is Rayleigh and aerosol transmission, $\rho_{R+A}$ is the Rayleigh and aerosols atmospheric intrinsic reflectance, and $S_{R+A}$ is the Rayleigh and aerosols spherical albedo. The 6S radiative transfer code is utilized to compute the transmission, intrinsic reflectance, and spherical albedo terms. Ozone concentrations and column water vapor are derived from ancillary data. The aerosol optical thickness (AOP) is extracted directly from the imagery by using the dark, dense vegetation (DDV) method of Kaufman {\it et al.} \todo{add reference}.This method postulates a linear relation between SWIR surface reflectance and reflectance in the visible bands, based on the physical correlation between chlorophyll absorption and bound water absorption \todo{Research more about AOT and the Kaufman method!!!}. Finally, the derived AOT, ozone, atmospheric pressure, and water vapor are supplied to the 6S radiative transfer algorithm, which then inverts TOA reflectance to surface reflectance using \autoref{eq:TOAref}. 
 
 According to the author in \cite{LandsatCDR}, the Landsat reflectance product has to be used with caution in coastal regions where land area is small relative to adjacent water because the efficacy of the surface correction is likely to be reduced. This product was available only for Landsat 4 TM, Landsat 5 TM and Landsat 7 ETM+ at the time of this publication. A quality assurance (QA) layer is attached to this product and it can be used for pixel-level conditions and validity production. The surface reflectance product is available in the earthexplorer.com website in a HDF-EOS package that contains all necessary files and it can be read in ENVI (through an ENVI header file).
+% -----------------------------------------------------------------------------
+\section{Provisional Landsat 8 Surface Reflectance CDR}
+\label{sec:provisionalCDR} 
 % ----------------------------------------------------
 % \section{MODTRAN}
 % ----------------------------------------------------
