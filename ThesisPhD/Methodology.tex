@@ -811,6 +811,7 @@ where $F$ is obtained from a trilinear interpolation based in the CPA concentrat
 The output of this process is a concentration mapping for each water constituent that spans the range of constituents levels in the scene. 
 \todo{add combination of both methods!}
 
+% ----------------------------------------------------
 \section{Ground Truth Data Collection}
 The area of study for this research is the Lake Ontario Rochester Embayment (latitude: 43°15'32.53"N and longitude: 77°36'13.10"W), which includes some nearby ponds (Long and Cranberry Ponds), the Genesee River plume, the Irondequoit Bay and the southern end of Lake Ontario, as shown in Figure~\ref{fig:areaofstudy1} and Figure~\ref{fig:areaofstudy2}. This area was selected because it exhibits a wide range of variability in concentration of water constituents, including some eutrophic water bodies (ponds) with high concentration of CPAs, and oligomesotrophic water bodies (Lake Ontario) with low concentration of CPAs, so the retrieval algorithm can be tested with different scenarios. Landsat-8 images from this area of study and corresponding water samples collected at the time of the satellite's overpass will be used to test the retrieval algorithm. So far, there are only three satisfactory images available from the summer 2013\todo{update this info}. This project contemplates performing one new ground truth data collection during 2014. Therefore, images from the 2013-2014 spring and summer collection seasons will be used to test the methodology. Note that a difficult challenge of this research is to obtain images with relatively clear weather conditions (i.e. cloud free) over the area of study.
 \begin{figure}[htb]
@@ -867,10 +868,11 @@ BRADONT&  43.325780 & -77.706432 &  ~~1.44 & ~2.00        & Braddock Bay, Lake O
 
 In order to have outputs in HydroLight that are representative of the water bodies that are being studied, inherent optical properties (IOPs) of those specific waters have to be defined as input to the HydroLight model. After collection, these water samples need to be analyzed in the lab to obtain IOPs for the main water constituents. Furthermore, apparent optical properties (AOPs) (i.e. water surface reflectance) and backscattering measurements will be also collected for further comparison and to pursue closure between the HydroLight AOPs results and in-situ AOPs measurements.
 
+% ----------------------------------------------------
 \section{Validation}
 The results from the retrieval process will be validated by comparison with the concentration of water samples taken during field campaigns in the spring and summer of 2013 and 2014. These concentrations will be obtained from lab measurements made at the Rochester Institute of Technology. For further validation, the results will be compared with products derived from ocean color satellites such as MODIS (e.g. MODIS Chl-{\it a} product), in regions where it is possible. 
 
-Additionally, the results will be compared with the products derived in the SeaWiFS Data Analysis System (SeaDAS) software for Landsat-8, which is contemplated to be launched soon (more info: \url{http://seadas.gsfc.nasa.gov/}). The latest version (SeaDAS 7.0.2) is a comprehensive image analysis package for the processing, display, analysis, and quality control of ocean color data developed by the developers of ESA's BEAM software package and the Ocean Biology Processing Group (OBPG) at NASA. If this capability is launched in the next version of SeaDAS, Landsat-8 level L1 and L2 data could potentially be  atmospherically corrected using the method used for MODIS \cite{Gordon:1994,Ruddick:2000bs,Wang:2007dz}, and therefore L3 data (e.g. Chl-{\it a} product) could be obtained from Landsat-8 images.
+Additionally, the results for the \gls{mobelm} and the CPA retrieval are compared with the products derived in the l2gen algorithm the in \gls{seadas} software.\todo{complete more!}
 
 \section{Summary of Process}
 \subsection{Atmospheric Correction}
@@ -907,7 +909,7 @@ Additionally, the results will be compared with the products derived in the SeaW
 
 % \subsection{LUT Method}
 
-
+% ----------------------------------------------------
 \section{Concluding Remarks}
 The purpose of this chapter was to introduce the methodology required to achieve the objectives defined in the Chapter \S\ref{ch:objectives}. First, we began by explaining the different atmospheric correction techniques that will be investigated in this research along with the solar-glint removal algorithm. These atmospheric correction techniques include two different approaches. The first approach are methods applied to ocean color satellites. The second one is the MoB-ELM method. The in-water constituent retrieval process was presented. The LUT generation and the metrics used to perform the retrieval were described. Additionally, the ground truth data collection was briefly explained. Finally, how the results will be validated was described. 
 

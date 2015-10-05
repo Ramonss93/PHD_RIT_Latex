@@ -430,8 +430,8 @@ The IOPs are additive. Therefore, the total absorption coefficient, for instance
   a_{total}(z,\lambda) = \sum_{i=1}^{ncomp} a_i(z,\lambda)
 \end{equation}
 e.g.,
-\begin{equation}
-  a_{total}(z,\lambda) =  a_w(\lambda) +a_{CDOM}(z,\lambda)+ a_{Chl}(z,\lambda)+a_{SM}(z,\lambda) \notag
+\begin{equation}\label{eq:atotal}
+  a_{total}(z,\lambda) =  a_w(\lambda) +a_{CDOM}(z,\lambda)+ a_{Chl}(z,\lambda)+a_{SM}(z,\lambda)
 \end{equation}
 This fact is important because it will help to retrieve simultaneously the CPAs in this case. This also implies that we need to know the IOPs for each component, which is not an easy task, especially the scattering coefficient.
 
@@ -466,6 +466,11 @@ and the {\it backscattered fraction} \index{backscattered fraction, $b_b/b$} as
 \end{equation}
 which tells how much of the total scattering is due to backscattering.
 
+Again, because the IOPs are additive, the total backscattering coefficients can be expressed as
+\begin{equation}\label{eq:b_btotal}
+  b_b(z,\lambda) =  b_{bw}(\lambda) + b_{bChl}(z,\lambda)+b_{bSM}(z,\lambda)
+\end{equation}
+
 It is important to note that the previous definition assumed that there are no inelastic-scattering processes present. However, fluorescence by dissolved matter or chlorophyll, and Raman scattering by the water molecules themselves, are inelastic-scattering processes that do occur in nature. The power that is lost from $\lambda$ by scattering into $\lambda'\neq\lambda$ results in absorption coefficient $a(\lambda)$ increment. The gain in power at $\lambda'$ is expressed as a source term in the radiative transfer equation (see \autoref{eq:RTEfinal}).
 
 Another IOP commonly used in ocean optics is the {\it single-scattering albedo} \index{single-scattering albedo, $\omega_o$} $\omega_o$, defined as
@@ -482,7 +487,7 @@ Additionally, the {\it volume scattering phase function} $\tilde{\beta}(\psi,\la
 % ----------------------------------------------------
 \subsubsection*{The Radiative Transfer Equation (RTE)}
 \addcontentsline{toc}{subsubsection}{The Radiative Transfer Equation}
-The connection between the IOPs, boundary conditions, and light sources (e.g. bioluminescence) to the radiances is made through the radiative transfer equation (RTE). It expresses conservation of energy in terms of radiance for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium. All other radiometric variable (irradiances) and AOPs can be derived from the radiance.
+The connection between the IOPs, boundary conditions, and light sources (e.g. bioluminescence) to the radiances is made through the \gls{rte}. It expresses conservation of energy in terms of radiance for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium. All other radiometric variable (irradiances) and AOPs can be derived from the radiance.
 
 \begin{figure}[htb]
 \centering
@@ -536,7 +541,7 @@ which is more convenient to use in oceanography because it depends on the depth 
 % ----------------------------------------------------
 \subsubsection*{Apparent Optical Properties (AOPs)}
 \addcontentsline{toc}{subsubsection}{Apparent Optical Properties}
-The apparent optical properties are those properties that not only depend on the medium (the IOPs) but also on the directional structure of the ambient light field (radiance distribution). Additionally, AOPs need to display enough stability to be useful descriptors of a water body. They are always a ratio of two radiometric quantities. Examples of AOPs are the irradiance reflectance, the remote-sensing reflectance, and various diffuse attenuation functions.
+The \gls{aops} are those properties that not only depend on the medium (the IOPs) but also on the directional structure of the ambient light field (radiance distribution). Additionally, AOPs need to display enough stability to be useful descriptors of a water body. They are always a ratio of two radiometric quantities. Examples of AOPs are the irradiance reflectance, the remote-sensing reflectance, and various diffuse attenuation functions.
 
 The irradiance reflectance (a.k.a. irradiance ratio) is defined as
 \begin{equation}
@@ -566,18 +571,15 @@ It is important to note that AOPs are not additive as the IOPs. Also, AOPs can n
 
 % ------------------------------------------
 \subsection{Deriving IOPs from AOPs}
-The reflectance inversion methods refer to method to derive IOPs (e.g. absorption $a$ and scattering $b$ coefficients) from AOPs (e.g. $R_{rs}$). There two kinds of inversion methods: empirical and semi-analytic models. The general expression of optical closure relationships is well known \{$R_{rs}(\lambda)~or~L_{wN} = f[b_b(\lambda)/a(\lambda)]$\} with $R_{rs}=L_w/E_d$ the remote-sensing reflectance and $L_{wN}$ the normalized water-leaving radiance \cite{Morel:1977rw,Maritorena:02}. \cite{Gordon:1988qv} derived this relationship as
+\label{subsec:semianalitic}
+The reflectance inversion methods refer to method to derive IOPs (e.g. absorption $a$ and scattering $b$ coefficients) from AOPs (e.g. $R_{rs}$). There two kinds of inversion algorithms: empirical and semi-analytic algorithms. The empirical algorithms apply simple or multiple regressions between the property of of interest and the ratios of \gls{rrs}. These kinds of algorithms tend to work only in waters with similar properties to the ones they were based on, resulting in a limited applicability. Some of the advantage of the empirical algorithms are their simplicity and rapidity in data processing. On the other hand, the semianalytical algorithms are based on solving the \gls{rte} and they can be applied to different water types \cite{Lee2002_invQAA}.
+
+It is well known that the AOPs are a function of the ratio between the backscattering and the absorption coefficients, .i.e. $R_{rs}(\lambda)~or~L_{wN} = f[b_b(\lambda)/a(\lambda)]$ with $R_{rs}=L_w/E_d$ the remote-sensing reflectance and $L_{wN}$ the normalized water-leaving radiance \cite{Morel:1977rw,Maritorena:02}. As an example, \cite{Gordon:1988qv} derived this relationship as
 \begin{equation}\label{eq:semianal}
   \hat{L}_{wN} = \frac{tF_0(\lambda)}{n_w^2} \sum_{i=1}^2g_i\left[\frac{b_b(\lambda)}{b_b(\lambda)+a(\lambda)}\right]^i
 \end{equation}
-\noindent where $t$ is the sea-air transmission factor, $F_0(\lambda)$ is the extraterrestrial solar irradiance, $n_w$ is the index of refraction of the water, and the $g_i$ terms are fitting coefficients from Monte Carlo simulations of an idealized ocean by \cite{Gordon:1986fr}. If \autoref{eq:semianal} is used at first order only, the $g_1$ term becomes the $f/Q$ factor, which is dependent on the viewing geometry and not constant \cite{Maritorena:02}.
+\noindent where $t$ is the sea-air transmission factor, $F_0(\lambda)$ is the extraterrestrial solar irradiance, $n_w$ is the index of refraction of the water, and the $g_i$ terms are fitting coefficients from Monte Carlo simulations of an idealized ocean by \cite{Gordon:1986fr}. If \autoref{eq:semianal} is used at first order only, the $g_1$ term becomes the $f/Q$ factor, which is dependent on the viewing geometry and not constant \cite{Maritorena:02}. Examples of semianalytical algorithms can be found in \cite{Lee2002_invQAA} and \cite{Werdell2013_inv}. Note that the IOP spectra, $a(\lambda)$ and $b_b(\lambda)$, can be decomposed in the different water constituents or \gls{cpas} (see \autoref{eq:atotal} and \autoref{eq:b_btotal}). Therefore, if all the \gls{iops} but the $b_b(\lambda)$ are known, then the $b_b(\lambda)$ can be determined from \gls{rrs} using one of these semianalytical algorithms.
 
-This was extended by \cite{Lee2002_invQAA} and \cite{Werdell2013_inv}. 
-% ------------------------------------------
-\subsection{Standard Algorithms (NASA)}
-\subsubsection{$C_a$}
-\subsubsection{$TSS$}
-\subsubsection{$CDOM$}
 % ------------------------------------------
 % \subsection{Constituent Retrieval}
 
@@ -600,18 +602,18 @@ This was extended by \cite{Lee2002_invQAA} and \cite{Werdell2013_inv}.
 
 % ----------------------------------------------------
 \section{The OLI Sensor}
-The Landsat project, a joint initiative between USGS and NASA, has been monitoring the earth for over four decades, creating the longest uninterrupted data set available. Landsat-8, formally known as the Landsat Data Continuity Mission (LDCM), is the most recent satellite to continue this objective. Carrying two instruments onboard, the Operational Land Imager (OLI) and the Thermal InfraRed Scanner (TIRS), Landsat-8 is the first of a new generation of Landsat satellites with these state-of-the-art technologies. 
+The Landsat project, a joint initiative between USGS and NASA, has been monitoring the earth for over four decades, creating the longest uninterrupted data set available. Landsat 8, formally known as the Landsat Data Continuity Mission (LDCM), is the most recent satellite to continue this objective. Carrying two instruments onboard, the Operational Land Imager (OLI) and the Thermal InfraRed Scanner (TIRS), Landsat 8 is the first of a new generation of Landsat satellites with these state-of-the-art technologies. 
 
-Landsat-8 is an optical passive satellite, which means it records the energy reflected from a source (in this case the sun) by a target. It has a temporal resolution is 16 days, which means that it images the same location on Earth every 16 days. Because the area of study (Rochester Embayment) appears in two Landsat-8 paths, there is one image of this area every eight days. OLI is considered to be a multispectral instrument with a total of seven bands: four bands in the visible (VIS), one band in the near infrared (NIR) and two bands in the short wave infrared (SWIR), as can be seen in \autoref{fig:olibands}. \autoref{fig:olibands} also shows Landsat-7 bands for comparison. Note the two new bands: coastal band and cirrus bands.
+Landsat 8 is an optical passive satellite, which means it records the energy reflected from a source (in this case the sun) by a target. It has a temporal resolution is 16 days, which means that it images the same location on Earth every 16 days. Because the area of study (Rochester Embayment) appears in two Landsat 8 paths, there is one image of this area every eight days. OLI is considered to be a multispectral instrument with a total of seven bands: four bands in the visible (VIS), one band in the near infrared (NIR) and two bands in the short wave infrared (SWIR), as can be seen in \autoref{fig:olibands}. \autoref{fig:olibands} also shows Landsat 7 bands for comparison. Note the two new bands: coastal band and cirrus bands.
 
 \begin{figure}[htb]
 \centering
       \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/OLIbands.jpg}
-      \caption{Landsat-8 bands compared with Landsat-7 bands (Source: \protect\url{http://landsat.gsfc.nasa.gov/}).}
+      \caption{Landsat 8 bands compared with Landsat 7 bands (Source: \protect\url{http://landsat.gsfc.nasa.gov/}).}
       \label{fig:olibands}
 \end{figure}
 
-OLI has a spatial resolution of $30m$ in all seven bands, the same as previous Landsat satellites. Considering its 30-meter resolution, Landsat-8 should be especially useful for studying the nearshore and coastal environment at a much higher spatial resolution, when compared to ocean color satellites (e.g. MODIS, SeaWiFS, MERIS). This is illustrated in \autoref{fig:resol} where some features in the nearshore areas of Rochester, NY (such as ponds) can be fully resolved by Landsat-8 ($30m$) and not by Terra-MODIS ($500m$).
+OLI has a spatial resolution of $30m$ in all seven bands, the same as previous Landsat satellites. Considering its 30-meter resolution, Landsat 8 should be especially useful for studying the nearshore and coastal environment at a much higher spatial resolution, when compared to ocean color satellites (e.g. MODIS, SeaWiFS, MERIS). This is illustrated in \autoref{fig:resol} where some features in the nearshore areas of Rochester, NY (such as ponds) can be fully resolved by Landsat 8 ($30m$) and not by Terra-MODIS ($500m$).
 
 \begin{figure}[htb]
   \centering
@@ -619,7 +621,7 @@ OLI has a spatial resolution of $30m$ in all seven bands, the same as previous L
   \caption{Spatial resolution comparison between Terra-MODIS (500m) and Landsat 8 (30m). \label{fig:resol} } 
 \end{figure}
 
-Although the OLI's spectral bands are not narrow enough to be compared with MODIS' spectral bands, the OLI's spectral bands are narrower when compared to Landsat 7 (L7), as seen in \autoref{tab:bandwidth}. OLI also includes a new coastal band that increases the spectral resolution of the instrument, plus a new cirrus band. These two improved features have the potential to more accurately capture signals leaving the water. \cite{Gerace:2013} demonstrated with a simulated dataset that system noise is the main driver of retrieval error, and therefore a higher signal-to-noise ratio (SNR) means a better retrieval. In comparison to its predecessors (e.g. Landsat-5 and Landsat-7), Landsat 8 has an improved SNR because of its 12-bit quantization (4096 levels) and pushbroom sensor design (which allows for more continuous integration on target). This improvement in SNR can be seen in \autoref{fig:L8SNR} which compares the SNR of Landsat-7 and Landsat-8, calculated from actual image data over uniform water regions of the Red Sea that have similar brightness \cite{Hu:2012}. \autoref{fig:L8SNR} also shows the specified SNR from Landsat-8 at typical input signal (radiance L typical) levels (which the instrument significantly exceeds), which were obtained from \cite{Irons:2012}. These improvements are significant drivers behind the hypothesis that the Landsat 8 satellite has superior performance and application in water quality studies than its predecessors.
+Although the OLI's spectral bands are not narrow enough to be compared with MODIS' spectral bands, the OLI's spectral bands are narrower when compared to Landsat 7 (L7), as seen in \autoref{tab:bandwidth}. OLI also includes a new coastal band that increases the spectral resolution of the instrument, plus a new cirrus band. These two improved features have the potential to more accurately capture signals leaving the water. \cite{Gerace:2013} demonstrated with a simulated dataset that system noise is the main driver of retrieval error, and therefore a higher signal-to-noise ratio (SNR) means a better retrieval. In comparison to its predecessors (e.g. Landsat 5 and Landsat 7), Landsat 8 has an improved SNR because of its 12-bit quantization (4096 levels) and pushbroom sensor design (which allows for more continuous integration on target). This improvement in SNR can be seen in \autoref{fig:L8SNR} which compares the SNR of Landsat 7 and Landsat 8, calculated from actual image data over uniform water regions of the Red Sea that have similar brightness \cite{Hu:2012}. \autoref{fig:L8SNR} also shows the specified SNR from Landsat 8 at typical input signal (radiance L typical) levels (which the instrument significantly exceeds), which were obtained from \cite{Irons:2012}. These improvements are significant drivers behind the hypothesis that the Landsat 8 satellite has superior performance and application in water quality studies than its predecessors.
 
 
 \begin{table}[!ht]
@@ -793,16 +795,64 @@ The HydroLight physical model has the following characteristics:
 	\item Various bottom boundary options.
 	\item Includes all orders of multiple scattering.
 	\item It can optionally include Raman scatter by water.
-	\item It can optionally include fluorescence by Chl and CDOM.
+	\item It can optionally include fluorescence by Chlorophyll-{\it a} and CDOM.
 	\item It can optionally include horizontally homogeneous internal sources such as bioluminescing layers.
 	\item Polarization not included.
 \end{itemize}
+% ------------------------------------------
+\section{SeaDAS and NASA's Ocean-related Products}
+\label{sec:seadas}
+
+The \gls{seadas} software (more info: \url{http://seadas.gsfc.nasa.gov/}) is a comprehensive image analysis package for the processing, display, analysis, and quality control of ocean color data developed by the developers of \gls{esa}'s BEAM software package (\url{http://www.brockmann-consult.de/cms/web/beam/}) and the \gls{obpg} at NASA. Its last version (\gls{seadas} 7.2), recently launched, supports Level 1 Landsat 8 data. It can generate Level 2 data from Level 0 and Level 1. The level 2 data is obtained by applying the atmospheric correction method based on \cite{Gordon:1994} to the different heritage ocean color instruments and now Landsat 8, among others. It also can generate Level 3 data, such as temporal binned data. \gls{seadas} includes some  semi-analytical bio-optical models described in \S\ref{subsec:semianalitic}.
+
+A number of standard products are supported by the \gls{obpg} at NASA's Goddard Space Flight Center (\url{http://oceancolor.gsfc.nasa.gov/}). The \gls{obpg}'s responsibilities are collection, processing, calibration, validation, archive and distribution of ocean-related products from a large number of operational, satellite-based remote-sensing missions providing ocean color, sea surface temperature and sea surface salinity data to the international research community. Most of the ocean-related products are included in the \gls{seadas} package, supported by the \gls{obpg}. The following section describes some of the products relevant to this research.
+
+\subsection{Chlorophyll-{\it a} Concentration}
+
+The chlorophyll-{\it a} concentration retrieval algorithms supported by \gls{seadas} are described in \cite{OReilly1998_Chl} and \cite{OReilly2000}. These include semianalytic models and empirical algorithms. The semianalytic models are based on the $b_b/(a + b_b)$ to $R_{rs}$ relationship \cite{Gordon:1988qv}. The empirical algorithms are based in band ratios \cite{OReilly2000}. One example of a empirical algorithm is the \gls{oc2} algorithm developed for \gls{seawifs}. The \gls{oc2} algorithm establishes an empirical equation relating \gls{rrs} in the $490$ and $555nm$ bands to chlorophyll-{\it a} concentrations $C_a$ from a large data set of coincident {\it in situ} remote-sensing reflectances and chlorophyll-{\it a} concentrations, $\tilde{R}_{rs}$ and $\tilde{C}_a$. This empirical equation is a \gls{mcp} defined as
+\begin{equation}\label{eq:oc2}
+  C_a = 10^{\displaystyle a_0+a_1R_2+a_2R_2^2+a_3R_2^3} + a_4
+\end{equation}
+\noindent where $R_2=\log_{10}\left(R_{555}^{490}\right)$ and $R_{\lambda_j}^{\lambda_i}$ is a compact notation for the $R_{rs}(\lambda_i)/R_{rs}(\lambda_j)$ band ratio \cite{OReilly2000}. The model coefficients were determined from a data set using iterative minimization routines (using IDL). As an example, the \gls{mcp} equation for the \gls{oc2} version 4 (OC2v4; \autoref{fig:chlemp}.a)) is
+\begin{equation}
+  C_a = 10^{\displaystyle 0.319-2.336R_2+0.879R_2^2-0.135R_2^3} - 0.071
+\end{equation}
+\noindent where $R_2=\log_{10}\left(R_{555}^{490}\right)$.
+
+The \gls{oc2} algorithm utilized just a green and a blue band. Modifications to this approach have been developed to take advantage of the rest of the blue and green bands. An example of these algorithms is the \gls{oc4} version 4 (OC4v4; \autoref{fig:chlemp}.b) that uses a fourth order polynomial equation defined as
+\begin{equation}
+  C_a = 10^{\displaystyle 0.366-3.067R_{4S}+1.930R_{4S}^2+0.649R_{4S}^3-1.532R_{4S}^4}
+\end{equation}
+\noindent where $R_{4S}=\log_{10}\left(R_{555}^{443}>R_{555}^{490}>R_{555}^{510}\right)$, $S$ denotes for \gls{seawifs}.
+
+\begin{figure}[htb]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPHD/Images/OC2v4}  
+    % \vspace{1.5cm}
+    \centerline{(a)}\medskip
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.48\linewidth}
+    \centering
+      \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPHD/Images/OC4v4}
+    % \vspace{1.5cm}
+    \centerline{(b)}\medskip
+  \end{minipage}
+  \caption{Empirical algorithms for the chlorophyll-{\it a} concentration for \gls{seawifs}. (a) $R_{555}^{490}$ versus $\tilde{C}_a$ and OC2v4 model (solid curve). (b) $R_{555}^{443}>R_{555}^{490}>R_{555}^{510}$ versus $\tilde{C}_a$ and OC4v4 model (solid curve). These empirical algorithms were developed over a data set of $N=2804$ data points. \label{fig:chlemp} } 
+\end{figure}
+
+One of the known limitations of the approach is that the data set is mostly representative of Case 1 waters and not few Case 2 waters \cite{OReilly2000}. Some modification for low $C_a$ values have been suggested by \cite{Hu:2012fv}.
+
+\subsection{$TSS$}
+\subsection{$CDOM$}
 
 % ----------------------------------------------------
-\section{SeaDAS}
+\section{ACOLITE}
+\label{subsec:acolite}
 
-% ----------------------------------------------------
-\section{ACOLITE}\todo{complete this section}
+
+
 
 % ----------------------------------------------------
 \section{Challenges in the remote sensing of Case 2 waters}
@@ -863,4 +913,4 @@ The HydroLight physical model has the following characteristics:
 
 % ----------------------------------------------------
 \section{Concluding Remarks}
-An overview of fundamental concepts that are relevant to this research was presented in this chapter. We began by describing the different energy contributions to the signal captured by the sensor followed by a description of the water constituents and their optical properties in the form of absorption and scattering coefficients. We continued with the description of how the atmosphere interacts with photons and its effect in the total signal along with the glint effect due to energy reflected in the water surface. The in water radiative transfer theory was also treated. A brief description of the Landsat-8 instrument was described. Finally, some tools used in this research were overviewed. These tools are the ELM atmospheric correction method, the Landsat surface Reflectance CDR and Hydrolight. The next section will present the methodology that will be used to accomplish this research's goal.
+An overview of fundamental concepts that are relevant to this research was presented in this chapter. We began by describing the different energy contributions to the signal captured by the sensor followed by a description of the water constituents and their optical properties in the form of absorption and scattering coefficients. We continued with the description of how the atmosphere interacts with photons and its effect in the total signal along with the glint effect due to energy reflected in the water surface. The in water radiative transfer theory was also treated. A brief description of the Landsat 8 instrument was described. Finally, some tools used in this research were overviewed. These tools are the ELM atmospheric correction method, the Landsat surface Reflectance CDR and Hydrolight. The next section will present the methodology that will be used to accomplish this research's goal.

@@ -1,5 +1,5 @@
 % \documentclass[draft]{book}
-\documentclass[draft]{book}
+\documentclass[]{book}
 
 \usepackage{graphicx}
 
@@ -223,21 +223,42 @@
 \memberC{Dr. Christy Tyler}
 % \memberD{Dr. Christy Tyler}
 
+\pagenumbering{gobble} % no page number displayed
+
 \makedeclaration
-\newpage
+
+\clearpage
+\thispagestyle{empty}
+\phantom{a}
+\vfill
 
 \makePHDproposalapproval
+
+\clearpage
+\thispagestyle{empty}
+\phantom{a}
+\vfill
+
+
 \makecopyright
+
+\clearpage
+\thispagestyle{empty}
+\phantom{a}
+\vfill
 
 
 % \maketitle
 
-\pagenumbering{roman}
+
 
 % \chapter*{Abstract}
 % \addcontentsline{toc}{chapter}{Abstract}
 
 \begin{abstract}
+\pagenumbering{roman}
+\addcontentsline{toc}{chapter}{Abstract}
+
 \setlength{\parindent}{20pt}
 % 300 Words max.
 % Background/motivation/context
@@ -290,15 +311,27 @@ Therefore, this study shows that the Landsat 8 satellite can be utilized over Ca
 
 \end{abstract}
 
+\clearpage
+\thispagestyle{empty}
+\phantom{a}
+\vfill
+
 % \chapter*{Acknowledgements}
 % %*****************************************************************************************************
 \begin{acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
 \setlength{\parindent}{20pt}
 % To my parents, Osvaldo Concha and Nelly Sepulveda, sister Loretto Concha and brother Alvaro Concha. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center. Fulbright commission. My advisor Dr. John Schott. Amanda and Cindy. Classmates: Aly, Bikash, Viraj, Madurima, Peter Sun. Professor Dr. John Kerekes. Collection help: Harold Valdivia. My dear friends: Juan Saldana, Kader, Patrick, Sarada, Susan, Melisa, Sasha, Jeremy. The people at Crossfit Rochester: Joe, Andrew. The Latin Rhythm Dance Club at RIT. My best support here Aixa de Jesus. My adopted Chilean family and dancers in Rochester: Marcia, Rosa and Doña Rosita, Raul, Willy and Marisol, Harold and Nancy. My Chilean friends in U. of R. Felipe, Maria Eugenia, Emilio, Brenda and Pauly. Kimberley Thoms.
 \end{acknowledgements}
 %*****************************************************************************************************
 
+\clearpage
+\thispagestyle{empty}
+\phantom{a}
+\vfill
+
 \begin{dedication}
+% \addcontentsline{toc}{chapter}{Dedication}
 
 Dedicated to
 
