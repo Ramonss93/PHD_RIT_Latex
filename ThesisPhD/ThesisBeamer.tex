@@ -1,11 +1,10 @@
-\documentclass{beamer}
+% On a dry run about 45-50 min.
+% Remember your telling a story mostly to your peers. The committee already knows it. Make it interesting to the students. Not to much detail. A little background on what the state of the art is why all three constituents are hard if they vary independently and then what you did.
+% JRS
+\documentclass[]{beamer}
 \usepackage[latin1]{inputenc}
 \usepackage{textpos}
-
 \usepackage{graphics}
-% \usepackage[demo]{graphicx}
-\usepackage{adjustbox}
-
 \usepackage[english]{babel}
 \usepackage{colortbl}
 \usepackage{caption}
@@ -14,9 +13,10 @@
 \usepackage{amsmath}
 \usepackage[makeroom]{cancel}
 \usepackage{xcolor} % for colored text
-
 \usepackage{tikz} % for flow charts
-\usetikzlibrary{shapes,arrows,positioning,shadows,calc}
+\usetikzlibrary{shapes,arrows,positioning,shadows,calc,decorations.markings}
+
+
 
 \usepackage{filecontents}% http://ctan.org/pkg/filecontents
 \usepackage{silence}% http://ctan.org/pkg/silence
@@ -33,47 +33,95 @@
 8 20
 \end{filecontents*} 
 
-	\renewcommand<>{\item}[1]{\only#2{\beameroriginal{\item}{#1}}} % for replace a equation for other equation in the same place
-	
-	% \usetheme{Warsaw}
-	\usetheme{Frankfurt}
-	% \usetheme{Boadilla}
-	\setbeamertemplate{navigation symbols}{} 
-	% \useoutertheme{infolines} 
-% \setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \insertshortauthor \hspace*{3.5cm} \insertshorttitle \hspace*{4.0cm} \hfill\insertframenumber/\inserttotalframenumber}} 
+\renewcommand<>{\item}[1]{\only#2{\beameroriginal{\item}{#1}}} % for replace a equation for other equation in the same place
 
-\setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \insertshortauthor \hspace*{3.5cm} \insertshorttitle \hspace*{4.4cm} \hfill\insertframenumber}} 
+% ---------- FRAME THEME -------------
+% \usetheme{Warsaw}
+\usetheme{Frankfurt}
+% \usetheme{Singapore}
+% \usetheme{Boadilla}
+
+\usecolortheme{cranejavier}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{mini frames}{}
+\setbeamertemplate{frametitle}[default][center]
+
+\setbeamertemplate{headline}{%
+\leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=0.7ex]{palette quaternary}%
+    \insertsectionnavigationhorizontal{\paperwidth}{}{}
+    \end{beamercolorbox}%
+  }
+}
+
+\setbeamerfont{headline}{size=\tiny}
+% \setbeamertemplate{section in head/foot shaded}[default][20]
+% \usesectionheadtemplate
+%   {\hfill{\bfseries\insertsectionhead}}
+%   {\hfill\color{fg!30!bg}\insertsectionhead}
+
+% \definecolor{RITorange}{RGB}{243,110,33}
+\definecolor{RITorange}{RGB}{ 255, 204, 0}
+\definecolor{craneblack}{RGB}{0, 0, 153}
+
+\setbeamercolor{frametitle}{fg=craneblack}
+\setbeamercolor{title}{fg=craneblack}
+\setbeamercolor{normal text}{fg=craneblack}
+
+\setbeamertemplate{section in head/foot}{\hfill\protect\tikz[baseline=(P.base)] \protect\node[trapezium,fill=RITorange,rounded corners=2pt,inner sep=2.5pt](P){\textcolor{craneblack}{\insertsectionhead}};}
+
+\setbeamertemplate{section in head/foot shaded}{\hfill\protect\tikz[baseline=(P.base)] \protect\node[trapezium,draw=RITorange,fill=white,rounded corners=2pt,inner sep=2.5pt](P){\textcolor{craneblack}{\insertsectionhead}};}
+% \setbeamertemplate{section in head/foot shaded}{\textcolor{fg!70!bg}{\hfill\insertsectionhead}}
+
+
+
+% \useoutertheme{infolines} 
+\setbeamertemplate{footline}{\hbox{\vspace{0.1cm}\hspace*{12.2cm} \hfill\insertframenumber}} 
 
 \def\braces#1{[#1]} % to define square parenthesis 
 	
 % \usecolortheme{orchid}
-
 % \usecolortheme{lily}
+% \usecolortheme{wolverine}
+% \useinnertheme{circles}
 
-% \usecolortheme{default}
-\usecolortheme{cranejavier}
 
 % \setbeamertemplate{footline}[frame number]
 % \setbeamertemplate{footline}[page number]
-	
-	
-	% -------------------------------------- Slide 1
-	\title[Landsat-8 over Case 2 Water]{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
-	\author[Javier A. Concha]{\Large Javier A. Concha \\\footnotesize Ph.D. Candidate\\ Advisor: Dr. John Schott}
-	\institute{\footnotesize Digital Imaging and Remote Sensing Lab\\Chester F. Carlson Center for Imaging Science\\ Rochester Institute of Technology}
-	\date{October 22, 2014}
 
+% ------------------------------------------------------
+
+% My packages
+% added on 08-03-15
+\usepackage[percent]{overpic}
+% http://www-ljk.imag.fr/membres/Jerome.Lelong/latex/appendixnumberbeamer.sty
+% Reference: http://tex.stackexchange.com/questions/2541/beamer-frame-numbering-in-appendix
+\usepackage{appendixnumberbeamer}
+% Add total frame count to slides, optional. From Stefan,
+% http://www.latex-community.org/forum/viewtopic.php?f=4&t=2173
+% \expandafter\def\expandafter\insertshorttitle\expandafter{%
+%   \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}	
+
+
+	
+% -------------------------------------- Slide 1 -----------------
+	\title[Landsat 8 over Case 2 Waters]{The Use of Landsat 8 for Monitoring of Fresh and Coastal Waters}
+	\author[Javier A. Concha]{\Large Javier A. Concha\\\large Advisor: John R. Schott\\\vspace{0.5cm}}
+	\institute{\footnotesize Digital Imaging and Remote Sensing Lab\\Chester F. Carlson Center for Imaging Science\\ Rochester Institute of Technology}
+	\date{November 18, 2015}
 
 \AtBeginSection[ ]
 {	\setbeamertemplate{footline}{} 	
-	\begin{frame}{\LARGE Outline} 
+	\begin{frame}{\Large Atmospheric Correction for Landsat 8 over Case 2 Waters} 
 	\LARGE
 		\tableofcontents[currentsection]
 	\end{frame}
 
 \addtocounter{framenumber}{-1}	
 
-\setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \insertshortauthor \hspace*{3.5cm} \insertshorttitle \hspace*{4.4cm} \hfill\insertframenumber}} 
+\setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \hspace*{12.2cm} \hfill\insertframenumber}} 
 }	
 
 % \AtBeginSubsection[ ]
@@ -85,7 +133,8 @@
 % }		
 \newcounter{tmpc} % for resume counter
 %&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-%&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+%&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&	
+	
 \begin{document}
 {	
 \setbeamertemplate{footline}{} 
@@ -109,8 +158,8 @@
 	   \tikz\node[opacity=0.3]{ \includegraphics[width=65mm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/landsat8-earth.jpg}};
 	\end{textblock*}
 
-	\begin{textblock*}{12cm}(3.5cm,0cm)
-	   \scriptsize Presented for Candidacy Exam
+	\begin{textblock*}{\linewidth}(0cm,0cm)
+	   \center\scriptsize Ph.D. Imaging Science Thesis Defense
 	\end{textblock*}
 	
 	\end{frame}
@@ -121,19 +170,48 @@
 %\setbeamercovered{transparent}
 \setbeamercovered{still covered={\opaqueness<1->{2}},again covered={\opaqueness<1->{2}}}
 
-% ----------------------------------- Slide ----------------------------------------------	
+% ----------------------------------- Slide -------------------------------------	
 
-\addtobeamertemplate{frametitle}{}{%
-\begin{textblock*}{90mm}(8.2cm,-0.5cm)
-% \includegraphics[height=0.5cm]{/Users/javier/Desktop/Javier/MASTER_RIT/SPIE2012/Slides/rit_white_no_bar.jpg}
-\includegraphics[height=0.4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RIT_LOGO.png}
-\end{textblock*}}
+% \addtobeamertemplate{frametitle}{}{%
+% \begin{textblock*}{90mm}(8.2cm,-0.5cm)
+% % \includegraphics[height=0.5cm]{/Users/javier/Desktop/Javier/MASTER_RIT/SPIE2012/Slides/rit_white_no_bar.jpg}
+% \includegraphics[height=0.4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RIT_LOGO.png}
+% \end{textblock*}}
+% ----------------------------------- Slide -------------------------------------	
+{
+\setbeamertemplate{headline}{}
+\addtobeamertemplate{frametitle}{\vspace*{-0.5\baselineskip}}{}
 
 
-% ----------------------------------- Slide ----------------------------------------------
+\begin{frame}{\LARGE Why?} 
+\vspace{-.5cm}
+\begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+  		\vspace{0.5cm}
+      	\begin{itemize}
+      	\Large
+      		\item Ocean Color Satellites (e.g. MODIS, SeaWiFS): \\ \LARGE Global Studies
+      	\end{itemize}
+	\end{column}
+
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+ 		\begin{figure}[H]
+ 			\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/107325main_chloro_concentrate.jpg}
+ 		\end{figure}
+ 		\vspace{-0.7cm}
+ 		{\hspace{4.2cm}\tiny $*~$Credit: NASA}
+ 	\end{column}
+\end{columns}
+
+\begin{figure}[H]
+		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/DiffResol.png}
+\end{figure}
+\end{frame}
+}
+% ----------------------------------- Slide -------------------------------------
 {
 \setbeamertemplate{footline}{} 
-\begin{frame}{\LARGE Outline} 
+\begin{frame}{\Large Atmospheric Correction for Landsat 8 over Case 2 Waters} 
 \LARGE
 	\tableofcontents
 \end{frame}
@@ -141,13 +219,32 @@
 \addtocounter{framenumber}{-1}
 }
 
-%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Objectives}
-% ---------------- Subsection ------------------------------
-\subsection*{Motivation}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Motivation} 
-\large
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\subsection*{Introduction}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Big Picture} 
+\begin{itemize}
+\LARGE
+
+\item To Use Landsat 8 to {\bf simultaneously} retrieve Color Producing Agents (CPAs):
+\begin{itemize}
+	\Large
+ 	\item chlorophyll-{\it a} ($C_a$)
+ 	\item colored dissolved organic matter ($CDOM$)
+ 	\item suspended minerals ($SM$ or $TSS$)
+ \end{itemize}
+\vspace{.5cm}
+\item Over Coastal and Inland Water (Case 2 Waters)
+\vspace{.5cm}
+\item Small/Medium Scale regions
+
+\end{itemize}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Who cares?} 
+\Large
 \begin{itemize}\itemsep.3cm
 \item {\bf Why is it important?}\\
 Water resources are important for both society and ecosystems:\\
@@ -165,206 +262,582 @@ Water resources are important for both society and ecosystems:\\
 \item First, we need to {\bf quantify} water quality
 \end{itemize}
 \end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Motivation (con't)} 
-\vspace{-.7cm}
-\begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-  		\vspace{0.5cm}
-      	\begin{itemize}
-      	\Large
-      		\item Ocean Color Satellites (e.g. MODIS, SeaWiFS): \\ \LARGE Global Studies
-      	\end{itemize}
-	\end{column}
+% ----------------------------------- Slide ------------------------------------
+\begin{frame}[t]\frametitle{\LARGE How?}
 
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-  	\centering
-  	\vspace{.35cm}
-  	\centerline{MODIS Chl-a product}
-  	\vspace{-.4cm}
- 		\begin{figure}[H]
- 			\includegraphics[height=2.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/107325main_chloro_concentrate.jpg}
- 		\end{figure}
- 		\vspace{-0.7cm}
- 		{\hspace{4.2cm}\tiny $*~$Credit: NASA}
- 	\end{column}
-\end{columns}
+\hspace*{-1cm}\begin{tikzpicture}[node distance=7em]
+\node(L8ROIimage)[inner sep=0pt]
+    {\includegraphics[trim=0 0 80 50,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/LC80170302014272LGN00_AreaOfStudy.png}};
 
-\begin{figure}[H]
-		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/DiffResol.png}
+\node(Map)[inner sep=0pt,right of=L8ROIimage, xshift=5cm]
+    {\includegraphics[trim=0 0 50 30,clip,width=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CHLmap140929masked.png}};
+\draw[->, >=latex, blue!70!white, line width=15pt]   (L8ROIimage) -- (Map) ;   
+\end{tikzpicture}
+
+% \setbeamercovered{invisible}
+\vspace{0.5cm}
+\begin{figure}[!ht]
+  \centering
+\hspace*{-15pt}\makebox[\linewidth][c]{%  
+% \resizebox{11cm}{!}{%
+% Define block styles
+\small
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=2em, minimum height=2em,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=1em, minimum height=3em, text width=3em, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=2em, minimum height=2em, text width=5em, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=2em, minimum height=2em, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{tikzpicture}[node distance=7em]
+% \node (start) [startstop] {Start};
+% step 1
+\pause
+\node (L8image) [io] {Landsat \\Image};\pause
+% step 2
+\node (prepro) [process, right of=L8image] {Image \\pre-processing};
+\draw [arrow] (L8image) -- (prepro);\pause
+% step 3
+\node (AtmCorr) [process, right of=prepro] {Atmospheric Correction};
+\draw [arrow] (prepro) -- (AtmCorr);\pause
+% step 4
+\node (RetProc) [process, right of=AtmCorr] {Retrieval Process};
+\draw [arrow] (AtmCorr) -- (RetProc);\pause
+% step 5
+\node (CPAmap) [io, right of=RetProc] {CPA \\maps};
+\draw [arrow] (RetProc) -- (CPAmap);\pause
+% step 6
+\node (Val) [process, below of=CPAmap, yshift=2em] {Validation};
+\draw [arrow] (CPAmap) -- (Val);
+
+% \node[align=left, below=0.0 of prepro] (List1) {\scriptsize - Cloud/Land/Water Mask\\\scriptsize - Radiometric Calibration};
+
+
+\end{tikzpicture}
+% } % resizebox end
+} % makebox end
+% \caption{High-level flowchart of the process. \label{fig:highlevelflowchart}}
 \end{figure}
-\vspace{-.5cm}
-~~~~~~GSD: $1Km~$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GSD: $30m$
 
 \end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Motivation (con't)} 
-\huge
-{\bf PROBLEM}:\\
-\vspace{.1cm}
-``There is a lack of algorithms in the water research community to address coastal issues, including important metrics of water quality.'' Mainly because spatial resolution!!!\\
-\vspace{.7cm}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE What do we want to obtain?}{\Large Water Components}
+
+\begin{figure}[htb]
+  \centering
+      \includegraphics[width=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/WaterColumn.eps}
+  % \caption{Contributions to sensor-reaching radiance from the water column.}
+  \label{fig:WaterColumn}
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE What do we want to obtain?}{\Large Water Components}
 \large
-\cite{Mueller2013} ``Satellite remote sensing in support of an integrated ocean observing system,'' Geoscience and Remote Sensing Magazine, IEEE
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Goal} 
-\begin{itemize}
-\LARGE
+Color Producing Agents (CPAs) or water components:
+\begin{enumerate}\itemsep0.5cm
+	\item {\bf Chlorophyll-{\it a}:} Main pigment of Phytoplankton.
+	\item {\bf Particles or Suspended Material (SM) or minerals:} Suspended inorganic particles, not dissolved.
+	\item {\bf Colored Dissolved Organic Matter (CDOM) or yellow substance:} From decomposition of organic material. Only absorber.
+\end{enumerate}
 
-\item To Use Landsat-8 to {\bf simultaneously} retrieve Color Producing Agents (CPAs):
-\begin{itemize}
-	\Large
- 	\item chlorophyll-{\it a}
- 	\item colored dissolved organic matter (CDOM)
- 	\item suspended minerals (SM or TSS)
- \end{itemize}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Why Atmospheric Correction is important for Water Studies?} 
+ \begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{5cm} % each column can also be its own environment
+    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/SensorReachingRadiance.png}
+    	    \vspace{0.2cm}
+    		\centerline{To retrieve:}
+    		\centerline{water-leaving radiance ($L_w$)}
+     	\end{column}
+  
+  	\begin{column}[T]{7cm} % each column can also be its own environment
+    \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/TOARadiance.png}
+    	    \vspace{0.2cm}
+    		\centerline{Retrieved $L_w$ versus}
+    		\centerline{total at-sensor radiance $L_u$}
+    		% \centerline{(Unknown concentrations)}
+     	\end{column}
+\end{columns}
 \vspace{.5cm}
-\item Over Coastal and Inland Water (Case 2 Waters)
-\vspace{.5cm}
-\item Small/Medium Scale regions
-
-\end{itemize}
+\hspace{4cm}{\scriptsize $*~$Images from: http://www.oceanopticsbook.info/}
 \end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Process} 
-
-\begin{figure}[H]
-		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
-\end{figure}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Objectives}
-\begin{itemize}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Definitions}{\Large Inherent Optical Properties (IOPs)}
 \Large
-\item Develop over-water atmospheric correction
-\vspace{.4cm}
-\item Design water constituent retrieval algorithm
-\vspace{.4cm}
-\item Apply glint correction
-\vspace{.4cm}
-\item Validate results
-\vspace{.4cm}
-\item Demo process to a different study site
-\end{itemize}
-\end{frame}
-%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Background and Literature Overview}
-% ---------------- Subsection ------------------------------
-\subsection*{Landsat-8}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Spectral Bands}
-\begin{figure}[H]
-		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/ldcmbands.png}
+{\bf IOPs:} depend only upon the medium, and not light field\\
+
+\begin{figure}[htb]
+  	\begin{minipage}[c]{0.48\linewidth}
+		\centering
+		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/IOPgeo.png}\\
+		\vspace{-.3cm}
+		\centerline{\scriptsize *\cite{Mobley:2001}}\medskip
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+		$\Delta v$: Water Volume
+	\end{minipage}\\
 \end{figure}
-\vspace{-1cm}
-\hfill \scriptsize $*~$Credit: NASA
+
+\vspace{0.2cm}
+\large
+{\bf Absorption coefficients:}\\ 
+\begin{equation}
+  a(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_a(\lambda)}{\Delta r}~~\left[m^{-1} \right]
+\end{equation}
+
 \end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm}\Large OLI Specifications} 
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Definitions}{\Large Apparent Optical Properties (AOPs)}
+\Large
+{\bf AOPs:} depend upon the medium, and the directional structure of the light field\\
+\vspace{0.5cm}
+\large
+{\bf Remote-sensing reflectance:}
+\begin{equation}
+\label{eq:Rrs}
+  R_{rs}(\theta,\phi,\lambda)\equiv \frac{L_w(\theta,\varphi,\lambda)}{E_d(\lambda)}~~\left[sr^{-1} \right]
+\end{equation}\\
+\vspace{0.3cm}
+\centering
+{\bf $L_w$:} Water-leaving radiance\\
+\vspace{0.5cm}
+{\bf $E_d$:} Downwelling irradiance\\
+
+
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Case 1 versus Case 2 Waters}{\Large Optical Classification \cite{GordonMorel1983}}
+\Large
+\begin{itemize}\itemsep1cm
+	\item {\bf Case 1}: Phytoplankton is the main driver.
+	\begin{itemize}
+	\Large
+		\item Example: open ocean
+	\end{itemize}
+
+	\item {\bf Case 2}: Not only phytoplankton, but suspended sediments and/or CDOM.
+	\begin{itemize}
+	\Large
+		\item Example: ponds, coastal waters
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Case 1 versus Case 2 Waters} 
+
+\begin{figure}[htb]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      {\Large Case 1 waters}\\
+      \vspace{.3cm}
+      \includegraphics[width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPHD/Images/OCedu_TSSfixed}\\
+      \centerline{Fixed sediments}\medskip
+  \end{minipage} 
+      \hfill
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      {\Large Case 2 waters}\\
+      \vspace{.3cm}
+      \includegraphics[width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPHD/Images/OCedu_CDOMfixed}\\
+      \centerline{Fixed CDOM}\medskip
+  \end{minipage}    
+      % \caption{Simulated water color with (a) fixed \gls{cdom} absorption coefficient at $\lambda=440nm$, $a_{CDOM}(440)$ and variable sediments and chlorophyll-{\it a} concentrations, and (b) fixed sediments and variable CDOM and chlorophyll-{\it a} concentrations.\label{fig:OneCPAfixed}}
+\end{figure}
+\end{frame}
+% ----------------- SUBSECTION ----------------------------------------------
+% \subsection*{Landsat 8}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Why Landsat 8?} 
 \vspace{-.5cm}
 \begin{itemize}
 \LARGE
-	\item Optical satellite (passive)
+
+	\item Multispectral: 4 VIS, 1 NIR, 2 SWIR
 	\vspace{.2cm}
-	\item Multispectral: 4 VIS, 1 NIR, 2 SWIR, 1 Pan
-	\vspace{.2cm}
-	\item Spatial resolution: 15/30/100m
+	\item Spatial resolution: 30 m
 	\vspace{.2cm}
 	\item Temporal resolution: 16 days
 	\vspace{.2cm}
 	\item Bit depth: 12-bits quantization (4096 levels)
 	\vspace{.2cm}
 	\item Pushbroom satellite
+	\vspace{.2cm}
+	\item Improved signal-to-noise ratio
+
 \end{itemize}
+
 \end{frame}
+% % ----------------------------------- Slide -------------------------------------
+% \begin{frame}{\LARGE Landsat 8} 
+
+% \begin{figure}[H]
+% 		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/ldcmbands.png}
+% \end{figure}
+
+% \end{frame}
+% % ----------------------------------- Slide -------------------------------------
+% \begin{frame}{\LARGE Landsat 8 Image} 
+
+
+% \begin{figure}[htb]
+%   \begin{minipage}[c]{0.6\linewidth}
+%     \centering
+%       \includegraphics[trim=0 0 0 0,clip,height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/groundtruth-sitenames-no-ends.jpg}  
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[d]{0.3\linewidth}
+%     \centering
+%       \includegraphics[trim=0 0 0 0,clip,height=3cm,angle=90]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/JavierSampling.JPG}
+%   \end{minipage}
+%   % \caption{PIF mask determination. (a) False color image, with vegetation in red and (b) PIF mask over downtown Rochester. \label{fig:PIFmask} } 
+% \end{figure}
+
+% % \begin{figure}[htb]
+% %   \centering
+% %   \includegraphics[width=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/groundtruth-sitenames-no-ends.jpg}
+% %   % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
+% % \end{figure}
+% \end{frame}
+
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Signal-to-Noise Ratio}
-\begin{figure}[htb]
-\centering
-      \includegraphics[height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/L8SNR_2.eps}
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat-8 Image} 
+\begin{frame}{\LARGE Landsat 8 Image} 
 \begin{figure}[htb]
   	\centering
   	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/LC80160302013262LGN00subset.jpg}
-  % \caption{Portion of the Landsat-8 image to be corrected showing part of the Lake Ontario, nearby ponds and Downtown Rochester. \label{fig:Scene} } 
+  % \caption{Portion of the Landsat 8 image to be corrected showing part of the Lake Ontario, nearby ponds and Downtown Rochester. \label{fig:Scene} } 
 \end{figure}
 \centering
 \vspace{-.3cm}
 09/19/13
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Comparison with Landsat-5}
+\begin{frame}{\LARGE Landsat 8}{\vspace{0.1cm} \Large Comparison with Landsat 5}
 \begin{figure}[htb]
   	\centering
   	\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/NoiseComparison.png}
-  % \caption{Portion of the Landsat-8 image to be corrected showing part of the Lake Ontario, nearby ponds and Downtown Rochester. \label{fig:Scene} } 
+  % \caption{Portion of the Landsat 8 image to be corrected showing part of the Lake Ontario, nearby ponds and Downtown Rochester. \label{fig:Scene} } 
 \end{figure}
 \vspace{-.3cm}
 \large
-~~~~~~~~~~~~~Landsat-8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Landsat-5
+~~~~~~~~~~~~~Landsat 8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Landsat 5
 \vspace{-.3cm}
 ~~~~~~~~~~~(09/29/2014)~~~~~~~~~~~~~~~~~~~~~~~~(04/24/2000)
 \end{frame}
-% ---------------- Subsection ------------------------------
-\subsection*{Atmospheric Correction}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Empirical Line Method (ELM)}
+\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Signal-to-Noise Ratio}
+\begin{figure}[htb]
+\centering
+      \includegraphics[height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/L8SNR.png}
+\end{figure}
+\end{frame}
+% ---------------- Subsection ------------------------------
+% \subsection*{Physics Model: Hydrolight}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Hydrolight} 
+\textbf{HYDROLIGHT} is a in-water radiative transfer numerical model .
+
+% \vspace{\baselineskip}
+
+% \textbf{HYDROLIGHT} computes radiance distributions and derived quantities for natural water bodies (e.g. irradiances, reflectances, K functions, etc.)
+
+% \vspace{\baselineskip}
+
+% \textbf{HYDROLIGHT} was developed by Curtis Mobley for over 20 years (1989) and is a commercial software product of Squoia Scientific, Inc.
+
+\begin{figure}[H]
+\begin{columns}[onlytextwidth] % contents are top vertically aligned
+	\column{.45\textwidth}
+		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/HydroLight_logo.jpg}	
+	\column{.45\textwidth} 
+  		\includegraphics[height=2.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/sequoia_logo.jpg}
+\end{columns}
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Hydrolight (con't)} 
+\begin{figure}[H]
+\begin{columns}[onlytextwidth] % contents are top vertically aligned
+	\column{.35\textwidth}
+  		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/absvsz.png}
+  	\column{.32\textwidth}
+  	\footnotesize
+  		\begin{equation}
+  			\cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}=\cdots \notag
+  		\end{equation}
+	\column{.35\textwidth} 
+		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadSpec.png}
+\end{columns}
+\end{figure}
+		\footnotesize
+        \resizebox{1.0\textwidth}{!}{%
+                \begin{tikzpicture}[node distance=0.75cm, auto]
+                        \tikzset{
+                                basenode/.style={rectangle,rounded corners,draw=black,very thick, inner sep=1em, minimum size=3em, text centered,text width=2cm},
+                                productnode/.style={ellipse,rounded corners,draw=black, very thick, text centered,text width=1.5cm},
+                                myarrow/.style={->,>=stealth',thick, double = black},
+                                mylabel/.style={text width=7em, text centered}
+                        }
+                        %\path[use as bounding box] (0,6) rectangle (4,2);
+                        \node[basenode] (IOPs) {Inherent Optical Properties};
+                        \node[basenode, below=of IOPs] (BC) {Boundary Conditions};
+                        \node[basenode, right=of IOPs] (RTE) {Radiative Transfer Equation};
+                        \node[basenode, right=of RTE] (rad) {Radiance Distribution};
+
+                        \draw[myarrow] (IOPs)--(RTE);
+                        \draw[myarrow] (BC)-|(RTE);
+                        \draw[myarrow] (RTE)--(rad);
+                \end{tikzpicture}
+        }
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Hydrolight (con't)} 
+\centerline{\LARGE For the Dark Pixel and LUT generation}
+\begin{figure}[H]
+		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/HLdiagram.pdf}
+\end{figure}
+\hspace{5cm}{$*~$IOPs: Inherent Optical Properties}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Collection}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
+\begin{figure}[htb]
+  \centering
+	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/L8AreaOfStudy.pdf} 
+  % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large Area of Study}
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy2.pdf}
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}
+\large
+{\bf Field Work:}
+\begin{itemize}
+	\item Remote-sensing reflectances $R_{rs}$
+	\item Water Samples
+	\item Location
+	\item Temperature
+\end{itemize}
+\vspace{0.5cm}
+{\bf Lab Measurements:}
+\begin{itemize}
+	\item Chlorophyll-{\it a} concentration ($C_a$), Total Suspended Solids ($TSS$)\footnotemark[1]
+	\item Chlorophyll-{\it a}, Particles and CDOM absorption coefficients
+\end{itemize}
+\vspace{0.5cm}
+\small
+\footnotetext[1]{Lab concentration measurements were validated with the Monroe County Environmental Lab measurements}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}
+\vspace{-1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/Collection.pdf}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}{\Large Lab Measurements} 
+\vspace{-1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LabMeasurements.pdf}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Work and Lab Measurements}
+
+\begin{figure}[htbp!]
+  \begin{minipage}[a]{0.485\linewidth}
+  	\hspace{-1cm}
+      \centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=6.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/RrsExamplesField.png}  
+      \put (20,64) {$R_{rs}(\lambda)$}  		
+      \end{overpic}  
+  \end{minipage}
+\hfill
+  \begin{minipage}[a]{0.485\linewidth}
+      \centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=6.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/IOPExamplesField.png} 
+      \put (30,62) {$a(\lambda)$}  		
+      \end{overpic}       
+  \end{minipage}\\
+  \vspace{0.3cm}
+   \begin{minipage}[a]{0.485\linewidth}
+  	\centering
+  	remote-sensing reflectance\\  
+  \end{minipage}
+  \hfill
+  \begin{minipage}[a]{0.485\linewidth}
+  	\centering
+  	Absorption coefficients for:\\
+  	Chlorophyll\\
+  	Sediments\\
+  	CDOM
+
+  \end{minipage}
+\end{figure}
+
+
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Landsat 8 Images}
+\Large
+\centering
+Only THREE clear images with enough data!!!
+
+\begin{figure}[htb!]
+    \begin{minipage}[c]{0.32\linewidth}
+	\hspace{-1.5cm}
+      \centering
+    \begin{tikzpicture}
+        \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[trim=0 0 0 0,clip,width=3.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/LC80160302013262LGN00.jpg}};
+        \begin{scope}[x={(image.south east)},y={(image.north west)}]
+            \draw[red,ultra thick] (0.25,0.5) rectangle (0.4,0.6);
+        \end{scope}
+    \end{tikzpicture}\\
+    \hspace{-1.0cm}\centerline{09-19-2013}\medskip
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.32\linewidth}
+    \hspace{-.5cm}
+      \centering
+    \begin{tikzpicture}
+        \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[trim=80 0 120 0,clip,width=3.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/LC80170302014272LGN00_ENVI.jpg}};
+        \begin{scope}[x={(image.south east)},y={(image.north west)}]
+            \draw[red,ultra thick] (0.8,0.5) rectangle (0.93,0.6);
+        \end{scope}
+    \end{tikzpicture}
+    \hspace{-.5cm}\centerline{09-29-2014}\medskip
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.32\linewidth}
+      \centering
+    \begin{tikzpicture}
+        \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[trim=80 0 120 0,clip,width=3.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/LC80170302015259LGN00_ENVI.jpg}};
+        \begin{scope}[x={(image.south east)},y={(image.north west)}]
+            \draw[red,ultra thick] (0.8,0.5) rectangle (0.93,0.6);
+        \end{scope}
+    \end{tikzpicture}
+      \centerline{09-16-2015}\medskip
+    \end{minipage}
+      % \caption{Landsat 8 images acquired on (a) 09-29-2014 (scene LC80170302014272LGN00) and (b) 09-16-2015 (scene LC80170302015259LGN00). Study area indicated in red boxes. \label{fig:L8Images1415} }
+\end{figure}  
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection}
+
+\begin{figure}[htbp!]
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/Pictures1.pdf}  
+\end{figure}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection}
+
+\begin{figure}[htbp!]
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/Pictures2.pdf}  
+\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Atmospheric Correction}
+% \subsection*{}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}
+\large
+{\bf Objective:} To develop an over-water atmospheric correction for Landsat 8 based on \cite{Raqueno:2000} and \cite{Gerace:2012}.\\
+\vspace{0.5cm}
+\small
+{\bf Work published in:}
+\small
+\begin{itemize}\itemsep0.3cm
+	\item Concha, J. A. and Schott, J. R. (2014a). ``A model-based ELM for atmospheric correction over Case 2 water with Landsat 8.'' In Ocean Sensing and Monitoring VI, volume 9111, 911112 of Proc. SPIE, {\tt doi:10.1117/12.2050589}.
+	\item Concha, J. A. and Schott, J. R. (2015). ``Atmospheric Correction for Landsat 8 over Case 2 Waters.'' In Earth Observing Systems XX, volume 9607, Proc. SPIE, {\tt doi:10.1117/12.2188345}.
+\end{itemize}
+
+
+\end{frame}
+
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Standard Atmospheric Correction}{\Large NASA's \cite{Gordon:1994} Methods}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=8cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/epsilonvslambdaGordon.png}
+  \caption{$\varepsilon(\lambda,\lambda_{NIR2}) = \frac{\rho_{as}(\lambda)}{\rho_{as}(\lambda_{NIR2})}$ values in natural logaritmic scale for different aerosol models and relative humidity (Source: \cite{Gordon:1997}). \label{fig:epsilonvslambda} } 
+  % \vspace{0.5cm}
+\end{figure}
+
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Which Atmospheric Correction?}{\Large Empirical Line Method (ELM)} 
  \begin{columns}[c] % contents are top vertically aligned
   	\begin{column}[T]{5cm} % each column can also be its own environment
-  	{\centering \Large $L(\lambda)=m\cdot r_d(\lambda)+b$}\\
+  	\centering \Large $L(\lambda)=m\times R_{rs}(\lambda)+b$\\
   	\vspace{0.1cm}
+  	\large
   	where: \begin{tabbing} $L$: Radiance\\
-  	$r_d$: Reflectance\\
+  	$R_{rs}=\frac{Lw}{E_d}$: Remote-sensing\\ ~~~~~~~~~~~~~~~~~~reflectance\\
   	$m$: slope\\
   	$b$: offset
   	\end{tabbing}
   	% \vspace{0.3cm}
-    \begin{itemize}
-    	\item Two pixels in the scene with known reflectance
-    	\vspace{0.3cm}
-    	\item Linear relationship between radiance $L$ and reflectance $r_d$ 	
-    \end{itemize}
      	\end{column}
   
-  	\begin{column}[T]{7cm} % each column can also be its own environment
-	\centering
+  	\begin{column}[T]{7.5cm} % each column can also be its own environment
+	\centering	
 \begin{figure}[htb]
 	\centering
-\resizebox{7cm}{!}{%
-\begin{tikzpicture}[y=.2cm, x=.7cm]
+
+\resizebox{7.5cm}{!}{%
+\begin{tikzpicture}[x=4ex,y=1ex]
  	%axis
 	\draw (0,0) -- coordinate (x axis mid) (10,0);
     \draw (0,0) -- coordinate (y axis mid) (0,30);
-    %ticks
- %  	\foreach \x in {0,...,10}
- %   		\draw (\x,1pt) -- (\x,-3pt)
-	% node[anchor=north] {\x};
- %  	\foreach \y in {0,5,...,30}
- %   		\draw (1pt,\y) -- (-3pt,\y) 
- %   			node[anchor=east] {\y}; 
+ 
     %labels      
-	\node[below=0ex] at (8,0) {$Band_i~~reflectance~(r_d)$};
-	\node[rotate=90] at (-.5,23) {$Band_i~~Radiance~(L)$};
+	\node[below=0ex] at (6,0) {\large $i^{th}$-band remote-sensing reflectance ($R_{rs}$)};
+	\node[rotate=90] at (-.5,23) {\large $i^{th}$-band Radiance ($L$)};
 
-	\node[below=.2ex] at (-2.1,4.5) {$b=$offset};
-	\node[below=1.4ex] at (-2.1,4.0) {(path radiance)};
-	\draw[rotate=90,|<->|] (0,1) -- coordinate (x axis mid) (1.2,1);
+	\node[below=.2ex] at (-1.5,4.3) {\large $b=$offset};
+	% \node[below=1.4ex] at (-2.1,4.0) {\large (path radiance)};
+	\draw[rotate=90,|<->|] (0,1) -- coordinate (x axis mid) (1,1);
 
-	\node[below=0ex] at (2,15) {Dark Object};
+	\node[below=0ex] at (2,16) {\large Dark Object};
 	\draw[arrows=-triangle 45] (2,12.5) -- (2,9);
 
-	\node[below=0ex] at (4,20) {$m=$ Slope};
+	\node[below=0ex] at (4,21) {\large $m=$ Slope};
 	\draw[arrows=-triangle 45] (4,17.5) -- (5,14.5);
 
-	\node[below=0ex] at (7,27) {Bright Object};
+	\node[below=0ex] at (7,28) {\large Bright Object};
 	\draw[arrows=-triangle 45] (7,24.5) -- (7.9,20.5);
 
-	\node[below=0ex] at (8,9) {\large $r_d=(L-b)/m$};
+	\node[below=0ex] at (8,9) {\Large $R_{rs}=(L-b)/m$};
 
 	%plots
 	\draw plot 
@@ -373,12 +846,1225 @@ Water resources are important for both society and ecosystems:\\
 		file {linereg2.data};
 
 \end{tikzpicture}
-  }%close \resizebox
-% \caption{Regression used in ELM to solve the linear relationship between reflectance $r_d$ and radiance $L$ using a dark and bright pixel from the scene. \label{fig:ELM}}
+} % end resize
 \end{figure}
 
      	\end{column}
 \end{columns}
+
+\vspace{.5cm}
+\begin{itemize}
+	\Large
+	\item Two pixels in the scene with known reflectance: Bright and Dark pixels
+	\vspace{0.3cm}
+	% \item Linear relationship between radiance $L$ and reflectance $r_d$ 	
+\end{itemize}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Our Approach:} 
+{\Large Model-Based Empirical Line Method (MoB-ELM)}
+
+\begin{block}{\LARGE Bright Pixel}
+ 	\begin{itemize}
+ 	\Large
+ 		\item {\bf Reflectance:} PIF\footnotemark[1] from Landsat 8 Surface Reflectance Product (USGS)
+ 		\item {\bf Radiance:} PIF\footnotemark[1] from Landsat 8 image
+ 	\end{itemize}
+\end{block} 
+% \vspace{0.1cm}
+\begin{block}{\LARGE Dark Pixel}
+
+	\begin{itemize}
+	\Large
+		\item {\bf Reflectance:} Hydrolight
+		\item {\bf Radiance:} Corresponding ROI\footnotemark[2] over water from Landsat 8 image
+	\end{itemize}
+
+\end{block}
+\footnotetext[1]{Pseudo-Invariant Features}
+\footnotetext[2]{Region of interest}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE MoB-ELM} 
+{\vspace{.1cm} \Large Bright Pixel -- Pseudo-Invariant Features}
+\centering
+\Large
+Landsat 8 Surface Product from USGS
+\begin{figure}[htb]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[trim=30 0 30 0,clip,height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/DTROCL8falsecolor.jpg}  
+    \vspace{0.3cm}
+    \centerline{Downtown Rochester}
+    \centerline{False Color Image}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.48\linewidth}
+    \centering
+      \includegraphics[trim=30 0 30 0,clip,height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFmaskApplied.jpg}
+    \vspace{0.3cm}
+    \centerline{Downtown Rochester}
+    \centerline{PIF mask}
+  \end{minipage}
+  % \caption{PIF mask determination. (a) False color image, with vegetation in red and (b) PIF mask over downtown Rochester. \label{fig:PIFmask} } 
+\end{figure}
+\end{frame}
+
+% % ----------------------------------- Slide -------------------------------------
+% \begin{frame}{\LARGE Atmospheric Correction} 
+% {\Large PIFs -- Bright Pixel}
+
+% \begin{figure}[htb]
+%   \begin{minipage}[c]{0.48\linewidth}
+%     \centering
+%       \includegraphics[height=4.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ZenithCorrection.eps}
+%   % \caption{Mean values for nine scenes of the Landsat reflectance product after applying the master PIF mask. \label{fig:ZenithCorr} }   
+%     \vspace{0.3cm}
+%     \centerline{PIFs values for 9}
+%     \centerline{Landsat reflectance images}
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[d]{0.48\linewidth}
+%     \centering
+%       \includegraphics[height=4.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ZenithCorrelation.eps}
+%   % \caption{Linear regression between reflectance values and solar zenith angle for band 1 of the Landsat reflectance product. \label{fig:Band1Corr} }
+%     \vspace{0.3cm}
+%     \centerline{Band 1 - PIFs spectrum for 9}
+%     \centerline{Landsat reflectance images}
+%   \end{minipage}
+%   % \caption{PIF mask determination. (a) False color image, with vegetation in red and (b) PIF mask over downtown Rochester. \label{fig:PIFmask} } 
+% \end{figure}
+% \end{frame}
+% ----------------------------------- Slide -------------------------------------
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large LUT -- Hydrolight}
+\large
+\begin{itemize}\itemsep.4cm
+\item {\bf Case 2 model:}  four-component (pure water, chlorophyll-bearing particles, CDOM, and mineral particles) IOP model
+
+\item {\bf Inputs:}
+	\begin{itemize}\itemsep.2cm
+	\large
+		\item IOPs from the field. ONLY absorption!
+
+		\item Illumination conditions (time, zenith angle, day of the year, etc.)
+	\end{itemize}
+
+\item {\bf Output:} water-leaving reflectance or remote-sensing reflectance ($R_{rs}$)
+
+\item {\bf Difficulty:} No information about scattering and phase function. Smart guess!
+\end{itemize}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE MoB-ELM} 
+{\vspace{.1cm} \Large Dark Pixel -- Hydrolight}
+
+\begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+
+		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/StudyArea.png}
+	\end{column}
+
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+  		\begin{itemize}
+  		\Large
+  		  	\item {\bf Reflectance:} Hydrolight run with IOPs measured in the field from Lake Ontario
+  		  	\vspace{.5cm}
+  			\item {\bf Radiance:} Corresponding ROI from the Landsat 8 image
+  		\end{itemize}
+ 	\end{column}
+\end{columns}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE MoB-ELM}{\vspace{.1cm} \Large Bright and Dark Pixel}
+
+\begin{figure}[htb]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[width=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/ELMrad130929_150422}
+    \vspace{0.3cm}
+    \centerline{(a) Radiance}\medskip
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.48\linewidth}
+    \centering
+      \includegraphics[width=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/ELMRrs130929_150422}
+    \vspace{0.3cm}
+    \centerline{(b) $R_{rs}$}\medskip
+  \end{minipage}
+  % \caption{Example of the bright and dark pixel used in the MoB-ELM atmospheric correction method for Landsat 8 scene acquired on 09-19-2013.\label{fig:MOBELMpxls} } 
+\end{figure}
+
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE MoB-ELM}{\vspace{.1cm} \Large Results}
+
+\begin{figure}[htbp!]
+  \centering
+  \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/ROI130919_150422}
+  % \caption{$R_{rs}$ for the sites for the 09-19-2013 collection after applying the MoB-ELM atmospheric correction (Labels: LONGS: Long Pond south, CRANB: Cranberry Pond, ONTOS: Lake Ontario off-shore, and ONTNS: Lake Ontario near-shore).\label{fig:RrsROIs130919} } 
+\end{figure}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large MoB-ELM}
+\vspace{-.5cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/ELMcomparison.eps}
+\end{figure}
+\vspace{-.4cm}
+\centerline{Comparison between traditional ELM (dashed lines)}
+\centerline{and MoB-ELM (solid lines).}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Corrections Comparison}
+\LARGE
+\begin{itemize}\itemsep.5cm
+	\item Our method (RIT): MoB-ELM
+	\item Gordon and Wang's methods (NASA):
+	\begin{itemize}
+	\Large
+		\item SeaDAS-SWIR
+		\item SeaDAS-MUMM (modification)
+		\item Acolite-SWIR
+	\end{itemize}
+\end{itemize}
+
+\begin{block}{\large Gordon and Wang's tools}
+\large
+{\bf SEADAS:} NASA's Package for Ocean Color\\
+
+{\bf ACOLITE:} Royal Belgian Institute of Natural Science
+\end{block}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Corrections Comparison @ $443nm$}{\Large09-19-2013 Scene}
+\vspace{-0.5cm}
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 200 0 0,clip,width=5.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/subset_0_of_Collocated13262_ACOSWIR_MOB_SEA_Rrs_443MOBdivpi}
+  		\put (5,5) {\small MOB-ELM}
+  		\end{overpic}
+  	\end{minipage}
+  	\hfill
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 200 0 0,clip,width=5.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/subset_0_of_Collocated13262_ACOSWIR_MOB_SEA_Rrs_443ACO}
+  		\put (5,5) {\small Acolite-SWIR}
+  		\end{overpic}
+  	\end{minipage}
+
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 200 0 0,clip,width=5.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/subset_0_of_Collocated13262_ACOSWIR_MOB_SEA_Rrs_443SEA}
+  		\put (5,5) {\small SeaDAS-SWIR}
+  		\end{overpic}
+  	\end{minipage}
+  	\hfill
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=30 170 40 150,clip,width=5.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_Rrs_443_MUMM45}
+  		\put (5,5) {\small SeaDAS-MUMM}
+  		\end{overpic}
+  	\end{minipage}
+  	\begin{minipage}[c]{1.0\linewidth}
+  		\centering
+  		\vspace{0.5cm}
+  		\begin{overpic}[trim=0 0 0 0,clip,height=1cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_colorbar}
+  		\put (28,16) {\small $R_{rs}(443nm) [1/sr]$}
+  		\end{overpic}
+  	\end{minipage}
+
+  % \caption{$R_{rs}$ 443.\label{fig:Rrs443} } 
+\end{figure}
+
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Corrections Comparison @ $561nm$}{\Large09-19-2013 Scene}
+\vspace{-0.2cm}
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 155 40 150,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_Rrs_561_MOB}
+  		\put (5,5) {\small MOB-ELM}
+  		\end{overpic}
+  	\end{minipage}
+  	\hfill
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 150 40 150,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_Rrs_561_ACO_R_R}
+  		\put (5,5) {\small Acolite-SWIR}
+  		\end{overpic}
+  	\end{minipage}\\
+\vspace{0.5cm}
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 150 40 150,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_Rrs_561_SEA5x5_R}
+  		\put (5,5) {\small SeaDAS-SWIR}
+  		\end{overpic}
+  	\end{minipage}
+  	\hfill
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 150 40 150,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_Rrs_561_MUMM45}
+  		\put (5,5) {\small SeaDAS-MUMM}
+  		\end{overpic}
+  	\end{minipage}
+  	
+
+  	\begin{minipage}[c]{1.0\linewidth}
+  		\centering
+  		\vspace{0.3cm}
+  		\begin{overpic}[trim=0 0 0 0,clip,height=1cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_colorbar}
+  		\put (28,16) {\small $R_{rs}(561nm) [1/sr]$}
+  		\end{overpic}
+  	\end{minipage}
+
+  % \caption{$R_{rs}$ 561.\label{fig:Rrs561} } 
+\end{figure}
+
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Corrections Comparison @ $443nm$}{\Large09-19-2013 Scene}
+% \tiny
+\vspace{-.3cm}
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+  % \begin{minipage}[c]{0.49\linewidth}
+  % 		\centering
+  %     \begin{overpic}[trim=0 60 0 0,clip,width=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_443_Acolite-SWIR_SeaDAS-MUMM.png}
+  %     % \put (65,17) {\large A) $443nm$}
+  %     \end{overpic}  
+  % \end{minipage}
+  % \hfill
+  \begin{minipage}[d]{0.49\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_443_Acolite-SWIR_MoB-ELM.png}
+      % \put (65,17) {\large B) $483nm$}
+      \end{overpic}
+  \end{minipage}
+  \hfill
+  % \begin{minipage}[c]{0.49\linewidth}
+  % 		\centering
+  %     \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_443_Acolite-SWIR_SeaDAS-SWIR.png}
+  %     % \put (65,17) {\large C) $561nm$}
+  %     \end{overpic}  
+  % \end{minipage}
+  \begin{minipage}[d]{0.49\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_443_SeaDAS-MUMM_MoB-ELM.png}
+      % \put (65,17) {\large D) $655nm$}
+      \end{overpic}
+  \end{minipage}\\
+  % \vspace{0.3cm}
+  % \hfill
+  % \begin{minipage}[c]{0.49\linewidth}
+  % 		\centering
+  %     \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_443_SeaDAS-SWIR_SeaDAS-MUMM.png}
+  %     % \put (65,17) {\large C) $561nm$}
+  %     \end{overpic}  
+  % \end{minipage}
+  % \hfill
+  \begin{minipage}[d]{0.49\linewidth}
+ 	\vspace{-.1cm}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_443_SeaDAS-SWIR_MoB-ELM.png}
+      % \put (65,17) {\large D) $655nm$}
+      \end{overpic}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.49\linewidth}
+  	\centering
+  	\Large
+  	$R_{rs}(443nm)$\\
+  	\vspace{1cm}
+      \begin{overpic}[trim=0 0 0 340,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_655_Acolite-SWIR_SeaDAS-MUMM.png}
+      \end{overpic}
+  \end{minipage}    
+
+% 
+  % \caption{Scatter plots showing the comparison of remote-sensing reflectance ($R_{rs}$) at 443 nm, derived from the 09-29-2013 image over the Rochester Embayment (scene LC80160302013262LGN00) using the different methods. Colors denote pixel densities, the dashed black line is the 1:1 line, and the Reduced Major Axis (RMA) regression line is drawn in red. \label{fig:13262Rrs443} } 
+\end{figure}
+
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Corrections Comparison @ $561nm$}{\Large09-19-2013 Scene}
+\vspace{-.3cm}
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+  % \begin{minipage}[c]{0.49\linewidth}
+  % 		\centering
+  %     \begin{overpic}[trim=0 60 0 0,clip,width=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_561_Acolite-SWIR_SeaDAS-MUMM.png}
+  %     % \put (65,17) {\large A) $443nm$}
+  %     \end{overpic}  
+  % \end{minipage}
+  % \hfill
+  \begin{minipage}[d]{0.49\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_561_Acolite-SWIR_MoB-ELM.png}
+      % \put (65,17) {\large B) $483nm$}
+      \end{overpic}
+  \end{minipage}
+  \hfill
+  % \begin{minipage}[c]{0.49\linewidth}
+  % 		\centering
+  %     \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_561_Acolite-SWIR_SeaDAS-SWIR.png}
+  %     % \put (65,17) {\large C) $561nm$}
+  %     \end{overpic}  
+  % \end{minipage}
+  \begin{minipage}[d]{0.49\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_561_SeaDAS-MUMM_MoB-ELM.png}
+      % \put (65,17) {\large D) $655nm$}
+      \end{overpic}
+  \end{minipage}\\
+  % \vspace{0.3cm}
+  % \hfill
+  % \begin{minipage}[c]{0.49\linewidth}
+  % 		\centering
+  %     \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_561_SeaDAS-SWIR_SeaDAS-MUMM.png}
+  %     % \put (65,17) {\large C) $561nm$}
+  %     \end{overpic}  
+  % \end{minipage}
+  % \hfill
+
+  \begin{minipage}[d]{0.49\linewidth}
+  \vspace{-.1cm}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=4.3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_561_SeaDAS-SWIR_MoB-ELM.png}
+      % \put (65,17) {\large D) $655nm$}
+      \end{overpic}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.49\linewidth}
+  	\centering
+  	\Large
+  	$R_{rs}(561nm)$\\
+  	\vspace{1cm}  	
+      \begin{overpic}[trim=0 0 0 340,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_655_Acolite-SWIR_SeaDAS-MUMM.png}
+      \end{overpic}
+  \end{minipage}    
+
+% 
+  % \caption{Scatter plots showing the comparison of remote-sensing reflectance ($R_{rs}$) at 561 nm, derived from the 09-29-2013 image over the Rochester Embayment (scene LC80160302013262LGN00) using the the different methods. Colors denote pixel densities, the dashed black line is the 1:1 line, and the Reduced Major Axis (RMA) regression line is drawn in red. \label{fig:13262Rrs655} } 
+\end{figure}
+
+
+\end{frame}
+
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction Methods} 
+{\Large Comparison with Field Data}
+% \centerline{\LARGE Bright and Dark Pixel}
+\vspace{-0.5cm}
+\small
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\hspace{-.5cm}\begin{figure}[htbp!]
+  \begin{minipage}[c]{0.49\linewidth}
+  		\centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=4.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/RrsCompONTNS.png}
+      \put (20,60) {(a) ONTNS} 
+      \end{overpic}  
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.49\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=4.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/RrsCompONTEX.png}
+      \put (20,14) {(b) ONTEX}  	
+      \end{overpic}
+  \end{minipage}
+
+  \begin{minipage}[d]{0.49\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=4.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/RrsCompONTOS.png}
+      \put (20,14) {(c) ONTOS}  	 	
+      \end{overpic}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[c]{0.49\linewidth}
+  		\centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=4.8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/RrsCompRVRPL.png}
+      \put (20,14) {(d) RVRPLM}  		
+      \end{overpic}  
+  \end{minipage}
+  % \hfill
+  % \begin{minipage}[c]{0.49\linewidth}
+  % 		\centering
+  %     \begin{overpic}[trim=0 0 0 0,clip,width=3.7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/RrsCompRVRPI.png}
+  %     \put (20,14) {E) RVRPIER}  		
+  %     \end{overpic}  
+  % \end{minipage}
+  
+  % \caption{Comparison of $R_{rs}$ for the sites on the 90-19-2013 collection. \label{fig:13262RrsComp}} 
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction Methods} 
+{\Large Comparison with Field Data}
+% \centerline{\LARGE Bright and Dark Pixel}
+
+\begin{block}{$R_{rs}(\lambda)$ normalized root mean squared error (NRMSE)}
+	\begin{equation*}
+\label{eq:NRMSE}
+	NRMSE =\frac{\sqrt{\frac{1}{N}\sum_{n=1}^N{\left[R_{rs}(\lambda)_{ret}(n) - R_{rs}(\lambda)_{mea}(n)\right]^2}}}{max\{R_{rs}(\lambda)_{mea}(n)\} - min\{R_{rs}(\lambda)_{mea}(n)\}}\times100 ~[\%]
+\end{equation*}
+\end{block}
+
+\noindent where:\\
+		$R_{rs}(\lambda)_{ret}$: retrieved\\
+	 	$R_{rs}(\lambda)_{mea}$: measured $R_{rs}(\lambda)$\\
+	 	$n=1\dots N$: number of samples.
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction Methods} 
+{\Large Comparison with Field Data}
+% \centerline{\LARGE Bright and Dark Pixel}
+\tiny
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+  \begin{minipage}[c]{0.48\linewidth}
+      \centering
+      \begin{overpic}[trim=30 0 50 0,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/NRMSE_RRS_B1.png}
+      \put (20,40) {\small (a) 443nm} 
+      \end{overpic}  
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.48\linewidth}
+    \centering
+      \begin{overpic}[trim=110 0 180 0,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/NRMSE_RRS_B2.png}
+      \put (20,40) {\small (b) 483nm}     
+      \end{overpic}
+  \end{minipage}
+
+    \begin{minipage}[c]{0.48\linewidth}
+      \centering
+      \begin{overpic}[trim=110 0 180 0,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/NRMSE_RRS_B3.png}
+      \put (20,40) {\small (c) 561nm} 
+      \end{overpic}  
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.48\linewidth}
+    \centering
+      \begin{overpic}[trim=110 0 180 0,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/NRMSE_RRS_B4.png}
+      \put (20,40) {\small (d) 655nm}     
+      \end{overpic}
+  \end{minipage}
+
+  % \caption{NRMSE for $R_{rs}$ at 443, 483, 561 and 655nm.\label{fig:NRMSE130919_RRS} } 
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE MoB-ELM Atmospheric Correction}{\vspace{0.1cm} \Large Conclusions}
+\Large
+\begin{itemize}\itemsep0.5cm
+	\item MoB-ELM tries to avoid the use field data
+	\item {\it A priori} knowledge of the water optical properties is needed
+	% \item MoB-ELM is highly dependent on dark pixel from Hydrolight
+	\item MoB-ELM performed similar to the Gordon and Wang approach overall (SeaDAS-SWIR)
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[CPA Retrieval]{CPA Retrieval}
+% \subsection*{}
+\begin{frame}{\LARGE CPA retrieval}
+\large
+{\bf Objective:}\\
+To develop a Color Producing Agent (CPA) retrieval for Landsat 8 based on \cite{Raqueno:2000} and \cite{Gerace:2012}.\\
+\vspace{0.5cm}
+\small
+{\bf Work published in:}
+\small
+\begin{itemize}\itemsep0.3cm
+	\item Concha, J. A. and Schott, J. R. (2014b). ``In-water component retrieval over Case 2 water using Landsat 8: Initial results.'' In Geoscience and Remote Sensing Symposium (IGARSS), 2014 IEEE International, {\tt doi:10.1109/IGARSS.2014.6947481}.
+	\item Concha, Javier and Schott, John. ``Retrieval of color producing agents in Case 2 waters using Landsat 8.'' Submitted to Remote Sensing of Environment  (2015).
+\end{itemize}
+
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE CPA Retrieval Process} 
+
+\begin{figure}[H]
+		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/UltimateProcess.pdf}
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+
+\begin{frame}{\LARGE CPA Retrieval}{\vspace{0.1cm} \Large RIT's Spectral Matching and LUT Algorithm}
+% \begin{block}{\footnotesize LUT}
+  \begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+  	\vspace{0.2cm}
+    	\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/LUTsmart130919_150422.eps}
+    	    \vspace{0.2cm}
+    		\centerline{LUT from Hydrolight}
+    		\centerline{(Known concentrations)}
+    \end{column}
+  	\hspace{.3cm}
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+  	\vspace{0.2cm}
+	\scriptsize \addtolength{\tabcolsep}{-5pt}
+\begin{table}[htb]
+% \caption{Input parameters for the LUT generation in Hydrolight for the Landsat 8 image acquired on 09-19-2013. \label{tab:LUTconc}} 
+\tiny
+\centering
+    \begin{tabular}{ccccc}
+    \hline \hline
+            IOPs Input & \bfseries{$C_a$} & \bfseries{$TSS$} & \bfseries{$a_{CDOM}(440nm)$} & \bfseries{$b_b/b$}    \\
+                   & $[mg~m^{-3}]$        & $[g~m^{-3}]$       &  $[1/m]$           & $[\%]$            \\ \hline \hline
+\multirow{8}{*}{ONTNS}  &  0.1    	& 1.0     &  0.11   &  0.3  \\
+   	&  0.5    	& 2.0   &  0.15   	&  0.4  \\
+    &  1.0    	& 5.0   &  0.21   	&  0.5  \\
+    &  3.0    	& 10.0  &  0.6    	&  0.6  \\ 
+    &  10.0     & --    &  --   	&  0.7  \\  
+    &  20.0     & --    &  --   	&  1.0  \\  
+    &  40.0     & --    &  --   	&  1.4  \\
+    &  --       & --    &  --   	&  2.0  \\ \hline
+
+\multirow{8}{*}{LONGS}   &  60.0   & 25.0    &  1.0    &  0.3  \\
+    &  90.0   & 45.0    &  1.2    &  0.4  \\
+    &  110.0  & 50.0    &  --     &  0.5  \\
+    &  --     & --      &  --     &  0.6  \\  
+    &  --     & --      &  --     &  0.7  \\  
+    &  --     & --      &  --     &  1.0  \\   
+    &  --     & --      &  --     &  1.4  \\  
+    &  --     & --      &  --     &  2.0  \\  \hline \hline
+% --      &  135.0  & --      &  --     &  --   \\  
+% --      &  150.0  & --      &  --     &  --   \\ \hline 
+    \end{tabular}
+  \end{table}
+     	\end{column}
+\end{columns}
+% \end{block}
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+
+\begin{frame}{\LARGE CPA Retrieval}{\vspace{0.1cm} \Large RIT's Spectral Matching and LUT Algorithm}
+
+  	\begin{columns}[c] % contents are top vertically aligned
+  		\begin{column}[T]{6cm} % each column can also be its own environment
+  		\vspace{0.2cm}
+    		\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/LUTsmart130919_150422.eps}
+    	    \vspace{0.2cm}
+    		\centerline{LUT from Hydrolight}
+    		\centerline{(Known concentrations)}
+    	\end{column}
+  		\hspace{-0.3cm}
+  		\begin{column}[T]{6cm} % each column can also be its own environment
+  		\vspace{0.2cm}
+  			\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/ROI130919_150422}
+  			\vspace{0.2cm}
+    		\centerline{Water Pixels from Image}
+    		\centerline{(Unknown concentrations)}	
+     	\end{column}
+	\end{columns}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Algorithm} 
+{\vspace{0.05cm} \Large Root Mean Squared Error (RMSE)}
+
+\begin{equation}
+  RMSE(i) = \sqrt{\frac{1}{m}\sum_1^m\left[\widetilde{R}_{rs}(i,\lambda_m)-R_{rs}(\lambda_m)\right]^2}
+\end{equation}
+where:\\
+$\widetilde{R}_{rs}(i,\lambda_m)$: $i$th database spectrum from the LUT at wavelength band $m$\\
+$R_{rs}(\lambda_m)$: spectrum for a particular water pixel from the image.
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Algorithm} 
+{\vspace{0.05cm} \Large Fixed IOP input and Phase Function}
+
+\scriptsize
+\begin{equation}
+  RMSE(i) = \sqrt{\frac{1}{m}\sum_1^m\left[\widetilde{R}_{rs}(i,\lambda_m)-R_{rs}(\lambda_m)\right]^2} \notag
+\end{equation}
+
+\vspace{0.5cm}
+
+\begin{figure}[htbp!]
+  \begin{minipage}[a]{0.485\linewidth}
+  	\hspace{-1cm}
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=6.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/INPmap130919masked.png}  
+  \end{minipage}
+\hfill
+  \begin{minipage}[a]{0.485\linewidth}
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=6.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/DPFmap130919masked.png}  
+  \end{minipage}\\
+\end{figure}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Algorithm} 
+{\vspace{0.05cm} \Large Non-linear Optimization Routine}
+\vspace{-0.2cm}
+\begin{block}{\bf \texttt{lsqnonlin} in Matlab}
+	Solve nonlinear least-squares problems\\
+	\vspace{.2cm}
+		$\underset{x}{min}\parallel f(x) \parallel^2_2=\underset{x}{min}(f_1(x)^2+f_2(x)^2+f_3(x)^2+...+f_m(x)^2)$\\
+		\vspace{.2cm}
+		with $f$ a vector with $m$ number of bands
+\end{block}
+
+\begin{block}{\bf Syntax:}
+	$[x]~=~lsqnonlin(@MyFn,x_0,LUT,R_{rs},LUTconc)$\\
+		\vspace{-.2cm}
+		$...$\\
+		$f = MyFn(x_0,LUT,R_{rs},LUTconc)$\\
+		$f(x)=R_{rs}-F$\\
+		\vspace{.2cm}
+		where:\\
+		$x_0$: initial concentrations of CPAs\\
+		$R_{rs}$: pixel with unknown concentrations\\
+		$F$: estimated curve from the LUT using {\bf trilinear interpolation}\\
+\end{block}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE CPA Retrieval Process}{\Large Results 09-19-13}
+
+\vspace{-0.2cm}
+
+\begin{figure}[htbp!]
+  \begin{minipage}[a]{0.485\linewidth}
+  	\hspace{-0.5cm}
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CHLmap130919masked.png}  
+  \end{minipage}
+\hfill
+%% TSS
+  \begin{minipage}[a]{0.485\linewidth}
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/TSSmap130919masked.png}  
+  \end{minipage}\\
+%% CDOM
+      \vspace{0.3cm}
+  \begin{minipage}[c]{0.485\linewidth}
+  \hspace{-0.5cm}
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CDOmap130919masked.png}  
+  \end{minipage}
+  \hfill
+  \begin{minipage}[c]{0.485\linewidth}
+  	\vspace{-0.7cm}
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/ROIRGB130919masked.png}  \\
+      RGB Image
+
+  \end{minipage}
+%
+  % \caption{CPA retrieval results for the Landsat 8 image acquired on 09-19-2013 (scene LC80160302013262LGN00). Concentration maps (left) and measured vs retrieved plots (right). The dashed line represent the 1:1 line. (Labels: LongS: Long Pond south, Cranb: Cranberry Pond, OntOS: Lake Ontario off-shore, and OntNS: Lake Ontario near-shore). \label{fig:CPAsMaps130919} } 
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE CPA Retrieval Process}{\Large Results 09-29-14}
+
+\vspace{-0.2cm}
+
+\begin{figure}[htbp!]
+  \begin{minipage}[a]{0.485\linewidth}
+  	\hspace{-1.0cm}
+      \centering
+      \includegraphics[trim=0 0 0 120,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CHLmap140929masked.png}  
+  \end{minipage}
+\hfill
+%% TSS
+  \begin{minipage}[a]{0.485\linewidth}
+      \centering
+      \includegraphics[trim=0 0 0 120,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/TSSmap140929masked.png}  
+  \end{minipage}\\
+%% CDOM
+      \vspace{0.3cm}
+  \begin{minipage}[c]{0.485\linewidth}
+  \hspace{-1.0cm}
+      \centering
+      \includegraphics[trim=0 0 0 120,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CDOmap140929masked.png}  
+  \end{minipage}
+  \hfill
+  \begin{minipage}[c]{0.485\linewidth}
+  	\vspace{-0.7cm}
+      \centering
+      \includegraphics[trim=0 0 0 120,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/ROIRGB140929masked.png}  \\
+      RGB Image  
+  \end{minipage}
+%
+  % \caption{CPA retrieval results for the Landsat 8 image acquired on 09-19-2013 (scene LC80160302013262LGN00). Concentration maps (left) and measured vs retrieved plots (right). The dashed line represent the 1:1 line. (Labels: LongS: Long Pond south, Cranb: Cranberry Pond, OntOS: Lake Ontario off-shore, and OntNS: Lake Ontario near-shore). \label{fig:CPAsMaps130919} } 
+\end{figure}
+
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE CPA Retrieval Process}{\Large Results 09-16-15}
+
+
+\vspace{-0.2cm}
+
+\begin{figure}[htbp!]
+  \begin{minipage}[a]{0.485\linewidth}
+  	\hspace{-1.0cm}
+      \centering
+      \includegraphics[trim=0 0 0 120,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CHLmap150916masked.png}  
+  \end{minipage}
+\hfill
+%% TSS
+  \begin{minipage}[a]{0.485\linewidth}
+      \centering
+      \includegraphics[trim=0 0 0 120,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/TSSmap150916masked.png}  
+  \end{minipage}\\
+%% CDOM
+      \vspace{0.3cm}
+  \begin{minipage}[c]{0.485\linewidth}
+  \hspace{-1.0cm}
+      \centering
+      \includegraphics[trim=0 0 0 120,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CDOmap150916masked.png}  
+  \end{minipage}
+  \hfill
+  \begin{minipage}[c]{0.485\linewidth}
+  	\vspace{-0.7cm}
+      \centering
+      \includegraphics[trim=0 0 0 120,clip,width=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/ROIRGB150916masked.png}    \\
+      RGB Image
+  \end{minipage}
+%
+  % \caption{CPA retrieval results for the Landsat 8 image acquired on 09-19-2013 (scene LC80160302013262LGN00). Concentration maps (left) and measured vs retrieved plots (right). The dashed line represent the 1:1 line. (Labels: LongS: Long Pond south, Cranb: Cranberry Pond, OntOS: Lake Ontario off-shore, and OntNS: Lake Ontario near-shore). \label{fig:CPAsMaps130919} } 
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE CPA Retrieval Process}{\vspace{.1cm}\Large Comparison with Field Data}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htb]
+
+\hspace{-.8cm}
+  \begin{minipage}[c]{0.32\linewidth}  
+  % CHL
+      \includegraphics[trim=40 0 80 0,clip,height=3.9cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CHLretvsmea150423}  
+  \end{minipage}
+  \hfill
+  % TSS
+  \begin{minipage}[d]{0.32\linewidth}
+      \includegraphics[trim=40 0 80 0,clip,height=3.9cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/TSSretvsmea150423}
+  \end{minipage}
+  \hfill
+  % CDOM
+  \begin{minipage}[c]{0.32\linewidth}
+      \includegraphics[trim=40 0 80 0,clip,height=3.9cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CDOMretvsmea150423} 
+
+  \end{minipage}
+
+
+  % \caption{Landsat 8's retrieved vs measured CPA concentration for the 09-19-2014 and 09-29-2015 scenes with regression line (solid red line) and goodness of fit values. The dashed line represents the 1:1 line. \label{fig:CPAsRetVSMea} } 
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE CPA Retrieval Process}{\vspace{.1cm} \Large Normalized Root Mean Square Error}
+\small
+\begin{equation}
+\label{eq:error_percentage}
+  NRMSE =\frac{\sqrt{\frac{1}{N}\sum_{n=1}^N{\left[C_{ret}(n) - C_{mea}(n)\right]^2}}}{max\{C_{mea}(n)\} - min\{C_{mea}(n)\}}\times100 ~[\%]
+\end{equation}
+\vspace{-.3cm}
+\begin{figure}[htb]
+  \centering
+      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/RMSE_ret150421}
+      % \vspace{-.4cm}
+      % \caption{RMSE expressed as percentage of range for each CPA. \label{fig:RMSE}}
+      % \vspace{-.4cm}
+\end{figure}
+\centering
+* Agreed with \cite{GeraceThesis}
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Chl-{\it a} Retrieval}{\vspace{0.1cm} \Large NASA's OC3 Algorithm}
+
+
+% \begin{block}{\footnotesize LUT}
+\begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{5cm} % each column can also be its own environment
+  	\vspace{0.4cm}
+    	\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/OC4_OReilly.png}\\
+    	~~~~~~~*\cite{OReilly2000}
+    \end{column}
+  	% \hspace{.3cm}
+  	\begin{column}[T]{6.5cm} % each column can also be its own environment
+  	\vspace{1cm}
+	% \scriptsize \addtolength{\tabcolsep}{-5pt}
+		\begin{equation*}
+			\begin{gathered}
+			C_a = 10^{\gamma}\\
+			\gamma = a_0+a_1\chi+a_2\chi^2+a_3\chi^3+a_4\chi^4\\
+			\chi = log_{10}(R)\\
+			R = \frac{max(R_{rs}(443,483))}{R_{rs}(561)}
+			\end{gathered}
+		\end{equation*}
+    \end{column}
+\end{columns}
+% \end{block}
+
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Chl-{\it a} Retrieval}{\vspace{0.1cm} \Large NASA's OC3 Algorithm}
+
+\hspace{-1.0cm}\begin{figure}[htb!]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[width=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPHD/Images/ChlStandardFixed.png}\\
+      
+  \end{minipage}
+  \hfill      
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[width=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPHD/Images/ChlStandardNoFixed.png}\\
+  \end{minipage}
+  \begin{minipage}[c]{0.48\linewidth}
+  	\centering
+  	Variable chlorophyll \\Fixed CDOM and sediments
+
+  \end{minipage}
+  \hfill
+  \begin{minipage}[c]{0.48\linewidth}
+  	\centering
+  	Variable CDOM, sediments\\ and chlorophyll
+
+  \end{minipage}
+      % \caption{$C_a$ versus blue green band ratio for the OC3 and OC2v4 standard model compared with Hydrolight simulated data for (a) fixed and (b) variable sediment and CDOM.\label{fig:ChlStandardFixedAntNot} } 
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Chl-{\it a} Retrieval}{\vspace{.1cm} \Large Methods Comparison}
+
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 0 40 0,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_chlor_MOB_D_R_R}
+  		\put (5,5) {MOB-ELM}
+  		\end{overpic}
+  	\end{minipage}
+  	\hfill
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 0 40 0,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/LC80160302013262LGN00_L2_SWIR_FranzAve_chlor_a_ACO_OC3def}
+  		\put (5,5) {Acolite-SWIR}
+  		\end{overpic}
+  	\end{minipage}
+
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 0 40 0,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_chlor_a_SEA5x5_R}
+  		\put (5,5) {SeaDAS-SWIR}
+  		\end{overpic}
+  	\end{minipage}
+  	\hfill
+	\begin{minipage}[c]{0.48\linewidth}
+  		\centering
+  		\begin{overpic}[trim=0 0 40 0,clip,width=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_chlor_a_MUMM45}
+  		\put (5,5) {SeaDAS-MUMM}
+  		\end{overpic}
+  	\end{minipage}
+  	
+
+  	\begin{minipage}[c]{1.0\linewidth}
+  		\centering
+  		\vspace{0.5cm}
+  		\begin{overpic}[trim=0 0 0 0,clip,height=1.2cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/Collocated13262_ACOSWIR_MOB_SEA5x5_MUMM45_colorbar_CHL_0_100}
+  		\put (35,16) {$C_a [mg/m^3]$}
+  		\end{overpic}
+  	\end{minipage}
+
+  % \caption{$C_a.$ \label{fig:chlor_a} } 
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Chl-{\it a} Retrieval}{\vspace{.1cm} \Large Comparison with Field Data}
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+  \begin{minipage}[c]{1.0\linewidth}
+		\centering
+     	\begin{overpic}[trim=0 0 0 0,clip,width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/CHLmeavsret.png}
+    	% \put(17,62){\includegraphics[trim=10 80 0 0,clip,width=2.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/CHLmeavsretZOOM.png}}
+      \end{overpic}  
+  \end{minipage}
+  % \caption{Comparison retrieved versus measured $R_{rs}$ for the sites on the 90-19-2013 collection. \label{fig:13262RrsMeaVSRet}} 
+\end{figure}
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Chl-{\it a} Retrieval}{\vspace{.1cm} \Large Comparison with Field Data}
+
+\begin{block}{$C_a$ normalized root mean squared error (NRMSE)}
+
+\begin{equation*}
+\label{eq:NRMSEchl}
+	NRMSE =\frac{\sqrt{\frac{1}{N}\sum_{n=1}^N{\left[C_{ret}(n) - C_{mea}(n)\right]^2}}}{max\{C_{mea}(n)\} - min\{C_{mea}(n)\}}\times100 ~[\%]
+\end{equation*}
+\end{block}
+
+\noindent where:\\
+$C_{ret}$: retrieved concentration\\
+$C_{mea}$: measured concentration\\
+$n=1\dots N$: number of samples.
+
+\end{frame}
+
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Chl-{\it a} Retrieval}{\vspace{.1cm} \Large Comparison with Field Data}
+% \vspace{-.2cm}
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+  \centering
+  \includegraphics[trim=0 0 0 100,clip,height=7.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/13262_NRMSE_CHL.png}
+  % \caption{NRMSE for $C_a$.\label{fig:NRMSE130919} } 
+\end{figure}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE CPA Retrieval}{\vspace{0.1cm} \Large Conclusions}
+\Large
+\begin{itemize}\itemsep.5cm
+	\item Empirical algorithms (NASA) fail in Case 2 waters
+	\item Developed CPA retrieval is a local solution
+	\item Three CPAs simultaneously retrieved
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Final Thoughts}
+% \subsection*{Conclusions}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Summary}
+\Large
+\begin{itemize}\itemsep.4cm
+\setbeamercovered{transparent}
+    \uncover<2->{
+	\item We developed an atmospheric correction algorithm for Landsat 8: MoB-ELM with {\it bright} and {\it dark} pixel from models }
+	\uncover<3->{
+	\item We developed a CPA retrieval using Landsat 8: Spectral Matching and LUT}
+	\uncover<4->{
+	\item We compared both MoB-ELM and CPA retrieval with standard algorithms (NASA)}
+\end{itemize}
+
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Final Conclusions} 
+\begin{itemize}\itemsep.4cm
+\Large
+\setbeamercovered{transparent}
+
+	% \uncover<3->{
+	% \item Standard Atmospheric Correction algorithms do not work in highly turbid waters}
+	\uncover<2->{
+	\item MoB-ELM is an alternative to standard atmospheric correction methods.}
+	\uncover<3->{
+	\item CPA Retrieval Algorithm is a good solution when some knowledge is available. It can be applied to many cases, but not all of them.}
+	\uncover<4->{
+	\item {\bf Landsat 8 has a great potential for monitoring of fresh and coastal waters!}}
+\end{itemize}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Future Work}{\vspace{0.1cm} \Large Atmospheric Correction}
+\Large
+\begin{itemize}\itemsep0.5cm
+	\item To have a better estimation of the phase function, backscattering
+	\item To try a mixed method: to combine MoB-ELM for coastal and \cite{Gordon:1994} 
+	for open waters
+	\item To take into account adjacency effect
+\end{itemize}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Future Work}{\vspace{0.1cm} \Large CPA Retrieval}
+\Large
+\begin{itemize}\itemsep0.5cm
+	\item To test the retrieval in different areas of study
+	\item To validate the Hydrolight outputs: IOP-AOP inversion models
+\end{itemize}
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Future Work}{\vspace{0.1cm} \Large Big Picture}
+\Large
+\begin{itemize}\itemsep0.5cm
+	\item To collect more data
+	\item To use the output for training hydrodynamics models
+	\item To investigate new sensors enhancements for future missions. Example: a red edge band
+\end{itemize}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Future Work}{\vspace{0.1cm} \Large Big Picture (con't)}
+\Large
+\begin{itemize}\itemsep0.5cm
+	\item To integrate the different algorithms (GUI)
+	% \item To study IOP stability over time
+	\item To have a better estimation of the scattering properties: IOP-AOP inversion models
+\end{itemize}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Acknowledgments}
+\Large
+\begin{itemize}\itemsep0.5cm
+	\item Advisor: Dr. Schott
+	\item Committee: Dr. Vodacek, Dr. Bachmann, Dr. Tyler
+	\item Cindy, Amanda, Sue
+	\item DIRS: Nina, Rolo, Aaron, Faculty. All who helped in the field collections
+	\item Monroe County Environmental Lab staff
+\end{itemize}
+\end{frame}
+
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Acknowledgments (con't)}
+\Large
+\begin{itemize}\itemsep0.5cm
+	\item Fulbright Commission and U.S. Geological Survey (USGS)
+	\item My colleagues and friends (among many): Aly, Anton, Dmitry, Aixa and my gf Yana
+	\item All my families here in the U.S.: SPIE Student Chapter, Tiger Tales Toastmasters, RIT Fulbright Scholars Association, Chile Lindo, Latin Rhythm Dance Club 
+	\item My Mom, Dad, Sister and Brother
+\end{itemize}
+\end{frame}
+
+%% ----------------------------------- Slide -------------------------------------
+
+{	
+\setbeamertemplate{footline}{} 
+\setbeamertemplate{headline}{}
+\begin{frame}[noframenumbering] 
+
+% \vspace{\baselineskip}
+% \centerline{\Large Thanks for your attention!}
+	% \vspace{\baselineskip}
+
+% \centerline{\Huge QUESTIONS?}
+\centering
+\LARGE
+\uncover <-1>{Thanks!}\\
+\vspace{\baselineskip}
+\uncover <2->{\Huge QUESTIONS?\\
+\vspace{\baselineskip}
+\large
+Javier A. Concha\\
+jxc4005@rit.edu}
+
+
+% \begin{figure}[htb]
+% \centering
+% \includegraphics[height=6cm]{./Images/LC80170302015259LGN00.png}
+% \end{figure}
+% \vspace{-.3cm}
+% { \hspace{2.2cm}\scriptsize $*~$Ontario Lake, on Sept. 16, 2015. Credit: NASA}
+\end{frame}
+}
+% #################################################################################
+% ########################## END PRESENTATION #####################################
+% #################################################################################
+\appendix
+\section{Additional Material}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large 2013, 2014 and 2015 Seasons}
+\begin{table}[htb]
+  
+  \centering
+  \includegraphics[width=10cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/Collect131415.png}
+  \label{tab:collect}
+\end{table}
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Definitions}{\Large Apparent Optical Properties (AOPs)}
+\Large
+{\bf AOPs:} depend upon the medium, and the directional structure of the light field\\
+\vspace{0.5cm}
+\large
+{\bf Remote-sensing reflectance:}
+\begin{equation}
+\label{eq:Rrs}
+  R_{rs}(\theta,\phi,\lambda)\equiv \frac{L_w(\theta,\varphi,\lambda)}{E_d(\lambda)}~~\left[sr^{-1} \right]
+\end{equation}
+
+{\bf Reflectance:}
+\begin{equation}\label{eq:rho}
+  \rho = \frac{\pi L}{F_o \cos{\theta}}
+\end{equation}
+
+{\bf Relationship:}
+\begin{equation}\label{eq:Rrs_And_rhow}
+ R_{rs} = \frac{\rho_w}{\pi}~~~\left[sr^{-1} \right]
+\end{equation}
+
+
+\end{frame}
+% ----------------------------------- Slide -------------------------------------
+% ------------------------------ SUBSECTION ----------------------------------------------
+% \subsection*{Field Collection and Lab Measurements}
+% \begin{frame}{\LARGE Field Collection} 
+% \begin{figure}[htb]
+%   \centering
+%   \includegraphics[width=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/groundtruth-sitenames-no-ends.jpg}
+%   % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
+% \end{figure}
+% \end{frame}
+% ----------------------------------- Slide -------------------------------------
+% \begin{frame}{\LARGE Field Collection (con't)} 
+% \vspace{-1cm}
+% \begin{figure}[htb]
+% \centering
+% \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/Collection.pdf}
+      
+% \end{figure}
+% % \centerline{Comparison between traditional ELM (dashed lines)}
+% % \centerline{and MoB-ELM (solid lines).}
+% \end{frame}
+% ----------------------------------- Slide -------------------------------------
+% \begin{frame}{\LARGE Lab Measurements} 
+% \vspace{-1cm}
+% \begin{figure}[htb]
+% \centering
+% \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LabMeasurements.pdf}
+      
+% \end{figure}
+% % \centerline{Comparison between traditional ELM (dashed lines)}
+% % \centerline{and MoB-ELM (solid lines).}
+% \end{frame}
+
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Limitations}
+MoB-ELM:
+\begin{itemize}\itemsep.5cm
+	\item Same atmosphere for the whole scene
+	\item {A priori} CPA concentration at at least one location
+\end{itemize}
+
+% CPA Retrieval:
+% \begin{itemize}\itemsep.5cm
+% 	\item blah blah
+% \end{itemize}
+
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods}
@@ -464,7 +2150,6 @@ where:\\
 		 \rho_w(\lambda_{NIR}) \approx 0 \Rightarrow \rho_c(\lambda_{NIR}) = \rho_{as}(\lambda_{NIR})\notag
 	\end{equation}
 \end{block}
-
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
@@ -486,16 +2171,16 @@ where:\\
 
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
+% \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=8cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/epsilonvslambdaGordon.png}
-  \caption{$\varepsilon(\lambda,\lambda_{NIR2})$ values in natural logaritmic scale for different aerosol models and relative humidity (Source: \cite{Gordon:1997}). \label{fig:epsilonvslambda} } 
-  % \vspace{0.5cm}
-\end{figure}
+% \begin{figure}[htb]
+%   \centering
+%   \includegraphics[width=8cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/epsilonvslambdaGordon.png}
+%   \caption{$\varepsilon(\lambda,\lambda_{NIR2})$ values in natural logaritmic scale for different aerosol models and relative humidity (Source: \cite{Gordon:1997}). \label{fig:epsilonvslambda} } 
+%   % \vspace{0.5cm}
+% \end{figure}
 
-\end{frame}
+% \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
@@ -519,774 +2204,104 @@ where:\\
 % \end{block}
 
 \end{frame}
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Methods Comparison}
+% \centerline{\LARGE Bright and Dark Pixel}
 
-
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Ruddick:2000bs} Methods}
-\vspace{-.5cm}
-\Large
-\begin{itemize}\itemsep.4cm
-	\item Based on \cite{Gordon:1994}, but for Case 2 or high productive Case 1 waters since $\rho_w(\lambda_{NIR}) \neq 0$
-
-	\item Two assumptions:
-	\begin{enumerate}[1)]\itemsep.2cm
-	\large
-		\item  The ratio of multiple-scattering aerosols and aerosol-Rayleigh in the NIR:\\
-			$\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})\equiv \frac{\displaystyle \rho_{a}(\lambda_{NIR1})+\rho_{ra}(\lambda_{NIR1})}{\displaystyle \rho_{a}(\lambda_{NIR2})+\rho_{ra}(\lambda_{NIR2})}$\\
-			is spatially homogeneous and fixed
-
-  		\item The calibration parameter:\\
-  			$\alpha \equiv \frac{\displaystyle \rho_w(\lambda_{NIR1})/T_0(\lambda_{NIR1})}{\displaystyle \rho_w(\lambda_{NIR2})/T_0(\lambda_{NIR2})}$\\
-  			is spatially homogeneous and fixed
-	\end{enumerate}
-\end{itemize}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Ruddick:2000bs} Methods (con't)}
-\Large
-Then:
-\begin{equation}
-  \rho_{a}(\lambda_{NIR1})+\rho_{ra}(\lambda_{NIR1}) = \frac{\alpha\rho_c(\lambda_{NIR2})-\rho_c(\lambda_{NIR1})}{\alpha-\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})}\notag
-\end{equation}
-and
-\begin{gather*}
-  \rho_{a}(\lambda_{NIR2})+\rho_{ra}(\lambda_{NIR2})=~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \notag\\
-  	~~~~~~~~~~~~~ \varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})\left[\frac{\alpha\rho_c(\lambda_{NIR2})-\rho_c(\lambda_{NIR1})}{\alpha-\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})}\right]\notag
-\end{gather*}
-where: $\rho_c$: Rayleigh-corrected reflectance
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Ruddick:2000bs} Methods (con't)}
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RuddickPlot.png}
-\end{figure}
-\vspace{-.4cm}
-\hfill \scriptsize (Source: \cite{Ruddick:2000bs})\\
-\vspace{.2cm}
-\Large
-\cite{Ruddick:2000bs} suggest $\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})$ from plot and $\alpha=1.72$
-\end{frame}
-
-% ---------------- Subsection ------------------------------
-\subsection*{Physics Model: Hydrolight}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Hydrolight} 
-\textbf{HYDROLIGHT} is a radiative transfer numerical model written in Fortran
-
-\vspace{\baselineskip}
-
-\textbf{HYDROLIGHT} computes radiance distributions and derived quantities for natural water bodies (e.g. irradiances, reflectances, K functions, etc.)
-
-\vspace{\baselineskip}
-
-\textbf{HYDROLIGHT} was developed by Curtis Mobley for over 20 years (1989) and is a commercial software product of Squoia Scientific, Inc.
-
-\begin{figure}[H]
-\begin{columns}[onlytextwidth] % contents are top vertically aligned
-	\column{.45\textwidth}
-  		\includegraphics[height=2.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/sequoia_logo.jpg}
-	\column{.45\textwidth} 
-		\includegraphics[height=2.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/HydroLight_logo.jpg}
-\end{columns}
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Hydrolight (con't)} 
-\begin{figure}[H]
-\begin{columns}[onlytextwidth] % contents are top vertically aligned
-	\column{.35\textwidth}
-  		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/absvsz.png}
-  	\column{.32\textwidth}
-  	\footnotesize
-  		\begin{equation}
-  			\cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}=\cdots \notag
-  		\end{equation}
-	\column{.35\textwidth} 
-		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadSpec.png}
-\end{columns}
-\end{figure}
-		\footnotesize
-        \resizebox{1.0\textwidth}{!}{%
-                \begin{tikzpicture}[node distance=0.75cm, auto]
-                        \tikzset{
-                                basenode/.style={rectangle,rounded corners,draw=black,very thick, inner sep=1em, minimum size=3em, text centered,text width=2cm},
-                                productnode/.style={ellipse,rounded corners,draw=black, very thick, text centered,text width=1.5cm},
-                                myarrow/.style={->,>=stealth',thick, double = black},
-                                mylabel/.style={text width=7em, text centered}
-                        }
-                        %\path[use as bounding box] (0,6) rectangle (4,2);
-                        \node[basenode] (IOPs) {Inherent Optical Properties};
-                        \node[basenode, below=of IOPs] (BC) {Boundary Conditions};
-                        \node[basenode, right=of IOPs] (RTE) {Radiative Transfer Equation};
-                        \node[basenode, right=of RTE] (rad) {Radiance Distribution};
-
-                        \draw[myarrow] (IOPs)--(RTE);
-                        \draw[myarrow] (BC)-|(RTE);
-                        \draw[myarrow] (RTE)--(rad);
-                \end{tikzpicture}
-        }
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Hydrolight (con't)} 
-\centerline{\LARGE For the Dark Pixel and LUT generation}
-\begin{figure}[H]
-		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/HLdiagram.pdf}
-\end{figure}
-\hspace{5cm}{$*~$IOPs: Inherent Optical Properties}
-\end{frame}
-%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Completed Work}
-% ---------------- Subsection ------------------------------
-\subsection*{Ground Truth Data Collection}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
-\begin{figure}[htb]
-  \centering
-	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy1.pdf} 
-  % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large Area of Study}
-\begin{figure}[htb]
-  	\centering
-  	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy2.pdf}
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}
-\vspace{-1cm}
-\begin{figure}[htb]
+\begin{table}[!ht]
+% \caption{ Comparison different methods for retrieving $R_{rs}$. \label{tab:RrsCompMethod} } 
 \centering
-\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/Collection.pdf}
-      
-\end{figure}
-% \centerline{Comparison between traditional ELM (dashed lines)}
-% \centerline{and model-based ELM (solid lines).}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}{\Large Lab Measurements} 
-\vspace{-1cm}
-\begin{figure}[htb]
-\centering
-\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LabMeasurements.pdf}
-      
-\end{figure}
-% \centerline{Comparison between traditional ELM (dashed lines)}
-% \centerline{and model-based ELM (solid lines).}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large 2013 and 2014 Seasons}
-\begin{table}[htb]
-  
-  \centering
-  \includegraphics[width=11cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/Collect1314.png}
-  \label{tab:collect}
+\tiny
+\begin{tabular}{cllcccccccc} 
+ % \bfseries{Band n} & \bfseries{$m$}      & \bfseries{$y_0$}    & \bfseries{$R^2$}     & \bfseries{$RMSE$} & $y(x=45^\circ)$   \\ \hline \hline
+Band		&   Method 1      &  Method 2	  &	Slope  	&	Offset  &	$R^2 $  &	N      	&	RMSE    	\\ 
+$[nm]$		&	  		      &  		 	  &	  		&			&	   		&	     	&$[mg/m^3]$ 	\\	\hline \hline
+\multirow{6}{*}{443}&Acolite-SWIR&MoB-ELM     &	0.9444 	&	-0.0047 &	0.8791 	&	144047  &	0.0054  	\\
+			&   SeaDAS-SWIR   &  MoB-ELM      &	0.8664 	&	-0.0007 &	0.7637 	&	141563  &	0.0019  	\\
+			&   SeaDAS-MUMM   &  MoB-ELM      &	0.8811 	&	-0.0018 &	0.7474 	&	144947  &	0.0029  	\\
+			&   Acolite-SWIR  &  SeaDAS-SWIR  &	1.1437 	&	-0.0053 &	0.7804 	&	145186  &	0.0038  	\\
+			&   Acolite-SWIR  &  SeaDAS-MUMM  &	1.0600 	&	-0.0032 &	0.8554 	&	147730  &	0.0026  	\\
+			&   SeaDAS-SWIR   &  SeaDAS-MUMM  &	0.9175 	&	~0.0018 &	0.8456 	&	145315  &	0.0014  	\\  \hline
+\multirow{6}{*}{448}&Acolite-SWIR&MoB-ELM     &	0.9353 	&	-0.0030 &	0.9302 	&	144077  &	0.0037  	\\
+			&   SeaDAS-SWIR   &  MoB-ELM      &	0.8547 	&	~0.0002 &	0.8454 	&	142116  &	0.0014  	\\
+			&   SeaDAS-MUMM   &  MoB-ELM      &	0.8639 	&	-0.0007 &	0.8408 	&	145138  &	0.0022  	\\ 
+			&   Acolite-SWIR  &  SeaDAS-SWIR  &	1.1269 	&	-0.0041 &	0.8739 	&	145692  &	0.0028  	\\
+			&   Acolite-SWIR  &  SeaDAS-MUMM  &	1.0693 	&	-0.0024 &	0.9175 	&	147837  &	0.0018  	\\
+			&   SeaDAS-SWIR   &  SeaDAS-MUMM  &	0.9441 	&	~0.0015 &	0.9122 	&	145888  &	0.0012  	\\ \hline
+\multirow{6}{*}{561}&Acolite-SWIR&  MoB-ELM   &	1.0183 	&	-0.0011 &	0.9044 	&	144192  &	0.0011  	\\
+	 		&   SeaDAS-SWIR   &  MoB-ELM      &	1.0043 	&	~0.0001 &	0.7828 	&	143288  &	0.0009  	\\
+	 		&   SeaDAS-MUMM   &  MoB-ELM      &	1.0611 	&	-0.0010 &	0.8468 	&	145339  &	0.0009  	\\
+	 		&   Acolite-SWIR  &  SeaDAS-SWIR  &	1.0307 	&	-0.0013 &	0.8233 	&	146761  &	0.0013  	\\
+	 		&   Acolite-SWIR  &  SeaDAS-MUMM  &	0.9663 	&	-0.0001 &	0.8968 	&	148040  &	0.0007  	\\
+	  		&   SeaDAS-SWIR   &  SeaDAS-MUMM  &	0.9374 	&	~0.0011 &	0.8728 	&	147116  &	0.0010  	\\ \hline
+\multirow{6}{*}{655}&Acolite-SWIR&MoB-ELM     &	1.1703 	&	-0.0017 &	0.8592 	&	144108  &	0.0013  	\\
+	 		&   SeaDAS-SWIR   &  MoB-ELM      &	1.2158 	&	-0.0004 &	0.7708 	&	142375  &	0.0007  	\\
+	 		&   SeaDAS-MUMM   &  MoB-ELM      &	1.2403 	&	-0.0008 &	0.6841 	&	145340  &	0.0009  	\\ 
+	 		&   Acolite-SWIR  &  SeaDAS-SWIR  &	0.9628 	&	-0.0011 &	0.7090 	&	145798  &	0.0014  	\\
+	 		&   Acolite-SWIR  &  SeaDAS-MUMM  &	0.9700 	&	-0.0008 &	0.7880 	&	147956  &	0.0010  	\\
+	 		&   SeaDAS-SWIR   &  SeaDAS-MUMM  &	1.0063 	&	~0.0004 &	0.7964 	&	146144  &	0.0007  	\\
+ \end{tabular}
 \end{table}
 \end{frame}
-% ---------------- Subsection ------------------------------
-\subsection*{Retrieval Process}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Process} 
+% ----------------------------------- Slide -------------------------------------
+\begin{frame}{\LARGE Chl-{\it a} Retrieval}{\Large Methods Comparison}
 
-\begin{figure}[H]
-		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
-\end{figure}
-
-\end{frame}
-% ---------------- Subsection ------------------------------
-\subsection*{Over-Water Atmospheric Correction}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Over-Water Atmospheric Correction}{\Large Model-Based ELM}
-
-\begin{block}{\LARGE Bright Pixel}
- 	\begin{itemize}
- 	\Large
- 		\item Radiance: PIF\footnotemark[1] from Landsat-8 image
- 		\item Reflectance: PIF\footnotemark[1] from Landsat reflectance product
- 	\end{itemize}
-\end{block} 
-% \vspace{0.1cm}
-\begin{block}{\LARGE Dark Pixel}
-
-	\begin{itemize}
-	\Large
-		\item Radiance: ROI\footnotemark[2] over water from Landsat-8 image
-		\item Reflectance: Hydrolight
-	\end{itemize}
-
-\end{block}
-\footnotetext[1]{Pseudo-Invariant Features}
-\footnotetext[2]{Region of interest}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Model-based ELM} 
-{\vspace{0.1cm} \Large Bright Pixel -- Pseudo-Invariant Features}
-\Large
-\centerline{Average Pixel from Landsat Reflectance Product (Landsat-5)}
-\large
-\begin{figure}[htb]
-  \begin{minipage}[c]{0.49\linewidth}
-    \centering
-      \includegraphics[trim=30 0 30 0,clip,height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/DTROCL8falsecolor.jpg}  
-    \vspace{0.2cm}
-    \centerline{Downtown Rochester}
-    \centerline{False Color Image}
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+  \begin{minipage}[c]{0.325\linewidth}
+  		\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_C_a_Acolite-SWIR_SeaDAS-MUMM.png}
+      \end{overpic}  
   \end{minipage}
   \hfill
-  \begin{minipage}[d]{0.49\linewidth}
-    \centering
-      \includegraphics[trim=30 0 30 0,clip,height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFmaskApplied.jpg}
-    \vspace{0.2cm}
-    \centerline{Downtown Rochester}
-    \centerline{PIF mask}
+  \begin{minipage}[d]{0.325\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_C_a_Acolite-SWIR_MoB-ELM.png}
+      \end{overpic}
   \end{minipage}
-  % \caption{PIF mask determination. (a) False color image, with vegetation in red and (b) PIF mask over downtown Rochester. \label{fig:PIFmask} } 
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Model-based ELM} 
-{\vspace{0.1cm} \Large Dark Pixel}
+  \hfill
+  \begin{minipage}[c]{0.325\linewidth}
+  		\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_C_a_Acolite-SWIR_SeaDAS-SWIR.png}
+      \end{overpic}  
+  \end{minipage}
 
-\begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{6cm} % each column can also be its own environment
+  \begin{minipage}[d]{0.325\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_C_a_SeaDAS-MUMM_MoB-ELM.png}
+      \end{overpic}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[c]{0.325\linewidth}
+  		\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_C_a_SeaDAS-SWIR_SeaDAS-MUMM.png}
+      \end{overpic}  
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.325\linewidth}
+  	\centering
+      \begin{overpic}[trim=0 60 0 0,clip,width=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_C_a_SeaDAS-SWIR_MoB-ELM.png}
+      \end{overpic}
+  \end{minipage}
 
-		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/StudyArea.png}
-	\end{column}
-
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-  		\begin{itemize}
-  			\item Radiance: Lake Ontario ROI
-  			\vspace{.5cm}
-  			\item Reflectance: Hydrolight with IOPs measured in the field over same ROI
-  		\end{itemize}
- 	\end{column}
-\end{columns}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction} 
-{\Large Model-Based ELM}
-\centerline{\LARGE {\color{red} \underline{\emph{Bright}}} and \underline{\emph{Dark}} Pixel}
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=12cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ELMpixelsENVI.pdf}
-\end{figure}
-\vspace{-.5cm}
-~~~~~~~~~~~~~~~~~~Radiance~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Reflectance
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process} 
-{\vspace{0.1cm} \Large Water Pixel Reflectances}
-\begin{figure}
-\centering
-    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/waterpixels.eps}
-\end{figure}
-
-\vspace{0.2cm}
-\centerline{Water Pixels}
-\centerline{(Unknown concentrations)}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Model-Based ELM}
-\vspace{-.5cm}
-\begin{figure}[htb]
-\centering
-\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/ELMcomparison.eps}
-\end{figure}
-\vspace{-.4cm}
-\centerline{Comparison between traditional ELM (dashed lines)}
-\centerline{and model-based ELM (solid lines).}
-\end{frame}
-% ---------------- Subsection ------------------------------
-\subsection*{In-Water Constituent Retrieval Process}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Process} 
-
-\begin{figure}[H]
-		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
+  \begin{minipage}[d]{1.0\linewidth}
+  	\centering
+      \begin{overpic}[trim=20 0 0 343,clip,width=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/2013262_ACOMOBSEAMUM_C_a_SeaDAS-SWIR_MoB-ELM.png}
+      \end{overpic}
+  \end{minipage}    
+  % \caption{$C_a$ comparison among all the four method analyzed in this work. \label{fig:13262Chlor} } 
 \end{figure}
 
 \end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large LUT -- Hydrolight}
-\large
-\begin{itemize}\itemsep.4cm
-\item {\bf Case 2 model:}  four-component (pure water, chlorophyll-bearing particles, CDOM, and mineral particles) IOP model
 
-\item {\bf Inputs:}
-	\begin{itemize}\itemsep.2cm
-	\large
-		\item IOPs from the field. ONLY absorption!
-
-		\item Illumination conditions (time, zenith angle, day of the year, etc.)
-	\end{itemize}
-
-\item {\bf Output:} water-leaving reflectance or remote-sensing reflectance ($R_{rs}$)
-
-\item {\bf Difficulty:} No information about scattering and phase function. Smart guess!
-\end{itemize}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process}
-{\vspace{0.1cm} \Large 4-D LUT -- Hydrolight}
-% \begin{block}{\footnotesize LUT}
-  \begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-  	\vspace{0.2cm}
-    	\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
-    	    \vspace{0.2cm}
-    		\centerline{LUT}
-    		\centerline{(Known concentrations)}
-    \end{column}
-  	% \hspace{1cm}
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-  	\vspace{1cm}
-	\tiny \addtolength{\tabcolsep}{-5pt}
-		\begin{tabular}{c|c|c|c|c}
-        		\bfseries{$<CHL>$}  	& \bfseries{$<SM>$}  & \bfseries{$a_{CDOM}(440)$} & \bfseries{$Backscatter$} & IOPs Input\\
-		$[ug/L]$  		& $[mg/L]$ & 	$[1/m]$ &	\bfseries{$Fraction$}, $[\%]$	\\ \hline \hline
-0.1   & 1.0  &  0.11 &  0.5 & ONTNS\\
-0.5   & 2.0  &  0.15 &  1.0 & LONGS\\
-1.0   & 5.0  &  0.21 &  1.5 & --\\
-3.0   & 10.0 &  0.6  &  2.0 & --\\
-10.0  & 25.0 &  1.0  &  --  & --\\
-20.0  & 45.0 &  1.2  &  --  & --\\
-40.0  & 50.0 &  --   &  --  & --\\
-60.0  & --   &  --   &  --  & --\\  
-90.0  & --   &  --   &  --  & --\\  
-110.0 & --   &  --   &  --  & --\\  
-135.0 & --   &  --   &  --  & --\\  
-150.0 & --   &  --   &  --  & --\\     
-	 	\end{tabular}
-     	\end{column}
-\end{columns}
-% \end{block}
-\end{frame}
-
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Process} 
-
-\begin{figure}[H]
-		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
-\end{figure}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process} 
-{\vspace{0.1cm} \Large LUT and Water Pixels}
- \begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{6.5cm} % each column can also be its own environment
-    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
-    	    \vspace{0.2cm}
-    		\centerline{LUT}
-    		\centerline{(Known concentrations)}
-     	\end{column}
-  
-  	\begin{column}[T]{6.5cm} % each column can also be its own environment
-    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/waterpixels.eps}
-    	    \vspace{0.2cm}
-    		\centerline{Water Pixels}
-    		\centerline{(Unknown concentrations)}
-     	\end{column}
-\end{columns}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Algorithm} 
-{\vspace{0.05cm} \Large Root Mean Square Error}
-\begin{equation}
-  RMSE(i) = \sqrt{\frac{1}{m}\sum_1^m\left[\widetilde{R}_{rs}(i,\lambda_m)-R_{rs}(\lambda_m)\right]^2} \notag
-\end{equation}
-where:\\
-\vspace{.3cm}
-$\widetilde{R}_{rs}(i,\lambda_m)$: $i$th database spectrum from the LUT\\
-$m$: band number\\
-$R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Algorithm} 
-{\vspace{0.05cm} \Large Non-linear Optimization Routine}
-\vspace{-0.2cm}
-\begin{block}{\bf \texttt{lsqnonlin} in Matlab}
-	Solve nonlinear least-squares problems\\
-	\vspace{.2cm}
-		$\underset{x}{min}\parallel f(x) \parallel^2_2=\underset{x}{min}(f_1(x)^2+f_2(x)^2+f_3(x)^2+...+f_m(x)^2)$\\
-		\vspace{.2cm}
-		with $f$ a vector with $m$ number of bands
-\end{block}
-
-\begin{block}{\bf Syntax:}
-	$[x]~=~lsqnonlin(@MyFn,x_0,LUT,R_{rs},LUTconc)$\\
-		\vspace{-.2cm}
-		$...$\\
-		$f = MyFn(x_0,LUT,R_{rs},LUTconc)$\\
-		$f(x)=R_{rs}-F$\\
-		\vspace{.2cm}
-		where:\\
-		$x_0$: initial concentrations of CPAs\\
-		$R_{rs}$: pixel with unknown concentrations\\
-		$F$: estimated curve from the LUT using {\bf trilinear interpolation}\\
-\end{block}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval}{\vspace{.1cm} \Large Concentration Maps Using RMSE}
-% \vspace{-.3cm}
-\centering
-\begin{figure}[htb]
-\centering
-\includegraphics[trim=200 0 180 0,clip,height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/RetrievalResults.eps}
-      
-\end{figure}
-% \centerline{Comparison between traditional ELM (dashed lines)}
-% \centerline{and model-based ELM (solid lines).}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval}{\vspace{.1cm} \Large Measured VS Retrieved Concentrations}
-\centering
- \begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{3cm} % each column can also be its own environment
-    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/chlcomp.eps}	    
-    \end{column}
-  
-  	\begin{column}[T]{3cm} % each column can also be its own environment
-    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/tsscomp.eps}   
-    \end{column}
-
-    \begin{column}[T]{3cm} % each column can also be its own environment
-    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/cdomcomp.eps}	   
-    \end{column}
-\end{columns}
-\vspace{1cm}
-\centerline{Note: Just for one day and one study area!}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Work Published}
-
-\large
-\begin{itemize}\itemsep.4cm
-	\item Concha, J.A., Schott, J.R. (2014). ``A model-based ELM for atmospheric correction over Case 2 water with Landsat-8'', International Society for Optics and Photonics (SPIE) Defense, Security, and Sensing 2014 SPIE Conference, Baltimore, MD, USA, April, 2014\\
-
-	\item Concha, J.A., Schott, J.R. (2014). ``In-water component retrieval over Case 2 water using Landsat-8: initial results.'' IEEE International Geoscience and Remote Sensing Symposium (IGARSS), Quebec, Canada, July, 2014
-\end{itemize}
-
-\end{frame}
-%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Future Work}
-% ---------------- Subsection ------------------------------
-\subsection*{Atmospheric Correction}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Glint}
-\vspace{-.5cm}
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=6.5cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/L8Glint.png}
-\end{figure}
-\vspace{-.7cm}
-\centerline{\scriptsize (07/11/2014)}
-\large
-\vspace{-.1cm}
-{\bf Glint:} Undesired signal due to sunlight and skylight reflected by the water surface.
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
-\Large
-\begin{itemize}\itemsep.4cm
-	\item Assumptions:\\
-		\begin{enumerate}[(a)]\itemsep.2cm
-		\Large
-			\item Brightness in the NIR:  only sun glint and spatially constant ambient NIR component (NIR backscatter in the atmosphere)
-			\item Sun glint in the VIS is linearly related to the brightness in the NIR
-		\end{enumerate}
-	\item Linear relationship: ROIs where sun glint is noticeable, and pixels values would be similar otherwise
-\end{itemize}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
-\vspace{-.5cm}
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=8.5cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RegressionHedley.png}
-\end{figure}
-\vspace{-.7cm}
-\hfill \scriptsize (Source: \cite{Hedley:2005})
-% \vspace{-.3cm}
-\large
-\begin{block}{Sun-glint corrected pixel brightness}
-	\begin{equation}\label{eq:deglint}
-	  	R_i' = R_i - b_i(R_{NIR}-min_{NIR})\notag
-	\end{equation}
-\end{block}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction} 
-{\Large SWIR Bands Approach \cite{Wang:2007}}
-\Large
-\begin{itemize}\itemsep.3cm
-	\item For Case 2 or high productive Case 1 waters: 
-	\begin{equation}
-		\rho_w(\lambda_{NIR}) \neq 0\notag
-	\end{equation}
-	
-	\item Solution: \cite{Gordon:1994} method using SWIR bands since $\rho_w(\lambda_{SWIR}) \approx 0$
-
-\end{itemize}
-
-\large
-\begin{block}{SSE}
-	\begin{equation}
-	  	\varepsilon(\lambda_{SWIR1},\lambda_{SWIR2}) = \frac{\rho_{as}(\lambda_{SWIR1})}{\rho_{as}(\lambda_{SWIR2})} \approx exp[c(\lambda_{SWIR1}-\lambda_{SWIR2})]\notag
-	\end{equation}
-\end{block}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction} 
-{\Large Blue Band \cite{GeraceThesis}}
-\Large
-\begin{itemize}\itemsep.4cm
-	\item Combination of spectral matching and \cite{Gordon:1994} techniques
-
-	\item Requirement: $\varepsilon(\lambda_{Coastal},\lambda_{SWIR1})\cong constant$ (not always true!)
-
-	\item No for highly turbid water due to variability in Coastal band
-
-	\item Use only bands whose histogram are Gaussian
-\end{itemize}	
-
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction} 
-{\Large Blue Band \cite{GeraceThesis} (con't)}
-\Large
-\begin{enumerate}[1)]\itemsep.4cm
-	\item Create 3-D LUT using Hydrolight. Range: $R_{rs}$
-
-	\item 4-D LUT: propagate 3-D LUT using MODTRAN for a range of visibilities. Range: sensor-reaching radiances
-	\setcounter{tmpc}{\theenumi}
-\end{enumerate}
-
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/4DLUT.png}
-\end{figure}
-\vspace{-.7cm}
-\hfill \scriptsize (Source: \cite{GeraceThesis})
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction} 
-{\Large Blue Band \cite{GeraceThesis} (con't)}
-\Large
-\begin{enumerate}[1)]\itemsep.4cm
-	\setcounter{enumi}{\thetmpc}
-	\item Visibility initial guess: 
-		\begin{itemize}\itemsep.2cm
-		\large
-			\item Find closest match in the 4-D LUT for an imaged water pixel
-
-			\item Fix concentrations associated with this match
-
-			\item Compare $\varepsilon(\lambda_{Coastal},\lambda_{SWIR1})$ from imaged pixel with 4-D LUT $\varepsilon(\lambda_{Coastal},\lambda_{SWIR1})$ for different visibilities with the fixed concentrations
-
-			\item Select closest match as initial visibility estimate
-		\end{itemize}
-
-	\item Interpolation using an Optimization routine from the imaged pixel with the fixed visibility
-\end{enumerate}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction} 
-{\Large Band Ratios \cite{GeraceThesis}}
-\large
-\begin{itemize}\itemsep.4cm
-	\item To use \cite{Ruddick:2000bs} approach with NIR and SWIR2 bands for calculating $\varepsilon(\lambda_{NIR},\lambda_{SWIR1})$ instead of NIR bands (SeaWiFS)
-
-	\item Two assumptions:
-	\begin{enumerate}[1)]\itemsep.2cm
-	\large
-		\item  The ratio of multiple-scattering aerosols and aerosol-Rayleigh in the NIR:\\
-			$\varepsilon_m(\lambda_{NIR},\lambda_{SWIR1})\equiv \frac{\displaystyle \rho_{a}(\lambda_{NIR})+\rho_{ra}(\lambda_{NIR})}{\displaystyle \rho_{a}(\lambda_{SWIR1})+\rho_{ra}(\lambda_{SWIR1})}$\\
-			is spatially homogeneous and fixed
-
-  		\item The calibration parameter:\\
-  			$\alpha \equiv \frac{\displaystyle \rho_w(\lambda_{NIR})/T_0(\lambda_{NIR})}{\displaystyle \rho_w(\lambda_{SWIR1})/T_0(\lambda_{SWIR1})}$\\
-  			is spatially homogeneous and fixed
-	\end{enumerate}
-
-\end{itemize}
-
-\end{frame}
-% ---------------- Subsection ------------------------------
-\subsection*{Retrieval}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Process} 
-{\vspace{0.1cm} \Large LUT and Water Pixels}
-\large
-\vspace{-.5cm}
-\begin{itemize}
-	\item Improve {\bf LUT creation in Hydrolight} and the {\bf Model-based ELM atmospheric correction }to have a better agreement between the modeled data and the image
-\end{itemize}
-\vspace{-.3cm}
-\begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-    \includegraphics[height=4.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
-    	    \vspace{0.1cm}
-    		\centerline{LUT}
-    		% \centerline{(Known concentrations)}
-     	\end{column}
-  
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-    \includegraphics[height=4.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/waterpixels.eps}
-    	    \vspace{0.1cm}
-    		\centerline{Water Pixels}
-    		% \centerline{(Unknown concentrations)}
-     	\end{column}
-\end{columns}
-\end{frame}
-% ---------------- Subsection ------------------------------
-\subsection*{Validation}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Comparison and Validation}
-\vspace{-.3cm}
-\Large
-\begin{itemize}\itemsep.4cm
-	\item Atmospheric Correction: Compare with results in SeaDAS by NASA (future release)\\
-    	\begin{minipage}[t]{\linewidth}
-          	\centering
-          	\adjustbox{valign=t}{%
-				\includegraphics[height=1cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/SeaDAS_splash.png}
-			}
-		% \medskip
-    	\end{minipage}
-	\item Retrieval: 
-
-		\begin{itemize}\itemsep.4cm
-		\Large
-		\item 	Compare with Ocean Optics products. Example: MODIS chl-{\it a} product\\
-		\begin{minipage}[t]{\linewidth}
-          	\centering
-          	\adjustbox{valign=t}{%
-				\includegraphics[height=2cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/107325main_chloro_concentrate.jpg}
-			}
-		% \medskip
-    	\end{minipage}	
-
-    	\item Compare with field data
-
-    	\end{itemize}			
-
-\end{itemize}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Future Work}
-\Large
-\begin{itemize}\itemsep.4cm
-	\item Improve Non-linear Optimization routine for 4-D LUT (3 components plus phase function) instead of 3-D LUT
-
-	\item Retrieval applied to more days in the area of study
-
-	\item Try retrieval in different area of studies
-
-	\item Journal articles for: 1) atmospheric correction and 2) retrieval
-\end{itemize}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Timeline}
-
-{\bf Expected graduation:} August 2015\\
-
-\vspace{.5cm}
-\small
-\begin{tabular*}{\textwidth}{l l}
-\hline
-        		\bfseries{Estimated Time}  	& \bfseries{Description} \\ 
-\hline \hline
-
-1 month   &  	\parbox[t]{7cm}{Fix LUT creation} \\
-\hline
-1 month   & 	\parbox[t]{7cm}{Retrieval applied to more days:\\
-				- Use images from 2013 and 2014 season\\
-				- More points to have better stats} \\
-\hline
-1 month   & 	\parbox[t]{7cm}{Atmospheric Correction:\\
-				- Apply \cite{Gordon:1994} methods\\
-				- Apply \cite{GeraceThesis} methods} \\
-\hline
-1 month   & 	\parbox[t]{7cm}{Improve Optimization Routine for 4-D LUT} \\
-\hline
-1 month   & 	\parbox[t]{7cm}{Validation} \\
-\hline
-1 month   & 	\parbox[t]{7cm}{Apply retrieval in different ares of studies} \\
-\hline
-6 months   & 	\parbox[t]{7cm}{Write Thesis and Journals:\\
-				- Include final results} \\
-\hline \hline
-
-     
-\end{tabular*}
-
-\end{frame}
-%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions}
-\subsection*{Conclusions}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Conclusions}
-
-\Large
-\begin{itemize}\itemsep.4cm
-	\item Current retrieval algorithm depends on IOPs from the field. Not always available!
-
-	\item LUT from Hydrolight: Highly dependent in phase function
-
-	\item Obtain field data for Landsat-8 is difficult, mainly for weather conditions
-\end{itemize}
-
-\end{frame}
-
-% --- slide ------------------------------------------------
-{	
-\setbeamertemplate{footline}{} 
-\setbeamertemplate{headline}{}
-\begin{frame}[noframenumbering] 
-
-\vspace{\baselineskip}
-\centerline{\Large Thanks for your attention!}
-	\vspace{\baselineskip}
-\vspace{-.3cm}
-% \centerline{\Huge QUESTIONS?}
-\uncover <2->{\centerline{\Huge QUESTIONS?}}
-\vspace{\baselineskip}
-\centerline{Javier A. Concha}
-\centerline{jxc4005@rit.edu}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LC80160302013262LGN00.jpg}
-\end{figure}
-\vspace{-.5cm}
-\centerline{\tiny (09/19/2013)}
-\end{frame}
-}
-% % BIBLIOGRAPHY
-% \bibliographystyle{apalike}
-
-% \bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
-% --- slide ------------------------------------------------
+ % ----------------------------------- Slide -------------------------------------
 \section*{}
 \begin{frame}%[shrink=30] 
 \tiny
   \frametitle{References}
   % \nocite{*}
   \bibliographystyle{apalike}
-  \bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
+  \bibliography{javier_bibPhD}
 \end{frame}
-\end{document} 
-% EEEEEEEEEEENNNNNNNNNNNNNNDDDDDDDDDDDD
+
+\end{document} % EEEEEEEEEEENNNNNNNNNNNNNNDDDDDDDDDDDD

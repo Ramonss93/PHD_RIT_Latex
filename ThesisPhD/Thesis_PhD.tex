@@ -1,5 +1,4 @@
-% \documentclass[draft]{book}
-\documentclass[]{book}
+\documentclass[oneside,11pt]{book}
 
 \usepackage{graphicx}
 
@@ -14,7 +13,7 @@
 
 \usepackage{multirow}
 \usepackage{fullpage}
-\usepackage{appendix}
+\usepackage[titletoc,title]{appendix}
 \usepackage{setspace}
 
 \usepackage[bf, small, center]{caption}
@@ -22,20 +21,24 @@
 
 \usepackage{longtable}
 
-\usepackage{geometry}
+\usepackage{geometry} % for page margin for odd and even pages to bind them
 \geometry{
-%  top=1.0in,  
-%  inner=1.5in,
-%  outer=1.5in,
+% top=1.0in,  
+ inner=3.5cm,
+ outer=1.0in,
   bottom=1.2in,
 %  headheight=3ex, 
   headsep=3ex,         
 }
 
-\usepackage{fancyhdr}
+% \doublespacing
+\onehalfspacing
+
+
+\usepackage{fancyhdr} % for the header
 \pagestyle{fancy}
-% \fancyhead[LO, RE]{\rightmark}
-\fancyhead[LE, RO]{\thepage}
+\fancyhead[L]{\it \leftmark}
+\fancyhead[R]{\thepage}
 \fancyfoot[]{}
 % \renewcommand{\headrulewidth}{0.3pt}
 
@@ -71,19 +74,118 @@
 \renewcommand\chapter{\newpage\stdsection}  
 
 %%%%%%%%%%% for Appendix
-\makeatletter
-\newcommand\appendix@section[1]{%
-  \refstepcounter{section}%
-  \orig@section*{Appendix \@Alph\c@section: #1}%
-  \addcontentsline{toc}{section}{Appendix \@Alph\c@section: #1}%
-}
-\let\orig@section\section
-\g@addto@macro\appendix{\let\section\appendix@section}
-\makeatother
+% \makeatletter
+% \newcommand\appendix@section[1]{%
+%   \refstepcounter{section}%
+%   \orig@section*{Appendix \@Alph\c@section: #1}%
+%   \addcontentsline{toc}{section}{Appendix \@Alph\c@section: #1}%
+% }
+% \let\orig@section\section
+% \g@addto@macro\appendix{\let\section\appendix@section}
+% \makeatother
 
 
-%%%%%%%%%%%%%%
 
+% Added 09-24-15 ----------------------------------------
+\usepackage{breakcites}
+
+
+
+% Added 11-12-13 ----------------------------------------
+
+\usepackage{titlesec} % For the spacing after and before chapter title
+
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}{\chaptertitlename \thechapter}{10pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{40pt}{20pt}
+
+\titlespacing*{\section}{0ex}{2.5ex}{2ex}
+\titlespacing*{\subsection}{0ex}{1.5ex}{1ex}
+
+% Added 09-21-15 ----------------------------------------
+%Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+\usepackage[Bjornstrup]{fncychap}
+\ChTitleVar{\raggedleft\Huge\rmfamily\bfseries}
+% ----------------------------------------
+
+\usepackage{indentfirst}
+\setlength{\parindent}{20pt}
+
+% Added 11-17-13 ----------------------------------------
+% Select what to do with todonotes: 
+% \usepackage[disable]{todonotes} % notes not showed
+\usepackage[draft]{todonotes}   % notes showed
+\setlength{\marginparwidth}{2cm}
+
+\usepackage{tikz} % for flow charts
+  \usetikzlibrary{shapes,shapes.geometric,arrows,positioning,shadows,calc}
+
+
+\begingroup\newif\ifmy
+\IfFileExists{linereg.data}{}{\mytrue}
+\ifmy
+\begin{filecontents}{linereg.data}
+#x y
+0 4
+10 24
+\end{filecontents}
+\fi\endgroup
+
+\begingroup\newif\ifmy
+\IfFileExists{linereg2.data}{}{\mytrue}
+\ifmy
+\begin{filecontents}{linereg2.data}
+#x y
+2 8
+8 20
+\end{filecontents}
+\fi\endgroup
+
+\usepackage{colortbl}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+\listfiles
+
+\setlength{\headheight}{15pt} % to avoid "Package Fancyhdr Warning: \headheight is too small (0.0pt): Make it at least 12.0pt."
+
+% Added 02-18-14 ----------------------------------------
+% \setlength{\abovecaptionskip}{-2ex}
+% \setlength{\belowcaptionskip}{-4ex} % space after caption
+%******************************************************************************************************
+
+% Added 08-10-14 
+\usepackage{enumitem}
+
+% Added 07-28-15 
+\usepackage[percent]{overpic}
+\usepackage{morefloats} % for the error "Too many unprocessed floats"
+
+% -------------------------------------------------------
+
+% Added 09-28-15 ----------------------------------------
+% Load the package with the acronym option
+\usepackage[acronym,nomain,toc,ucmark=true]{glossaries}
+% Generate the glossary
+\makeglossaries
+\renewcommand*{\acronymname}{Acronyms and Abbreviations}
+\include{Acronyms} % to include Acronyms.tex
+
+% Added 11-15-13 ----------------------------------------
+\includeonly{Acronyms,Introduction,Objectives,Background_and_Theory,Methodology,Results,Summary,Appendix,Vita} 
+% \includeonly{Acronyms,Introduction,Results}
+
+% Added 10-21-15 ----------------------------------------
+\usepackage{pdflscape}
+
+% Added 10-22-15 ----------------------------------------
+\usepackage{seqsplit}
+
+% Added 10-23-15 ----------------------------------------
+\usepackage{tocbibind}
+% ----------------------------------------
+\usepackage{seqsplit}
 \usepackage{hyperref}
 \hypersetup{
     % bookmarks=true,         % show bookmarks bar?
@@ -111,110 +213,80 @@
     breaklinks=true
 }
 
-% Added 09-24-15 ----------------------------------------
-\usepackage{breakcites}
-
 \usepackage[all]{hypcap} % to see figure with hyper ref
 
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
 
-% Added 11-12-13 ----------------------------------------
-
-\usepackage{titlesec} % For the spacing after and before chapter title
-
-\titleformat{\chapter}[display]
-    {\normalfont\huge\bfseries}{\chaptertitlename \thechapter}{10pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{40pt}{20pt}
-
-\titlespacing*{\section}{0ex}{2.5ex}{2ex}
-\titlespacing*{\subsection}{0ex}{1.5ex}{1ex}
-
-% Added 09-21-15 ----------------------------------------
-%Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
-\usepackage[Bjornstrup]{fncychap}
-\ChTitleVar{\raggedleft\Huge\rmfamily\bfseries}
-% ----------------------------------------
-
-\usepackage{indentfirst}
-\setlength{\parindent}{20pt}
-\doublespacing
-
-% Added 11-17-13 ----------------------------------------
-% Select what to do with todonotes: 
-% \usepackage[disable]{todonotes} % notes not showed
-\usepackage[draft]{todonotes}   % notes showed
-
-\setlength{\marginparwidth}{3.7cm}
-
-% Added 11-15-13 ----------------------------------------
-\includeonly{Acronyms,Introduction,Objectives,Background_and_Theory,Methodology,Results,Summary,Appendix} 
-% \includeonly{Background_and_Theory} 
-% \includeonly{Introduction,Objectives,Background_and_Theory,Methodology,Results} 
-\usepackage{tikz} % for flow charts
-  \usetikzlibrary{shapes,shapes.geometric,arrows,positioning,shadows,calc}
-
-\begin{filecontents*}{linereg.data}
-#x y
-0 4
-10 24
-\end{filecontents*} 
-
-\begin{filecontents*}{linereg2.data}
-#x y
-2 8
-8 20
-\end{filecontents*}
- 
-\usepackage{colortbl}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{multirow}
-
-\listfiles
-
-\setlength{\headheight}{15pt} % to avoid "Package Fancyhdr Warning: \headheight is too small (0.0pt): Make it at least 12.0pt."
-
-% Added 02-18-14 ----------------------------------------
-% \setlength{\abovecaptionskip}{-2ex}
-% \setlength{\belowcaptionskip}{-4ex} % space after caption
-%******************************************************************************************************
-
-
-% Added 08-10-14 
-\usepackage{enumitem}
-
-% Added 07-28-15 
-\usepackage[percent]{overpic}
-\usepackage{morefloats} % for the error "Too many unprocessed floats"
-
 % Added 12-03-13 ----------------------------------------
 \usepackage{imakeidx} % to create index
 \indexsetup{othercode=\small}
 \makeindex[program=makeindex,columns=2,intoc=true,options={-s MyIndex.ist}]
-% -------------------------------------------------------
+% \usepackage{imakeidx}     % use this one when is not working
+% \makeindex                % use this one when is not working
 
+% Added 10-25-15 ----------------------------------------
+\usepackage{silence}
+\WarningFilter{latex}{Text page}
+\WarningFilter{latex}{Float too large}
+\WarningFilter{latex}{Marginpar on page}
 
-% Added 09-28-15 ----------------------------------------
-% Load the package with the acronym option
-\usepackage[acronym,nomain]{glossaries}
+% Added 10-26-15 ----------------------------------------
+\usepackage{listings}
  
-% Generate the glossary
-\makenoidxglossaries
-\renewcommand*{\acronymname}{Acronyms and Abbreviations}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+ 
+\lstset{ %
+  % language=Matlab,                % the language of the code
+  basicstyle=\small\ttfamily,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  %tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add a comment within your code
+  morekeywords={*,...,lsqnonlin},              % if you want to add more keywords to the set
+  aboveskip=10pt,
+  belowskip=-12pt
+}
 
-\include{Acronyms}
+% Added 11-05-15 ----------------------------------------
+\usepackage[round]{natbib} 
+% from
+% http://tex.stackexchange.com/questions/117428/get-round-brackets-with-apalike
+% o your preamble. For regular in text citations, use
 
+% \citet{<key>} % or \cite{<key>}
+% and for citations enclosed in parentheses use
 
+% \citep{<key>}
+%%%%%%%%%%%%%%
 %******************************************************************************************************
 %******************************************************************************************************
 %******************************************************************************************************
 \begin{document}
 
-\degreetitle{The Use of Landsat 8 for Monitoring \\of Fresh and Coastal Waters}
+\degreetitle{The Use of Landsat 8 for Monitoring of \\Fresh and Coastal Waters}
 \degreeauthor{Javier A. Concha}
-\degreedate{November 18, 2015}
-% \degreedate{\today{}}
+% \degreedate{November 18, 2015}
+\degreedate{\today{}}
 \prevdegreeA{B.S. Electronics Engineering, Universidad de Concepci\'on, Chile, 2008}
 \prevdegreeB{M.S. Imaging Science, Rochester Institute of Technology, NY, USA, 2012}
 \advisor{Dr. John R. Schott}
@@ -223,41 +295,25 @@
 \memberC{Dr. Christy Tyler}
 % \memberD{Dr. Christy Tyler}
 
-\pagenumbering{gobble} % no page number displayed
+% \pagenumbering{gobble} % no page number displayed
+\pagenumbering{roman}
 
 \makedeclaration
 
-\clearpage
-\thispagestyle{empty}
-\phantom{a}
-\vfill
-
 \makePHDproposalapproval
 
-\clearpage
-\thispagestyle{empty}
-\phantom{a}
-\vfill
-
-
-\makecopyright
-
-\clearpage
-\thispagestyle{empty}
-\phantom{a}
-\vfill
-
+% \makecopyright
 
 % \maketitle
-
-
 
 % \chapter*{Abstract}
 % \addcontentsline{toc}{chapter}{Abstract}
 
+
 \begin{abstract}
-\pagenumbering{roman}
+\phantomsection
 \addcontentsline{toc}{chapter}{Abstract}
+
 
 \setlength{\parindent}{20pt}
 % 300 Words max.
@@ -276,18 +332,18 @@ The Mob-ELM employs pseudo invariant feature (PIF) pixels extracted from a refle
 %
 We used a look-up-table-based (LUT-based) inversion methodology to simultaneously retrieve CPAs.
 %
-The LUT of remote-sensing reflectance spectra was created in Hydrolight using IOPs measured in the field.
+The LUT of remote-sensing reflectance spectra was created in Hydrolight using inherent optical properties (IOPs) measured in the field.
 
 % Results
-The retrieval algorithm was applied over two~\todo{maybe three} Landsat 8 scenes.
+The retrieval algorithm was applied over three~\todo{three?} Landsat 8 scenes.
 %
 The CPA concentration maps exhibit expected trends of low concentrations in clear waters and higher concentrations in turbid waters. 
 %
-We estimated a normalized root mean squared error (NRMSE) of about $10\%$ for Chlorophyll-{\it a} and total suspended solid (TSS), and about $5\%$ for colored dissolved organic matter (CDOM) when compared with ground-truth data. 
+We estimated a normalized root mean squared error (NRMSE) of about $10\%$ for Chlorophyll-{\it a} and total suspended solid (TSS), and about $5\%$ for colored dissolved organic matter (CDOM) when compared with {\it in situ} data. 
 % Conclusions
 These results demonstrate that the developed algorithm allows the simultaneous mapping of concentration of all CPAs in Case 2 waters and over areas where the standard algorithms are not available due to spatial resolution.
 %
-Therefore, this study shows that the Landsat 8 satellite can be utilized over Case 2 waters as long as a careful atmospheric correction is applied. 
+Therefore, this study shows that the Landsat 8 satellite can be utilized over Case 2 waters as long as a careful atmospheric correction is applied and IOPs are known. 
 
 % Background/motivation/context
 % Aim/objectives(s)/problem statement
@@ -311,45 +367,49 @@ Therefore, this study shows that the Landsat 8 satellite can be utilized over Ca
 
 \end{abstract}
 
-\clearpage
-\thispagestyle{empty}
-\phantom{a}
-\vfill
 
 % \chapter*{Acknowledgements}
 % %*****************************************************************************************************
 \begin{acknowledgements}
-\addcontentsline{toc}{chapter}{Acknowledgements}
+\phantomsection
+\addcontentsline{toc}{chapter}{Acknowledgments}
 \setlength{\parindent}{20pt}
 % To my parents, Osvaldo Concha and Nelly Sepulveda, sister Loretto Concha and brother Alvaro Concha. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center. Fulbright commission. My advisor Dr. John Schott. Amanda and Cindy. Classmates: Aly, Bikash, Viraj, Madurima, Peter Sun. Professor Dr. John Kerekes. Collection help: Harold Valdivia. My dear friends: Juan Saldana, Kader, Patrick, Sarada, Susan, Melisa, Sasha, Jeremy. The people at Crossfit Rochester: Joe, Andrew. The Latin Rhythm Dance Club at RIT. My best support here Aixa de Jesus. My adopted Chilean family and dancers in Rochester: Marcia, Rosa and Doña Rosita, Raul, Willy and Marisol, Harold and Nancy. My Chilean friends in U. of R. Felipe, Maria Eugenia, Emilio, Brenda and Pauly. Kimberley Thoms.
 \end{acknowledgements}
 %*****************************************************************************************************
 
-\clearpage
-\thispagestyle{empty}
-\phantom{a}
-\vfill
 
 \begin{dedication}
 % \addcontentsline{toc}{chapter}{Dedication}
 
-Dedicated to
+\centering
+Dedicado a (Dedicated to):\\
+\vspace{7cm}
+Mis amados viejitos (My dear parents),\\ Osvaldo Concha Silva\\ y (and) \\ Nelly del Carmen Sep\'ulveda Reyes...
 
-Mis amados viejitos, Osvaldo Concha Silva and Nelly del Carmen Sep\'ulveda Reyes...
 \end{dedication}
 
+
 \tableofcontents
+% \addcontentsline{toc}{chapter}{Contents}
 
 \listoffigures
-\addcontentsline{toc}{chapter}{List of Figures}
+% \addcontentsline{toc}{chapter}{List of Figures}
 
 \listoftables
-\addcontentsline{toc}{chapter}{List of Tables}
+% \addcontentsline{toc}{chapter}{List of Tables}
 
-\printnoidxglossaries
-\addcontentsline{toc}{chapter}{Acronyms and Abbreviations}
+
+% \glsaddall
+
+\printglossaries
+
+
+% \addcontentsline{toc}{chapter}{Acronyms and Abbreviations}
+
 
 % \input{Introduction.tex}
+
 \include{Introduction}
 \include{Objectives}
 \include{Background_and_Theory}
@@ -358,14 +418,19 @@ Mis amados viejitos, Osvaldo Concha Silva and Nelly del Carmen Sep\'ulveda Reyes
 \include{Summary}
 \include{Appendix}
 
-\listoftodos
+
+\printindex
+\markboth{\it INDEX}{\it INDEX} % to change just this page header
+\thispagestyle{fancy}
 
 %\bibliographystyle{ieeetr}
 %\bibliographystyle{unsrtnat}
+% \addcontentsline{toc}{chapter}{Bibliography}
 \bibliographystyle{apalike}
+\bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/javier_bibPhD}
 
-\bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
+\include{Vita}
 
-\printindex
+\listoftodos
 
 \end{document}  

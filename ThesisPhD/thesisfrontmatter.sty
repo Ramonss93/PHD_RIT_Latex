@@ -122,7 +122,7 @@
         \hspace*{4cm} \@advisor, \kindcap ~Advisor \\
         \vspace{1cm}
         \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
-        \hspace*{4cm} Coordinator \letters ~Degree Program \hspace*{2.5cm} Date \\
+        \hspace*{4cm} Coordinator \letters ~Degree Program \hfill Date\\
     \end{flushleft}
 }
 
@@ -158,17 +158,21 @@
     \end{center}
     \begin{flushleft}
         \renewcommand{\baselinestretch}{1.0}
+        \vspace{1.5cm}
         \fontsize{12}{24}\selectfont
-        \hspace*{3cm} \rule[-2.5ex]{11cm}{0.5pt} \\
-        \hspace*{3cm} \@advisor, \kindcap ~Advisor \hfill Date~~~~~~~~\\
-        \hspace*{3cm} \rule[-2.5ex]{11cm}{0.5pt} \\
-        \hspace*{3cm} Coordinator \letters ~Degree Program \hfill Date~~~~~~~~\\
-        \hspace*{3cm} \rule[-2.5ex]{11cm}{0.5pt} \\
-        \hspace*{3cm} \@memberA, Committee Member \hfill Date~~~~~~~~\\
-        \hspace*{3cm} \rule[-2.5ex]{11cm}{0.5pt} \\
-        \hspace*{3cm} \@memberB, Committee Member \hfill Date~~~~~~~~\\
-        \hspace*{3cm} \rule[-2.5ex]{11cm}{0.5pt} \\
-        \hspace*{3cm} \@memberC, Committee Member \hfill Date~~~~~~~~\\
+        \hspace*{2cm} \rule[-2.5ex]{13cm}{0.5pt} \\
+        \hspace*{2cm} \@advisor, \kindcap ~Advisor \hfill Date~~~~\\
+        \vspace{0.5cm}
+        % \hspace*{2cm} \rule[-2.5ex]{13cm}{0.5pt} \\
+        % \hspace*{2cm} Coordinator \letters ~Degree Program \hfill Date~~~~\\
+        \hspace*{2cm} \rule[-2.5ex]{13cm}{0.5pt} \\
+        \hspace*{2cm} \@memberA, Committee Member \hfill Date~~~~\\
+        \vspace{0.5cm}
+        \hspace*{2cm} \rule[-2.5ex]{13cm}{0.5pt} \\
+        \hspace*{2cm} \@memberB, Committee Member \hfill Date~~~~\\
+        \vspace{0.5cm}
+        \hspace*{2cm} \rule[-2.5ex]{13cm}{0.5pt} \\
+        \hspace*{2cm} \@memberC, Committee Member \hfill Date~~~~\\
 %JC        \hspace*{4cm} \rule[-2.5ex]{10.4cm}{0.5pt} \\
 %JC        \hspace*{4cm} \@memberD \\        
     \end{flushleft}
@@ -181,19 +185,19 @@
 % ***********************************************
 \newcommand*{\makedeclaration}{
     \thispagestyle{empty}
-    \setcounter{page}{1}
-    \setlength{\topskip}{2cm}
+    %\setcounter{page}{1}
+    % \setlength{\topskip}{1in}
     \begin{center}
+        \includegraphics[width=2.5cm]{rit_black_no_bar.jpg}\\
+        \vspace{1cm}
         \renewcommand{\baselinestretch}{1.0}
-        \includegraphics[width=3cm]{rit_black_no_bar.jpg}\\
-        \vspace{1.5cm}
-        \fontsize{18}{20}\selectfont
+        \fontsize{17.28}{20}\selectfont
         \@degreetitle \\
         \vspace{0.8cm}
         \fontsize{12}{20}\selectfont
         by \\
         \vspace{0.8cm}
-        \fontsize{15}{20}\selectfont
+        \fontsize{14.4}{20}\selectfont
         \@degreeauthor \\
         \vspace{0.2cm}
         \fontsize{12}{20}\selectfont
@@ -205,22 +209,21 @@
         Requirements for the Degree of \kindspelledout ~in Imaging Science\\
         \vspace{1cm}
 
-        Imaging Science Department\\
         Chester F. Carlson Center for Imaging Science\\
         College of Science\\
         
-        \vspace{2cm}
+        \vspace{1cm}
         Rochester Institute of Technology \\
         Rochester, NY\\
         \@degreedate
-        \vspace{1cm}
+        \vspace{2cm}
     \end{center}
-    % \begin{flushleft}
-    %     \fontsize{12}{8}\selectfont
-    %     ~Signature of the Author \hrulefill \\
-    %     \mbox{ \rule{0cm}{1.5cm}Accepted by } \hrulefill \\
-    %     \mbox{ \hspace{2.5cm} } Coordinator, \letters ~Degree Program \hspace{3cm} Date
-    % \end{flushleft}
+    \begin{flushleft}
+        \fontsize{12}{8}\selectfont
+        ~Signature of the Author \hrulefill \\
+        \mbox{ \rule{0cm}{1.5cm}Accepted by } \hrulefill \\
+        \mbox{ \hspace{2.5cm} } Coordinator, \letters ~Degree Program \hspace{5cm} Date
+    \end{flushleft}
 }
 
 
@@ -277,34 +280,34 @@
 % ***********************************************
 % *      Lets make the copyright page           *
 % ***********************************************
-\newcommand*{\makecopyright}{
-    \newpage
-    \thispagestyle{plain}
-    \setlength{\topskip}{1cm}
-    \begin{center}
-        \renewcommand{\baselinestretch}{1.0}
-        \fontsize{12}{20}\selectfont
-        \kindallcap ~RELEASE PERMISSION \\
-        ROCHESTER INSTITUTE OF TECHNOLOGY \\
-        CHESTER F. CARLSON CENTER FOR IMAGING SCIENCE \\
-        \vspace{2.5cm}
-        Title of \kindcap: \\
-        \bfseries{\@degreetitle} \\
-        \vspace{2.5cm}
-    \end{center}
-    \begin{sloppypar}
-        \renewcommand{\baselinestretch}{1.0}
-        \fontsize{12}{20}\selectfont
-        I, \@degreeauthor, hereby grant permission to Wallace Memorial Library
-        of R.I.T.  to reproduce my thesis in whole or in part. Any reproduction
-        will not be for commercial use or profit. \par
-        \vspace{2.5cm}
-        \noindent
-        Signature \hrulefill \\
-        \fontsize{12}{8}\selectfont
-        \hspace*{12cm} Date
-    \end{sloppypar}
-}
+% \newcommand*{\makecopyright}{
+%     \newpage
+%     \thispagestyle{plain}
+%     \setlength{\topskip}{1cm}
+%     \begin{center}
+%         \renewcommand{\baselinestretch}{1.0}
+%         \fontsize{12}{20}\selectfont
+%         \kindallcap ~RELEASE PERMISSION \\
+%         ROCHESTER INSTITUTE OF TECHNOLOGY \\
+%         CHESTER F. CARLSON CENTER FOR IMAGING SCIENCE \\
+%         \vspace{2.5cm}
+%         Title of \kindcap: \\
+%         \bfseries{\@degreetitle} \\
+%         \vspace{2.5cm}
+%     \end{center}
+%     \begin{sloppypar}
+%         \renewcommand{\baselinestretch}{1.0}
+%         \fontsize{12}{20}\selectfont
+%         I, \@degreeauthor, hereby grant permission to Wallace Memorial Library
+%         of R.I.T.  to reproduce my thesis in whole or in part. Any reproduction
+%         will not be for commercial use or profit. \par
+%         \vspace{2.5cm}
+%         \noindent
+%         Signature \hrulefill \\
+%         \fontsize{12}{8}\selectfont
+%         \hspace*{12cm} Date
+%     \end{sloppypar}
+% }
 
 % ***********************************************
 % *      Lets make the abstract page            *
@@ -319,8 +322,8 @@
         \@degreetitle \\
         \bigskip
         \fontsize{12}{20}\selectfont
-        by \\
-        \@degreeauthor \\
+        %by \\
+        %\@degreeauthor \\
         \vspace{0.5cm}
         \textbf{Abstract}
         \medskip
