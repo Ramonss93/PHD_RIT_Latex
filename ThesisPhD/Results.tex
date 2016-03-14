@@ -30,16 +30,9 @@ An example of a Landsat 8 image that includes the area of study is illustrated i
   % \vspace{1cm}
 \end{figure}
 
-Water samples are collected for each site in dark Nalgene bottles (see Appendix~\ref{ch:fieldmea} for more details about data collection). Additionally, remote-sensing reflectances $R_{rs}$ are measured using an ASD and a SVC instrument (one for each crew). Backscattering measurements are taken using a HydroScat-2. This measurement is taken by both crews only if the logistics of the particular day allows it. Otherwise priority is given to the Lake crew. For each site, a location is recorded using a GPS. \autoref{tab:collect} shows a summary of the data collections done in 2013, 2014 and 2015 seasons with the available data.  The three Landsat 8 images used in this research are shown in green filled rows: the images acquired on 09-19-2013 (scene LC80160302013262LGN00; \autoref{fig:L8Image130919}.(a)), 09-29-2014 (scene LC80170302014272LGN00; \autoref{fig:L8Images1415}.(a)) and 09-16-2015 (scene LC80170302015259LGN00; \autoref{fig:L8Images1415}.(b)). The corresponding areas of study are shown in \autoref{fig:0910913Sites}, \autoref{fig:ROI_L8Images1415}.(a) and \autoref{fig:ROI_L8Images1415}.(b), respectively\todo{include first ROI image for comparison}.
+Water samples are collected for each site in dark Nalgene bottles (see Appendix~\ref{ch:fieldmea} for more details about data collection). Additionally, remote-sensing reflectances $R_{rs}$ are measured using an ASD and a SVC instrument (one for each crew). Backscattering measurements are taken using a HydroScat-2. This measurement is taken by both crews only if the logistics of the particular day allows it. Otherwise priority is given to the Lake crew. For each site, a location is recorded using a GPS. \autoref{tab:collect} shows a summary of the data collections done in 2013, 2014 and 2015 seasons with the available data.  The three Landsat 8 images used in this research are shown in green filled rows: the images acquired on 09-19-2013 (scene LC80160302013262LGN00; \autoref{fig:L8Image130919}.(a)), 09-29-2014 (scene LC80170302014272LGN00; \autoref{fig:L8Images1415}.(a)) and 09-16-2015 (scene LC80170302015259LGN00; \autoref{fig:L8Images1415}.(b)). The corresponding areas of study are shown in \autoref{fig:0910913Sites}, and \autoref{fig:ROI_L8Images1415}.
 
-\begin{table}[htb]
-  \caption{Summary of 2013, 2014 and 2015 data collections. Three images were used for testing the retrieval (green filling).}
-  \centering
-  \includegraphics[width=11cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/Collect131415.png}
-  \label{tab:collect}
-\end{table}
-
-\begin{figure}[htb!]
+\begin{figure}[H]
     \begin{minipage}[c]{0.48\linewidth}
       \centering
     \begin{tikzpicture}
@@ -64,7 +57,7 @@ Water samples are collected for each site in dark Nalgene bottles (see Appendix~
       \caption{Landsat 8 images acquired on (a) 09-29-2014 (scene LC80170302014272LGN00) and (b) 09-16-2015 (scene LC80170302015259LGN00). Study area indicated in red boxes. \label{fig:L8Images1415} }
 \end{figure}  
 
-\begin{figure}[h]
+\begin{figure}[H]
       \begin{minipage}[c]{1.0\linewidth}
       \centering
       \begin{overpic}[width=12cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/LC80160302013262LGN00_AreaOfStudy.png}
@@ -85,27 +78,35 @@ Water samples are collected for each site in dark Nalgene bottles (see Appendix~
     \end{minipage} 
       \caption[Area of study from the Landsat 8 images acquired on (a) 09-19-2013, (b) 09-29-2014 and (c) 09-16-2015.]{Area of study from the Landsat 8 images acquired on (a) 09-19-2013 (scene LC80160302013262LGN00) (b) 09-29-2014 (scene LC80170302014272LGN00) and (c) 09-16-2015 (scene LC80170302015259LGN00). \label{fig:ROI_L8Images1415} }
 \end{figure}  
+\todo{show sample points...}
+
+\begin{table}[htb]
+  \caption{Summary of 2013, 2014 and 2015 data collections. Three images were used for testing the retrieval (green filling).}
+  \centering
+  \includegraphics[width=11cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/Collect131415.png}
+  \label{tab:collect}
+\end{table}
 
 % ------------------------------
 \section{Laboratory Measurements}
-After collection, these water samples were analyzed in the lab at the Rochester Institute of Technology (RIT), and concentration and IOPs for each CPA were measured following the procedures described by \citet{Mueller1995} (see Appendix~\ref{ch:labmea} for more details about lab measurements). These measurements are utilized as input to Ecolight for the \gls{lut} generation of the retrieval process and the black pixel determination for the MoB-ELM atmospheric correction algorithm. Also, some are utilized for validation of the retrieval process. The $C_a$ and $TSS$ measurements were validated by comparing with measurements analyzed by a credible lab (Monroe County Environmental Laboratory). This comparison between labs showed agreement in the measurements. \autoref{tab:collect} shows the measurements available. Examples of IOPs measured in the lab from the 09-19-13 collection for chlorophyll, CDOM and minerals are shown in \autoref{fig:IOPastLONGS}.
+After collection, these water samples were analyzed in the lab at the Rochester Institute of Technology (RIT), and concentration and IOPs for each CPA were measured following the procedures described by \citet{Mueller1995} (see Appendix~\ref{ch:labmea} for more details about lab measurements). These measurements are utilized as input to Ecolight for the \gls{lut} generation of the retrieval process and the black pixel determination for the MoB-ELM atmospheric correction algorithm. Also, some are utilized for validation of the retrieval process. The $C_a$ and $TSS$ measurements were validated by comparing with measurements analyzed by a credible lab (Monroe County Environmental Laboratory). This comparison between labs showed agreement in the measurements, as shown in \autoref{fig:RIT_County_Comp} of the Appendix \ref{ch:labmea}. The uncorrected $C_a$ (\autoref{fig:RIT_County_Comp}.(b)) were utilized as the {\it in situ} data because it showed more correlation between the labs. \autoref{tab:collect} shows the measurements available\todo{add more sites to 2013 scene!}. Examples of IOPs measured in the lab from the 09-19-13 collection for chlorophyll, CDOM and minerals are shown in \autoref{fig:IOPastLONGS}.
 
 \begin{figure}[htb!]
     \begin{minipage}[c]{0.48\linewidth}
       \centering
-    \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/CHLaastLONGSJavier-eps-converted-to.pdf}
+    \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CHLaastLONGSJavier_g.png}
      \centerline{(a)}\medskip
     \end{minipage}
     \hfill
     \begin{minipage}[d]{0.48\linewidth}
       \centering
-    \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/astar_CDOM_LONGS091913-eps-converted-to.pdf}
+    \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/astar_CDOM_LONGS091913_g.png}
      \centerline{(b)}\medskip
     \end{minipage}\\
     
     \begin{minipage}[d]{1.0\linewidth}
       \centering
-    \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/astar_SM_LONGS091913-eps-converted-to.pdf}
+    \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/astar_SM_LONGS091913_g.png}
       \centerline{(c)}\medskip
     \end{minipage}
   \caption[Mass-specific absorption spectra for chlorophyll, CDOM and minerals from the 09-19-13 collection.]{Mass-specific absorption spectra for chlorophyll, CDOM and minerals from the 09-19-13 collection. These measured IOPs were used to create the LUT in HydroLight. \label{fig:IOPastLONGS} }  
@@ -123,17 +124,17 @@ This section shows the results from the MoB-ELM atmospheric correction algorithm
 
 The \gls{mobelm}\index{atmospheric correction!MoB-ELM} atmospheric correction algorithm described in \S\ref{subsec:mobelm} was applied to the Landsat 8 scene collected on 09-19-2013 (scene LC80160302013262LGN00) over the Rochester Embayment (\autoref{fig:L8Image130919}). The radiance and $R_{rs}$ spectra of the bright and dark pixels used for the MoB-ELM algorithm for this scene are shown in \autoref{fig:MOBELMpxls}. As an example of the MoB-ELM results, \autoref{fig:RrsROIs_130919} shows the $R_{rs}$ spectrum for four different stations of the 09-19-2013 Landsat 8 scene  (Labels: LONGS: Long Pond south, CRANB: Cranberry Pond, ONTOS: Lake Ontario off-shore, and ONTNS: Lake Ontario near-shore). The shape of these spectra resemble $R_{rs}$ of water pixels. Also, the spectrum corresponding to low concentration of CPAs (i.e. ONTOS: Lake Ontario off-shore and ONTNS: Lake Ontario near-shore) can be distinguished from the rest of the spectrum corresponding to higher concentration of CPAs (i.e. LONGS: Long Pond south, CRANB: Cranberry Pond).
 
-\begin{figure}[htb]
+\begin{figure}[H]
   \begin{minipage}[c]{0.48\linewidth}
     \centering
-      \includegraphics[width=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/ELMrad130929_150422}
+      \includegraphics[width=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/ELMrad130929_150422_g.png}
     % \vspace{1.5cm}
     \centerline{(a)}\medskip
   \end{minipage}
   \hfill
   \begin{minipage}[d]{0.48\linewidth}
     \centering
-      \includegraphics[width=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_SPIE_SanDiego/Images/ELMRrs130929_150422}
+      \includegraphics[width=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/ELMRrs130929_150422_g.png}
     % \vspace{1.5cm}
     \centerline{(b)}\medskip
   \end{minipage}
@@ -149,7 +150,7 @@ The \gls{mobelm}\index{atmospheric correction!MoB-ELM} atmospheric correction al
 
 Results of the MoB-ELM atmospheric correction method for different water bodies in the Rochester Embayment area are shown in \autoref{fig:waterpxs}. This figure shows the spectrum of the water pixels in water-leaving reflectance ($\rho_w=\pi R_{rs}$) values after applying the MoB-ELM atmospheric correction. These curves exhibit shapes that correspond with the shapes of typical water pixels. 
 
-\autoref{fig:refcomp} shows water water-leaving reflectance spectra as results from the MoB-ELM method (solid lines) compared with results from a traditional ELM method (dashed lines) for four different ROIs in the Rochester Embayment area (Cranberry Pond, Long Pond, and nearshore and offshore of the Lake Ontario, labeled as Cranb, LongS, OntNS and OntOS in \autoref{fig:0910913Sites}, respectively). The traditional ELM in this case is considered the ideal case: when reflectance measurements for both the dark and bright pixels are known. The traditional ELM method (\S\ref{sec:ELM}) was performed with reflectance measurements taken in the field using the SVC instrument \citep{SVCHR1024i} (Appendix~\ref{ch:fieldmea}). A reflectance measurement taken of the sand of Charlotte Beach, Rochester, NY (labeled as SandDry in \autoref{fig:0910913Sites}) was used for the bright pixel while a water-leaving reflectance measurement taken at the site OntNS was used for the dark pixel. The radiance values were taken from the corresponding ROIs in the Landsat 8 image. As can be seen in \autoref{fig:refcomp}, the atmospheric correction algorithm proposed in this study exhibits less than one percent reflectance unit ($<0.01\Rightarrow <1\%$) of difference in comparison to the results from the traditional ELM algorithm, which is the ideal case (ground-truth). \todo{Dr. Schott: check last sentences!}The traditional \gls{elm} algorithm is not used in this research because we are trying to avoid the need for ground-truth data. Also, the \gls{mobelm} algorithm is more powerful for the final \gls{lut} analysis because if forces the atmospherically corrected data look like the data from the Ecolight in the \gls{lut}, accounting for uncertainties and mismatching between ground-truth and the Ecolight model.
+\autoref{fig:refcomp} shows water water-leaving reflectance spectra as results from the MoB-ELM method (solid lines) compared with results from a traditional ELM method (dashed lines) for four different ROIs in the Rochester Embayment area (Cranberry Pond, Long Pond, and nearshore and offshore of the Lake Ontario, labeled as Cranb, LongS, OntNS and OntOS in \autoref{fig:0910913Sites}, respectively). The traditional ELM in this case is considered the ideal case: when reflectance measurements for both the dark and bright pixels are known. The traditional ELM method (\S\ref{sec:ELM}) was performed with reflectance measurements taken in the field using the SVC instrument \citep{SVCHR1024i} (Appendix~\ref{ch:fieldmea}). A reflectance measurement taken of the sand of Charlotte Beach, Rochester, NY (labeled as SandDry in \autoref{fig:0910913Sites}) was used for the bright pixel while a water-leaving reflectance measurement taken at the site OntNS was used for the dark pixel. The radiance values were taken from the corresponding ROIs in the Landsat 8 image. As can be seen in \autoref{fig:refcomp}, the atmospheric correction algorithm proposed in this study exhibits less than one percent reflectance unit ($<0.01\Rightarrow <1\%$) of difference in comparison to the results from the traditional ELM algorithm, which is the ideal case (ground-truth). The traditional \gls{elm} algorithm is not used in this research because we are trying to avoid the need for ground-truth data. Also, the \gls{mobelm} algorithm is more powerful for the final \gls{lut} analysis because if forces the atmospherically corrected data to look like the data from the Ecolight in the \gls{lut}, accounting for uncertainties and mismatching between ground-truth and the Ecolight model.
 
 \begin{figure}[htb]
     \centering
@@ -191,7 +192,7 @@ The fourth method evaluated in this work was the atmospheric correction approach
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 \subsubsection{\texorpdfstring{$R_{rs}$}{Rrs} Comparison Results}
 
-The $R_{rs}$ products from the four atmospheric correction methods described in the previous section (MoB-ELM, SeDAS-SWIR, Acolite-SWIR and SeaDAS-MUMM) are compared in this section. These algorithm were applied to the 09-19-2013 Landsat 8 image (\autoref{fig:0910913Sites}). A mask was created to mask out all pixels but water pixels. This mask was created by thresholding the Landsat 8's SWIR 2 band (\S\ref{sec:prepro}). \autoref{fig:Rrs443_482} shows the $R_{rs}$ values for $443nm$ (a-d) and $482nm$ (e-h), and \autoref{fig:Rrs561_655} for $561nm$ (a-d) and $655nm$ (e-h) for these four atmospheric correction methods. When analyzed visually, the similarities among the methods are higher in band 3 and 4 than band 1 and 2. For all bands, SeaDAS-SWIR and SeaDAS-MUMM look similar in both the lake and ponds. Also, the SeaDAS-SWIR method exhibits some noise across all bands. This is caused due to the low SNR in SWIR bands and averaging used for applying the \citet{Gordon:1994} atmospheric correction in \gls{seadas}.  Note that there are some bottom effect in the lake's shoreline causing all methods to retrieve high $R_{rs}$ in those areas, which is not the case. This should be taken in account for future processing by masking the areas where the water is clear enough that the bottom can be seen or incorporating bottom effects in the \gls{lut}.
+The $R_{rs}$ products from the four atmospheric correction methods described in the previous section (MoB-ELM, SeDAS-SWIR, Acolite-SWIR and SeaDAS-MUMM) are compared in this section. These algorithm were applied to the 09-19-2013 Landsat 8 image (\autoref{fig:0910913Sites}). A mask was created to mask out all pixels but water pixels. This mask was created by thresholding the Landsat 8's SWIR 2 band (\S\ref{sec:prepro}). \autoref{fig:Rrs443_482} shows the $R_{rs}$ values for $443nm$ (a-d) and $482nm$ (e-h), and \autoref{fig:Rrs561_655} for $561nm$ (a-d) and $655nm$ (e-h) for these four atmospheric correction methods. When analyzed visually, the similarities among the methods are higher in band 3 and 4 than band 1 and 2. For all bands, SeaDAS-SWIR and SeaDAS-MUMM look similar in both the lake and ponds. Also, the SeaDAS-SWIR method exhibits some noise across all bands. This is due to the low SNR in SWIR bands and averaging used for applying the \citet{Gordon:1994} atmospheric correction in \gls{seadas}.  Note that there are some bottom effect in the lake's shoreline causing all methods to retrieve high $R_{rs}$ in those areas, which is not the case. This should be taken in account for future processing by masking the areas where the water is clear enough that the bottom can be seen or incorporating bottom effects in the \gls{lut}.
 
 %^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 \begin{figure}[htb!]
@@ -371,16 +372,16 @@ Another comparison of $R_{rs}$ at $443nm$, $483nm$, $561nm$ and $655nm$ among al
 
 
 
-All methods produced negative $R_{rs}$ values. These negative values indicates that the atmosphere contribution has been over estimated. These negative values are shown in \autoref{tab:RrsCompMethod} as percentage of the total of water pixels for each method compared. These negative values were not used in the comparison. Finally, \autoref{tab:RrsCompMethod} shows the percentage of total number of water pixels used in the comparison (labeled as ``Used $[\%]$''). It can be seen that the Gordon and Wang's based methods generate more negative values compared with the MoB-ELM method overall. However, these negative values are small. 
+All methods produced negative $R_{rs}$ values. These negative values indicates that the atmosphere contribution has been over estimated. These negative values are shown in \autoref{tab:RrsCompMethod} as percentage of the total of water pixels for each method compared. These negative values were not used in the comparison. It can be seen that the Gordon and Wang's based methods generate more negative values compared with the MoB-ELM method overall. However, these negative values are small. 
 
-\autoref{fig:13262RrsCompField1} and \autoref{fig:13262RrsCompField2} show a comparison between $R_{rs}$ spectra measured in the field (blue dashed line) with retrieved $R_{rs}$ spectra from the four atmospheric correction methods for different sites within the study area for the 09-19-2013 scene (labels for \autoref{fig:13262RrsCompField1}.(a) ONTNS: Lake Ontario Near Shore, (b) ONTOS: Lake Ontario Off Shore, (c) ONTEX: Lake Ontario Extra, (d) RVRPLM: River Plume and (e) RVRPIER: River Pier; labels for \autoref{fig:13262RrsCompField2}.(a) LONGN: Long Pond North, (b) LONGS: Long Pond South, (c) CRANB: Cranberry Pond, (d) BRADIN: Braddock Bay In and (e) BRADONT: Braddock Bay - Lake Ontario side). Note that {\it in situ} data were not available for all stations. The spectra for each method tend to differ more from the field spectra in band 1 and 2 than in band 3 and 4, for all sites. The \gls{mobelm} algorithm performs the best over all. The Acolite-SWIR algorithm is the one that differs the most, specially in band 1 and 2. 
+\autoref{fig:13262RrsCompField1} and \autoref{fig:13262RrsCompField2} show a comparison between $R_{rs}$ spectra measured in the field (blue dashed line) with retrieved $R_{rs}$ spectra from the four atmospheric correction methods for different sites within the study area for the 09-19-2013 scene (labels for \autoref{fig:13262RrsCompField1}.(a) ONTNS: Lake Ontario Near Shore, (b) ONTOS: Lake Ontario Off Shore, (c) ONTEX: Lake Ontario Extra, (d) RVRPLM: River Plume and (e) RVRPIER: River Pier; labels for \autoref{fig:13262RrsCompField2}.(a) LONGN: Long Pond North, (b) LONGS: Long Pond South, (c) CRANB: Cranberry Pond, (d) BRADIN: Braddock Bay In and (e) BRADONT: Braddock Bay - Lake Ontario side). Note that {\it in situ} data were not available for all stations. The spectra for each method tend to differ more from the field spectra in band 1 and 2 than in band 3 and 4, for all sites. The \gls{mobelm} algorithm performs the best over all. The Acolite-SWIR algorithm is the one that differs the most, especially in band 1 and 2. 
 
-We calculated the normalized \acrfull{nrmse} for $R_{rs}(\lambda)$ to evaluate the differences between the {\it in situ} measurements and the spectra retrieved from the atmospheric correction methods. The \gls{nrmse} for the $R_{rs}$ is defined as
+We calculated the normalized \acrfull{nrmse} for $R_{rs}(\lambda)$ to evaluate the differences between the {\it in situ} measurements and the spectra retrieved from the atmospheric correction methods\todo{Calculate only RMSE!}. The \gls{nrmse} for the $R_{rs}$ is defined as
 \begin{equation}
 \label{eq:NRMSE}
   NRMSE =\frac{\sqrt{\frac{1}{N}\sum_{n=1}^N{\left[R_{rs}(\lambda)_{ret}(n) - R_{rs}(\lambda)_{mea}(n)\right]^2}}}{max\{R_{rs}(\lambda)_{mea}(n)\} - min\{R_{rs}(\lambda)_{mea}(n)\}}\times100 ~[\%]
 \end{equation}
-\noindent where $R_{rs}(\lambda)_{ret}$ is the retrieved $R_{rs}(\lambda)$, $R_{rs}(\lambda)_{mea}$ is the measured $R_{rs}(\lambda)$, and $n=1\dots N$ is the number of measured concentrations. For this case, $N=5$ {\it in situ} measurements. \autoref{fig:NRMSE130919_RRS} shows the NRMSE for all the atmospheric correction methods for all bands. It can be seen that the MoB-ELM algorithm performs the best for all bands with  $10\%\lesssim NRMSE \lesssim 20\%$, followed by the SeaDAS-SWIR algorithm. The largest errors are obtained when applying the Acolite-SWIR algorithm, specially in band 1, followed by the SeaDAS-MUMM algorithm. \todo{Dr.Schott: check this sentences!}Note that $20\%$ of a few reflectance units is still a very small error and it could be considered acceptable for the MoB-ELM case.
+\noindent where $R_{rs}(\lambda)_{ret}$ is the retrieved $R_{rs}(\lambda)$, $R_{rs}(\lambda)_{mea}$ is the measured $R_{rs}(\lambda)$, and $n=1\dots N$ is the number of measured concentrations. For this case, $N=5$ {\it in situ} measurements. \autoref{fig:NRMSE130919_RRS} shows the NRMSE for all the atmospheric correction methods for all bands. It can be seen that the MoB-ELM algorithm performs the best for all bands with  $10\%\lesssim NRMSE \lesssim 20\%$, followed by the SeaDAS-SWIR algorithm. The largest errors are obtained when applying the Acolite-SWIR algorithm, especially in band 1, followed by the SeaDAS-MUMM algorithm. Note that $20\%$ of a few reflectance units is still a very small error and it could be considered acceptable for the MoB-ELM case.
 
 
 
@@ -416,34 +417,34 @@ We calculated the normalized \acrfull{nrmse} for $R_{rs}(\lambda)$ to evaluate t
 \caption{ Comparison of the different atmospheric correction methods for retrieving $R_{rs}$ with the slope and offset for the regression lines and their respective goodness of fit values. \label{tab:RrsCompMethod} } 
 \centering
 \vspace{.2cm}
-\begin{tabular}{cllcccccccc} 
+\begin{tabular}{cllccccccc} 
  % \bfseries{Band n} & \bfseries{$m$}      & \bfseries{$y_0$}    & \bfseries{$R^2$}     & \bfseries{$RMSE$} & $y(x=45^\circ)$   \\ \hline \hline
-Band    &   Method 1      &  Method 2   & Slope   & Offset  & $R^2 $  & N       & RMSE    &\multicolumn{2}{c}{$R_{rs}<0~[\%]$}   &   Used    \\ 
-$[nm]$    &             &         &       &     &       &       &$[mg/m^3]$ & Method 1    & Method 2         & $[\%]$    \\ \hline \hline
-\multirow{6}{*}{443}&Acolite-SWIR&MoB-ELM     & 0.9444  & -0.0047 & 0.8791  & 144047  & 0.0054  &  ~0.53      & ~0.09            &   97      \\
-      &   SeaDAS-SWIR   &  MoB-ELM      & 0.8664  & -0.0007 & 0.7637  & 141563  & 0.0019  &  43.98      & ~0.05            &   55      \\
-      &   SeaDAS-MUMM   &  MoB-ELM      & 0.8811  & -0.0018 & 0.7474  & 144947  & 0.0029  &  42.64      & ~0.05            &   56      \\
-      &   Acolite-SWIR  &  SeaDAS-SWIR  & 1.1437  & -0.0053 & 0.7804  & 145186  & 0.0038  &  ~0.53      & 76.74            &   98      \\
-      &   Acolite-SWIR  &  SeaDAS-MUMM  & 1.0600  & -0.0032 & 0.8554  & 147730  & 0.0026  &  ~0.53      & 74.41            &   99      \\
-      &   SeaDAS-SWIR   &  SeaDAS-MUMM  & 0.9175  & ~0.0018 & 0.8456  & 145315  & 0.0014  &  43.98      & 42.64            &   56      \\  \hline
-\multirow{6}{*}{483}&Acolite-SWIR&MoB-ELM     & 0.9353  & -0.0030 & \underline{0.9302}  & 144077  & 0.0037  &  ~0.51      & ~0.00            &   97      \\
-      &   SeaDAS-SWIR   &  MoB-ELM      & 0.8547  & ~0.0002 & 0.8454  & 142116  & 0.0014  &  43.76      & ~0.00            &   55      \\
-      &   SeaDAS-MUMM   &  MoB-ELM      & 0.8639  & -0.0007 & 0.8408  & 145138  & 0.0022  &  42.57      & ~0.00            &   56      \\ 
-      &   Acolite-SWIR  &  SeaDAS-SWIR  & 1.1269  & -0.0041 & 0.8739  & 145692  & 0.0028  &  ~0.51      & 76.36            &   98      \\
-      &   Acolite-SWIR  &  SeaDAS-MUMM  & 1.0693  & -0.0024 & 0.9175  & 147837  & 0.0018  &  ~0.51      & 74.29            &   99      \\
-      &   SeaDAS-SWIR   &  SeaDAS-MUMM  & 0.9441  & ~0.0015 & 0.9122  & 145888  & 0.0012  &  43.76      & 42.57            &   56      \\ \hline
-\multirow{6}{*}{561}&Acolite-SWIR&  MoB-ELM   & 1.0183  & -0.0011 & 0.9044  & 144192  & 0.0011  &  ~0.44      & ~0.00            &   97      \\
-      &   SeaDAS-SWIR   &  MoB-ELM      & 1.0043  & ~0.0001 & 0.7828  & 143288  & 0.0009  &  43.30      & ~0.00            &   55      \\
-      &   SeaDAS-MUMM   &  MoB-ELM      & 1.0611  & -0.0010 & 0.8468  & 145339  & 0.0009  &  42.49      & ~0.00            &   56      \\
-      &   Acolite-SWIR  &  SeaDAS-SWIR  & 1.0307  & -0.0013 & 0.8233  & 146761  & 0.0013  &  ~0.44      & 75.56            &   99      \\
-      &   Acolite-SWIR  &  SeaDAS-MUMM  & 0.9663  & -0.0001 & 0.8968  & 148040  & 0.0007  &  ~0.44      & 74.15            &   100     \\
-        &   SeaDAS-SWIR   &  SeaDAS-MUMM  & 0.9374  & ~0.0011 & 0.8728  & 147116  & 0.0010  &  43.30      & 42.49            &   57      \\ \hline
-\multirow{6}{*}{655}&Acolite-SWIR&MoB-ELM     & 1.1703  & -0.0017 & 0.8592  & 144108  & 0.0013  &  ~0.49      & ~0.00            &   97      \\
-      &   SeaDAS-SWIR   &  MoB-ELM      & 1.2158  & -0.0004 & 0.7708  & 142375  & 0.0007  &  43.68      & ~0.00            &   55      \\
-      &   SeaDAS-MUMM   &  MoB-ELM      & 1.2403  & -0.0008 & 0.6841  & 145340  & 0.0009  &  42.49      & ~0.00            &   56      \\ 
-      &   Acolite-SWIR  &  SeaDAS-SWIR  & 0.9628  & -0.0011 & \underline{0.7090}  & 145798  & 0.0014  &  ~0.49      & 76.22            &   98      \\
-      &   Acolite-SWIR  &  SeaDAS-MUMM  & 0.9700  & -0.0008 & 0.7880  & 147956  & 0.0010  &  ~0.49      & 74.15            &   99      \\
-      &   SeaDAS-SWIR   &  SeaDAS-MUMM  & 1.0063  & ~0.0004 & 0.7964  & 146144  & 0.0007  &  43.68      & 42.49            &   56      \\
+Band    &   Method 1      &  Method 2   & Slope   & Offset  & $R^2 $  & N       & RMSE    &\multicolumn{2}{c}{$R_{rs}<0~[\%]$}\\ 
+$[nm]$  &                 &             &         & $[1/sr]$&         &         &$[1/sr]$ & Method 1    & Method 2         \\ \hline \hline
+\multirow{6}{*}{443}&Acolite-SWIR&MoB-ELM     & 0.9444  & -0.0047 & 0.8791  & 144047  & 0.0054  &  ~0.53      & ~0.09                \\
+      &   SeaDAS-SWIR   &  MoB-ELM      & 0.8664  & -0.0007 & 0.7637  & 141563  & 0.0019  &  43.98      & ~0.05             \\
+      &   SeaDAS-MUMM   &  MoB-ELM      & 0.8811  & -0.0018 & 0.7474  & 144947  & 0.0029  &  42.64      & ~0.05             \\
+      &   Acolite-SWIR  &  SeaDAS-SWIR  & 1.1437  & -0.0053 & 0.7804  & 145186  & 0.0038  &  ~0.53      & 76.74             \\
+      &   Acolite-SWIR  &  SeaDAS-MUMM  & 1.0600  & -0.0032 & 0.8554  & 147730  & 0.0026  &  ~0.53      & 74.41             \\
+      &   SeaDAS-SWIR   &  SeaDAS-MUMM  & 0.9175  & ~0.0018 & 0.8456  & 145315  & 0.0014  &  43.98      & 42.64             \\  \hline
+\multirow{6}{*}{483}&Acolite-SWIR&MoB-ELM     & 0.9353  & -0.0030 & \underline{0.9302}  & 144077  & 0.0037  &  ~0.51               &   97      \\
+      &   SeaDAS-SWIR   &  MoB-ELM      & 0.8547  & ~0.0002 & 0.8454  & 142116  & 0.0014  &  43.76      & ~0.00             \\
+      &   SeaDAS-MUMM   &  MoB-ELM      & 0.8639  & -0.0007 & 0.8408  & 145138  & 0.0022  &  42.57      & ~0.00             \\ 
+      &   Acolite-SWIR  &  SeaDAS-SWIR  & 1.1269  & -0.0041 & 0.8739  & 145692  & 0.0028  &  ~0.51      & 76.36             \\
+      &   Acolite-SWIR  &  SeaDAS-MUMM  & 1.0693  & -0.0024 & 0.9175  & 147837  & 0.0018  &  ~0.51      & 74.29             \\
+      &   SeaDAS-SWIR   &  SeaDAS-MUMM  & 0.9441  & ~0.0015 & 0.9122  & 145888  & 0.0012  &  43.76      & 42.57             \\ \hline
+\multirow{6}{*}{561}&Acolite-SWIR&  MoB-ELM   & 1.0183  & -0.0011 & 0.9044  & 144192  & 0.0011  &  ~0.44      & ~0.00       \\
+      &   SeaDAS-SWIR   &  MoB-ELM      & 1.0043  & ~0.0001 & 0.7828  & 143288  & 0.0009  &  43.30      & ~0.00             \\
+      &   SeaDAS-MUMM   &  MoB-ELM      & 1.0611  & -0.0010 & 0.8468  & 145339  & 0.0009  &  42.49      & ~0.00             \\
+      &   Acolite-SWIR  &  SeaDAS-SWIR  & 1.0307  & -0.0013 & 0.8233  & 146761  & 0.0013  &  ~0.44      & 75.56             \\
+      &   Acolite-SWIR  &  SeaDAS-MUMM  & 0.9663  & -0.0001 & 0.8968  & 148040  & 0.0007  &  ~0.44      & 74.15             \\
+        &   SeaDAS-SWIR   &  SeaDAS-MUMM  & 0.9374  & ~0.0011 & 0.8728  & 147116  & 0.0010  &  43.30      & 42.49           \\ \hline
+\multirow{6}{*}{655}&Acolite-SWIR&MoB-ELM     & 1.1703  & -0.0017 & 0.8592  & 144108  & 0.0013  &  ~0.49      & ~0.00       \\
+      &   SeaDAS-SWIR   &  MoB-ELM      & 1.2158  & -0.0004 & 0.7708  & 142375  & 0.0007  &  43.68      & ~0.00             \\
+      &   SeaDAS-MUMM   &  MoB-ELM      & 1.2403  & -0.0008 & 0.6841  & 145340  & 0.0009  &  42.49      & ~0.00             \\ 
+      &   Acolite-SWIR  &  SeaDAS-SWIR  & 0.9628  & -0.0011 & \underline{0.7090}  & 145798  & 0.0014  &  ~0.49 & 76.22      \\
+      &   Acolite-SWIR  &  SeaDAS-MUMM  & 0.9700  & -0.0008 & 0.7880  & 147956  & 0.0010  &  ~0.49      & 74.15             \\
+      &   SeaDAS-SWIR   &  SeaDAS-MUMM  & 1.0063  & ~0.0004 & 0.7964  & 146144  & 0.0007  &  43.68      & 42.49             \\
  \end{tabular}
 \end{table}
 \end{landscape}
@@ -793,15 +794,13 @@ $[nm]$    &             &         &       &     &       &       &$[mg/m^3]$ & Me
       \end{overpic}
   \end{minipage}
 
-  \caption{Comparison of the retrieved results for $R_{rs}$ with {\it in situ} data of the 09-19-2013 scene using the normalized root mean squared error (NRMSE) for $R_{rs}$ at 443, 483, 561 and 655nm. \label{fig:NRMSE130919_RRS} } 
+  \caption{Comparison of the retrieved results for $R_{rs}$ with {\it in situ} data of the 09-19-2013 scene using the normalized root mean squared error (NRMSE) for $R_{rs}$ at $443$, $483$, $561$ and $655nm$. \label{fig:NRMSE130919_RRS} } 
 \end{figure}
-
-
 
 % ------------------------------
 \section{Retrieval of Color Producing Agents (CPAs)}
 \label{sec:Results_CPAretrieval}
-This section displays the results from the main output of this research: the developed retrieval of CPAs algorithm. These results are compared with {\it in situ} measurements for validation. Also, the results from the chlorophyll-{\it a} concentration retrieval are contrasted with the standard band ratio algorithms. 
+This section displays the results from the main output of this research: the developed retrieval of CPAs algorithm. These results are compared with {\it in situ} measurements for validation. Also, the results from the chlorophyll-{\it a} concentration retrieval are compared with the standard band ratio algorithms. 
 
 % ------------ added from SPIE SD
 \subsection{Results from the Spectral-Matching and LUT Approach}
@@ -839,41 +838,62 @@ The developed retrieval algorithm \citep{Concha2013IGARSS} was applied to the 09
     \end{tabular}
   \end{table}
 
-Then, the MoB-ELM algorithm finds the closest match in the least-squared sense for the $R_{rs}$ of water pixels with unknown CPA concentrations in the LUT of water pixels with known CPA concentrations. This first step is done in order to fix the IOP set (pond or lake) and the backscatter fraction. At this point, the closest element has discrete CPA concentration values corresponding to values used for the LUT generation (see \autoref{tab:LUTconc}). Finally, a non-linear interpolation is used to interpolate between the closest match's neighbors in order to obtain continuous values for the three CPAs simultaneously. In this study, this algorithm was applied to the $R_{rs}$'s results from the MoB-ELM method only, and not to the results from the Gordon and Wang's algorithms. 
+Then, the MoB-ELM algorithm finds the closest match in the least-squared sense for the $R_{rs}$ of water pixels with unknown CPA concentrations in the LUT of water pixels with known CPA concentrations. This first step is done in order to fix the IOP set (pond or lake) and the backscatter fraction (\autoref{fig:CPAsMaps130919_IOP_bb}). At this point, the closest element has discrete CPA concentration values corresponding to values used for the LUT generation (see \autoref{tab:LUTconc}). Finally, a non-linear interpolation is used to interpolate between the closest match's neighbors in order to obtain continuous values for the three CPAs simultaneously. In this study, this algorithm was applied to the $R_{rs}$'s results from the MoB-ELM method only, and not to the results from the Gordon and Wang's algorithms. 
 
 The results of the retrieval for the 09-19-2013 scene are illustrated in \autoref{fig:CPAsMaps130919} as a concentration map for each CPA. These maps exhibit the expected trend of low concentrations in the lake and higher concentrations in the ponds. Some bottom effect is perceived in the shoreline of Lake Ontario causing wrong high values, and these pixels are discarded. 
+
 %^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 \begin{figure}[htbp!]
-%% Chl
-  \begin{minipage}[c]{1.0\linewidth}
+%% IOP
+  \begin{minipage}[b]{1.0\linewidth}
       \centering
-      \begin{overpic}[trim=0 20 0 30,clip,width=9.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CHLmap130919_150420} \put (105,60) {(a)}
+      \begin{overpic}[trim=0 0 0 0,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/INPmap130919masked.png} \put (105,55) {(a)}
       \end{overpic}   
-  \end{minipage}
-
-%% TSS
-  \begin{minipage}[d]{1.0\linewidth}
+  \end{minipage}\\
+\vspace{.3cm}\\
+%% DPF
+  \begin{minipage}[b]{1.0\linewidth}
       \centering
-      \begin{overpic}[trim=0 30 0 10,clip,width=9.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/TSSmap130919_150420} \put (105,60) {(b)}
-      \end{overpic}   
-  \end{minipage}
-
-%% CDOM
-  \begin{minipage}[c]{1.0\linewidth}
-      \centering
-      \begin{overpic}[trim=0 0 0 30,clip,width=9.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CDOMmap130919_150420} \put (105,60) {(c)}
+      \begin{overpic}[trim=0 0 0 0,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/DPFmap130919masked.png} \put (105,55) {(b)}
       \end{overpic}   
   \end{minipage}
 % 
-  \caption[CPA retrieval results for the Landsat 8 image acquired on 09-19-2013]{CPA retrieval results for the Landsat 8 image acquired on 09-19-2013 (scene LC80160302013262LGN00) over the Rochester Embayment for (a) chlorophyll, (b) sediments and (c) CDOM.\label{fig:CPAsMaps130919}}
-\end{figure}\
+  \caption[Input and phase function retrieval results for the Landsat 8 image acquired on 09-19-2013]{Input and phase function retrieval results for the Landsat 8 image acquired on 09-19-2013 (scene LC80160302013262LGN00) over the Rochester Embayment for (a) Input, (b) Backscatter fraction.\label{fig:CPAsMaps130919_IOP_bb}}
+\end{figure}
+
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+%% Chl
+  \begin{minipage}[b]{1.0\linewidth}
+      \centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CHLmap130919masked.png} \put (105,55) {(a)}
+      \end{overpic}   
+  \end{minipage}\\
+\vspace{.3cm}\\
+%% TSS
+  \begin{minipage}[b]{1.0\linewidth}
+      \centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/TSSmap130919masked.png} \put (105,55) {(b)}
+      \end{overpic}   
+  \end{minipage}\\
+\vspace{.3cm}\\
+%% CDOM
+  \begin{minipage}[c]{1.0\linewidth}
+      \centering
+      \begin{overpic}[trim=0 0 0 0,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CDOmap130919masked.png} \put (105,55) {(c)}
+      \end{overpic}   
+  \end{minipage}
+% 
+  \caption[CPA concentration maps in log scale for the Landsat 8 image acquired on 09-19-2013]{CPA concentration maps in log scale for the Landsat 8 image acquired on 09-19-2013 (scene LC80160302013262LGN00) over the Rochester Embayment for (a) chlorophyll, (b) sediments and (c) CDOM.\label{fig:CPAsMaps130919}}
+\end{figure}
 %^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 \begin{figure}[htbp!]
   \begin{minipage}[c]{1.0\linewidth}
       \centering
-      \begin{overpic}[trim=0 0 0 30,clip,height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CHLmap140929_150420} \put (105,60) {(a)}
+      \begin{overpic}[trim=0 0 0 120,clip,width=10cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CHLmap140929masked.png} \put (105,60) {(a)}
       \end{overpic}   
   \end{minipage}\\
+  \vspace{.3cm}\\
   % \hfill
   % \begin{minipage}[d]{0.45\linewidth}
       % \includegraphics[height=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CHLretvsmea140929_150420}
@@ -882,9 +902,10 @@ The results of the retrieval for the 09-19-2013 scene are illustrated in \autore
 %% TSS
   \begin{minipage}[c]{1.0\linewidth}
       \centering
-      \begin{overpic}[trim=0 0 0 30,clip,height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/TSSmap140929_150420} \put (105,60) {(b)}
+      \begin{overpic}[trim=0 0 0 120,clip,width=10cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/TSSmap140929masked.png} \put (105,60) {(b)}
       \end{overpic}   
   \end{minipage}\\
+  \vspace{.3cm}\\
   % \hfill
   % \begin{minipage}[d]{0.45\linewidth}
       % \includegraphics[height=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/TSSretvsmea140929_150420}
@@ -893,7 +914,7 @@ The results of the retrieval for the 09-19-2013 scene are illustrated in \autore
 %% CDOM
   \begin{minipage}[c]{1.0\linewidth}
       \centering
-      \begin{overpic}[trim=0 0 0 30,clip,height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CDOMmap140929_150420} \put (105,60) {(c)}
+      \begin{overpic}[trim=0 0 0 120,clip,width=10cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CDOmap140929masked.png} \put (105,60) {(c)}
       \end{overpic}   
   \end{minipage}\\
   % \hfill
@@ -901,7 +922,33 @@ The results of the retrieval for the 09-19-2013 scene are illustrated in \autore
       % \includegraphics[height=5.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CDOMretvsmea140929_150420}
   % \end{minipage}
 
-  \caption[CPA concentration maps for Landsat 8 image acquired on 09-29-2014]{CPA concentration maps for Landsat 8 image acquired on 09-29-2014 (scene LC80170302014272LGN00) over the Rochester Embayment for (a) chlorophyll, (b) sediments and (c) CDOM.\label{fig:CPAsMaps140929} } 
+  \caption[CPA concentration maps in log scale for the Landsat 8 image acquired on 09-29-2014]{CPA concentration maps in log scale for the Landsat 8 image acquired on 09-29-2014 (scene LC80170302014272LGN00) over the Rochester Embayment for (a) chlorophyll, (b) sediments and (c) CDOM.\label{fig:CPAsMaps140929} } 
+\end{figure}
+
+%^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\begin{figure}[htbp!]
+%% Chl
+  \begin{minipage}[b]{1.0\linewidth}
+      \centering
+      \begin{overpic}[trim=0 0 0 120,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CHLmap150916masked_2.png} \put (105,55) {(a)}
+      \end{overpic}   
+  \end{minipage}\\
+\vspace{.3cm}\\
+%% TSS
+  \begin{minipage}[b]{1.0\linewidth}
+      \centering
+      \begin{overpic}[trim=0 0 0 120,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/TSSmap150916masked_2.png} \put (105,55) {(b)}
+      \end{overpic}   
+  \end{minipage}\\
+\vspace{.3cm}\\
+%% CDOM
+  \begin{minipage}[c]{1.0\linewidth}
+      \centering
+      \begin{overpic}[trim=0 0 0 120,clip,width=10.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/CDOmap150916masked_2.png} \put (105,55) {(c)}
+      \end{overpic}   
+  \end{minipage}
+% 
+  \caption[CPA concentration maps in log scale for the Landsat 8 image acquired on 09-16-2015]{CPA concentration maps in log scale for the Landsat 8 image acquired on 09-16-2015 (scene LC80170302015259LGN00) over the Rochester Embayment for (a) chlorophyll, (b) sediments and (c) CDOM.\label{fig:CPAsMaps150916}}
 \end{figure}
 
 % %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -909,12 +956,12 @@ The results of the retrieval for the 09-19-2013 scene are illustrated in \autore
 
 % Note that the image to be analyzed needs to only include a bright target and not necessary a big urban area in order to determine the bright pixel from the Landsat surface reflectance product.\\
 
-The developed retrieval was also applied to the image acquired on 09-29-2014 (\autoref{fig:ROI_L8Images1415}.(b)). This image was analyzed in a similar fashion to the 09-19-2013 scene ((\autoref{fig:ROI_L8Images1415}.(a))) except that the reflectance of the bright pixel target used for the MoB-ELM algorithm was also predicted by Ecolight using data for the most eutrophic pond (Cranberry Pond), and not from a pixel in the Landsat Reflectance product. This approach is attractive when a wide range of water quality conditions are present and concentration measurements are available of bright and dark water targets. This approach may improve results where glint is present as it compensates for not only atmospheric effects but any other approximately linear phenomena that would modify the reflected energy leaving the water volume. Note that glint effects were not specifically compensated for in the atmospheric correction process and future efforts using the urban region bright target approach will need to compensate for glint when it is present. The concentration maps for this second scene are illustrated in \autoref{fig:CPAsMaps140929} again showing reasonable patterns in the lake and ponds. 
+The developed retrieval was also applied to the image acquired on 09-29-2014 (\autoref{fig:ROI_L8Images1415}.(b)). This image was analyzed in a similar fashion to the 09-19-2013 scene ((\autoref{fig:ROI_L8Images1415}.(a))) except that the reflectance of the bright pixel target used for the MoB-ELM algorithm was also predicted by Ecolight using data for the most eutrophic pond (Cranberry Pond), and not from a pixel in the Landsat Reflectance product. The brightest pond in the scene was used as bright target for the MoB-ELM algorithm because it represents the highest values for the water pixels allowing to cover the whole range of values from the darkest pixel in the open lake to the brightest pixel in the pond. This approach is attractive when a wide range of water quality conditions are present and concentration measurements are available of bright and dark water targets. This approach may improve results where glint is present as it compensates for not only atmospheric effects but any other approximately linear phenomena that would modify the reflected energy leaving the water volume. Note that glint effects were not specifically compensated for in the atmospheric correction process and future efforts using the urban region bright target approach will need to compensate for glint when it is present. The concentration maps for this second scene from 2014 are illustrated in \autoref{fig:CPAsMaps140929} again showing reasonable patterns in the lake and ponds. \autoref{fig:CPAsMaps140929} shows the results for the image acquired on 09-16-2015.
 
 
 % ------------
 % \subsection{Comparison with {\it in situ} data}
-\autoref{fig:RetvsMea130919} shows a comparison between {\it in situ} measured concentrations and retrieved concentrations obtained from the retrieval for each CPA for four different sites in the area of study for the 09-19-2013 image. Two sites are representative of high CPA concentration (from the ponds: LongS and Cranb), and two are representative of low CPA concentrations (from the lake: OntOS and OntNS). The dashed line represent the 1:1 line. \autoref{fig:CPAsRetVSMea} shows the comparison between predicted and observed values for all sample sites on both days ($N=9$), along with a regression line fitted to the data and its respective goodness of fit values, the $R^2$ and \gls{rmse}. The $R^2$ value of the regression for all CPAs are high ($R^2\geq0.89$). Note that dark targets on both days and the bright target on the 2014 date are forced to match by the MoB-ELM process. The results are very encouraging showing good quantitative agreement across a very wide range of concentrations. 
+\autoref{fig:RetvsMea130919} shows a comparison between {\it in situ} measured concentrations and retrieved concentrations obtained from the retrieval for each CPA for four different sites in the area of study for the 09-19-2013 image. Two sites are representative of high CPA concentration (from the ponds: LongS and Cranb), and two are representative of low CPA concentrations (from the lake: OntOS and OntNS). The dashed line represent the 1:1 line. \autoref{fig:CPAsRetVSMea} shows the comparison between predicted and observed values for all sample sites on all three days ($N=14$), along with a regression line fitted to the data and its respective goodness of fit values, the $R^2$ and \gls{rmse}. The $R^2$ values of the regression for all CPAs are high ($R^2\geq0.84$). Note that dark targets on the three days and the bright target on the 2014 date are forced to match by the MoB-ELM process. The results are very encouraging showing good quantitative agreement across a very wide range of concentrations. 
 
 %^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 \begin{figure}[htbp!]
@@ -949,14 +996,14 @@ The developed retrieval was also applied to the image acquired on 09-29-2014 (\a
   \begin{minipage}[c]{0.48\linewidth}
   \centering
   % CHL
-      \begin{overpic}[trim=40 0 80 0,clip,width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CHLretvsmea150423}  
+      \begin{overpic}[trim=0 0 0 0,clip,width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CHLretvsmea151211.png}  
   \put (100,80) {(a)}
       \end{overpic}   
   \end{minipage}
   % TSS
   \begin{minipage}[d]{0.48\linewidth}
   \centering
-      \begin{overpic}[trim=40 0 80 0,clip,width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/TSSretvsmea150423}
+      \begin{overpic}[trim=0 0 0 0,clip,width=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/TSSretvsmea151211.png}
   \put (100,80) {(b)}
       \end{overpic}   
   \end{minipage}
@@ -965,12 +1012,12 @@ The developed retrieval was also applied to the image acquired on 09-29-2014 (\a
   % CDOM
   \begin{minipage}[c]{1.0\linewidth}
   \centering
-      \begin{overpic}[trim=40 0 80 0,clip,width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CDOMretvsmea150423}  
+      \begin{overpic}[trim=0 0 0 0,clip,width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/CDOMretvsmea151211.png}  
   \put (100,80) {(c)}
       \end{overpic}   
   \end{minipage}
 
-  \caption[Landsat 8's retrieved vs measured CPA concentration for the 09-19-2013 and 09-29-2014 scenes]{Landsat 8's retrieved vs measured CPA concentration for the 09-19-2013 ($\ast$) and 09-29-2014 ($\triangle$) scenes with regression line (solid red line) and goodness of fit values for (a) chlorophyll, (b) sediments, and (c) CDOM. The dashed line represents the 1:1 line. \label{fig:CPAsRetVSMea} } 
+  \caption[Landsat 8's retrieved vs measured CPA concentration for the 09-19-2013 and 09-29-2014 scenes]{Landsat 8's retrieved vs measured CPA concentration for the 09-19-2013 ($\ast$), 09-29-2014 ($\triangle$), and 09-16-2015 ($\circ$) scenes with regression line (solid red line) and goodness of fit values for (a) chlorophyll, (b) sediments, and (c) CDOM. The dashed line represents the 1:1 line. \label{fig:CPAsRetVSMea} } 
 \end{figure}
 
 The numerical results for the retrieval are summarized in \autoref{fig:RMSE} where the \gls{rmse} in predicted CPA concentration is normalized by the range in concentrations to estimate overall performance, i.e. the normalized RMSE (NRMSE) for the CPA concentration, defined as
@@ -980,16 +1027,16 @@ The numerical results for the retrieval are summarized in \autoref{fig:RMSE} whe
   NRMSE =\frac{\sqrt{\frac{1}{N}\sum_{n=1}^N{\left[C_{ret}(n) - C_{mea}(n)\right]^2}}}{max\{C_{mea}(n)\} - min\{C_{mea}(n)\}}\times100 ~[\%]
 \end{equation}
 
-\noindent where $C_{ret}$ is the retrieved CPA concentration (i.e. $C_a$, $TSS$ or $a_{CDOM}(440nm)$), $C_{mea}$ is the measured CPA concentration, and $n=1,...,N$ is the $n$th site from a total of $N=9$ sites for both days. The {\it in situ} dataset used for the \gls{nrmse} calculation included the sites utilized for the MoB-ELM algorithm, .i.e. the dark (ONTOS) pixel for the 2013 scene and the dark (ONTOS) and bright (CRANB) pixels for the 2014 scene. The \gls{nrmse} are approximately $10\%$ for $C_a$ and $TSS$, and about $5\%$ for $a_{CDOM}(440nm)$. These errors are consistent with the expected errors reported by \citet{Gerace:2013}. 
+\noindent where $C_{ret}$ is the retrieved CPA concentration (i.e. $C_a$, $TSS$ or $a_{CDOM}(440nm)$), $C_{mea}$ is the measured CPA concentration, and $n=1,...,N$ is the $n$th site from a total of $N=14$ sites for all three days. The {\it in situ} dataset used for the \gls{nrmse} calculation included the sites utilized for the MoB-ELM algorithm, .i.e. the dark (ONTOS) pixel for the 2013 and 2015 scene and the dark (ONTOS) and bright (CRANB) pixels for the 2014 scene. The \gls{nrmse} are approximately $14\%$ for $C_a$, $11\%$ for $TSS$, and about $7\%$ for $a_{CDOM}(440nm)$. These errors are consistent with the expected errors reported by \citet{Gerace:2013}. 
 
 %^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 \begin{figure}[htb]
   \centering
-      \begin{overpic}[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/RMSE_ret150421}
+      \begin{overpic}[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2015_Landsat_Special_Issue/Images/RMSE_ret151211.png}
       % \vspace{-.4cm}
-      \put (4.5,27.8) {\rotatebox{90}{N}}
+      % \put (4.5,27.8) {\rotatebox{90}{N}}
       \end{overpic} 
-      \caption{NRMSE for each CPA for the 09-19-2013 and 09-29-2014 scenes. \label{fig:RMSE}}
+      \caption{NRMSE for each CPA for the 09-19-2013, 09-29-2014 and 09-16-2015 scenes. \label{fig:RMSE}}
 \end{figure}
 
 % -----------------------------------------------------------
@@ -1006,7 +1053,7 @@ In order to compare the results from the developed CPA concentration retrieval w
 \end{gathered}
 \end{equation}
 
-\noindent where $a_0-a_4$ are the empirical regression coefficients. The empirical coefficients used in this study were the tuned values for OLI provided in SeaDAS (chloc3\_coef = [0.2412,-2.0546,1.1776,-0.5538,-0.4570]).
+\noindent where $a_0-a_4$ are the empirical regression coefficients. The empirical coefficients used in this study were the tuned values for OLI provided in SeaDAS ({\tt chloc3\_coef} = [0.2412,\--2.0546,1.1776,-0.5538,-0.4570]).
 % --------------- end SPIE SD
 \autoref{fig:chlor_amaps} shows the $C_a$ maps obtained with the different methods for the 09-19-2013 scene. All the methods behave in a similar way for the clear water (lake), although some variability may not be visually noticeable due to the way the image is displayed\todo{change to log scale?}. For the more turbid waters (ponds), the algorithms differ quite significantly. 
 %^^^^^^^^^^^^^^^^^^^  FIGURE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1143,6 +1190,6 @@ Similarly, we calculated the normalized root mean squared error (NRMSE) for $C_a
 % ------------------------------
 \section{Concluding Remarks}
 
-This section showed the results for both the developed atmospheric correction and retrieval of CPAs algorithm. A comparison of these products with the standard algorithms were performed. Finally, a comparison of the MoB-ELM atmospheric correction algorithm and standard algorithm with {\it in situ} data was shown. 
+This section showed the results for both the developed atmospheric correction and retrieval of CPAs algorithm. A comparison of these products with the standard algorithms was performed. Finally, a comparison of the MoB-ELM atmospheric correction algorithm and standard algorithm with {\it in situ} data was shown. 
 
-The next section will discuss the conclusions derived from these results, discussion of the advantage and limitations of this approach and some work that should be addressed in the future.
+The next section will discuss the conclusions derived from these results, discussion of the advantages and limitations of this approach and some work that should be addressed in the future.

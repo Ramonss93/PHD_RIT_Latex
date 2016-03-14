@@ -19,9 +19,8 @@ This leads to the goal of our work: to develop a process to retrieve water const
 % -----------------------------------------------------------------
 \section{Statement of Objectives}
 \label{sec:objectives}
-The successful completion of this research effort will be marked by completion of the following primary requirements. Future objectives will be addressed if time permits.
-
 \subsection{Primary Requirements:}
+The successful completion of this research effort will be marked by completion of the following primary requirements.
 \begin{enumerate}
 	\item To develop an over-water atmospheric correction algorithm for Landsat 8 reflective imagery.
 	\item To design a water constituent concentration retrieval algorithm that can be applied to a specific study area.
@@ -29,6 +28,7 @@ The successful completion of this research effort will be marked by completion o
 \end{enumerate}
 
 \subsection{Future Objectives:}
+The following objectives will take this research forward.
 \begin{enumerate}
 	\item To demo this process to a second study site.
 	\item To include a glint correction.
@@ -73,7 +73,7 @@ After validation of the retrieval algorithm over the study area, the next step w
 
 			{\bf \item To include a glint correction.}
 
-Some contribution to the sensor-reaching signal could be potentially the reflected sun and sky from the water surface. This signal become more important for the spatial resolution of Landsat 8, where even some waves can be seen in the images. To quantify and correct these effects could improve the retrieval results.
+Some contribution to the sensor-reaching signal could be potentially the reflected sun and sky from the water surface. This signal becomes more important for the spatial resolution of Landsat 8, where even some waves can be seen in the images. To quantify and correct these effects could improve the retrieval results.
 
 			{\bf \item To integrate with Hydrodynamics models.} 
 
@@ -85,26 +85,26 @@ The retrieval process described here requires integration of different modules f
 
 			{\bf \item To investigate {\it in situ} AOPs and IOPs relationship to calculate backscattering.}
 
-In this study, the \gls{b_boverb} was determined by finding the best match for measured remote-sensing reflectances (\acrshort{rrs}) in a LUT of \gls{rrs} generated in Hydroligth with IOPs measured in field but varying the \gls{b_boverb}. The bio-optical measurements (i.e. absorption and scattering) combined with {\it in situ} \gls{rrs} could be used to have a better estimation of \gls{b_boverb}, and therefore, more representative LUTs. To accomplish this, an IOP-$R_{rs}$ inversion algorithm can be utilized \citep{Morel:1977rw,Lee2002_invQAA,Werdell2013_inv}.	
+In this study, the \gls{b_boverb} was determined by finding the best match for measured remote-sensing reflectances (\acrshort{rrs}) in a LUT of \gls{rrs} generated in Hydrolight with IOPs measured in the field but varying the \gls{b_boverb}. The bio-optical measurements (i.e. absorption and scattering) combined with {\it in situ} \gls{rrs} could be used to have a better estimation of \gls{b_boverb}, and therefore, more representative LUTs. To accomplish this, an IOP-$R_{rs}$ inversion algorithm can be utilized \citep{Morel:1977rw,Lee2002_invQAA,Werdell2013_inv}.	
 
 	\end{enumerate}	
 
 		
-
+\vspace{-0.5cm}
 % -----------------------------------------------------------------
 \section{Contribution to Field}
 \label{sec:contributiontofield}
 This research has made several contributions to the field of remote sensing.
 
-\todo{Dr. Schott: check section!}First, one important contribution is to demonstrate that Landsat satellites, which have been historically underestimated for the use of water quality measurements, could have a good performance in the estimation of water constituent concentrations. Landsat 8 was just launched in February 2013 and therefore there are few studies done about its performance so far, specially in its applications related to water assessments. Hence, this is the perfect time to investigate how its new upgrades will improve/impact our capability of retrieving water parameters. Therefore, this research present one of the first results of Landsat 8 performance over water.  
+First, one important contribution is to demonstrate that Landsat satellites, which have been historically underestimated for the use of water quality measurements, could have a good performance in the estimation of water constituent concentrations. Landsat 8 was just launched in February 2013 and therefore there are few studies done about its performance so far, especially in its applications related to water assessments. Hence, this is the perfect time to investigate how its new upgrades will improve/impact our capability of retrieving water parameters. Therefore, this research presents one of the first results of Landsat 8 performance over water.  
 
 While there are other global water constituent concentrations products, Landsat provides a unique combination of temporal (16 days repeat cycle) and spatial resolution (30 m pixel size). Most of the retrieval algorithms available in the literature use ocean color satellites (e.g. SeaWiFS), which have spatial resolution of about $250 m$ to $1 km$, but with products with $4km$ spatial resolution (e.g. MODIS Chlorophyll-{\it a} product). Even though this resolution is suitable for large scale studies, they fail to cover small scale studies (less than 100 m). On the other hand, high spatial resolution sensors carried on aircraft (e.g. AVIRIS) or even satellite (e.g. WorldView-2) although they can be used for small scale studies, their imagery tends to be expensive or not frequently available. Here is where Landsat 8 has the potential of filling that gap because its spatial resolution (30 m) could allow study of medium size targets, a river plume, for instance, and it is free to the international scientific community.
 
-Second, this research also contributes to the field of remote sensing by developing a novel approach to correct the atmospheric effect in Landsat 8 images over Case 2 waters via the developed \gls{mobelm}. In spite of the fact that the ELM method is widely used to correct satellite image, it needs measurements in the field that are not always available. We developed the \gls{mobelm} algorithm that overcomes this issue by estimating these measurements. Additionally, the standard atmospheric correction algorithms were tested over Case 2 waters, and they were compared with {\it in situ} data in order to compare with the \gls{mobelm}. This made this study one of the first to compare with {\it in situ} data. The same applies for the retrieval algorithm.
+Second, this research also contributes to the field of remote sensing by developing a novel approach to correct the atmospheric effect in Landsat 8 images over Case 2 waters via the developed \gls{mobelm}. In spite of the fact that the ELM method is widely used to correct satellite images, it needs measurements in the field that are not always available. We developed the \gls{mobelm} algorithm that overcomes this issue by estimating these measurements. Additionally, the standard atmospheric correction algorithms were tested over Case 2 waters, and they were compared with {\it in situ} data in order to compare with the \gls{mobelm}. This made this study one of the first to compare with {\it in situ} data. The same applies for the retrieval algorithm.
 
 Also, a dataset is made available for potential water quality studies through this research. Landsat 8 collects images all around the world where there is land including fresh and coastal waters. Such wide-reaching temporal and spatial coverage is not being broadly exploited for water quality studies.
 
-\todo{Dr. Schott: check paragraph!}Finally, this work prepares the way for other upcoming high spatial resolution sensors, such as Sentinel 2, \gls{hyspiri}, Landsat 9 and Landsat 10, by developing an alternative to ocean color methods used for low resolution satellites (i.e. \gls{modis}), that typically are used for open ocean.
+Finally, this work prepares the way for other upcoming high spatial resolution sensors, such as Sentinel 2, \gls{hyspiri}, Landsat 9 and Landsat 10, by developing an alternative to ocean color methods used for low resolution satellites (i.e. \gls{modis}), that typically are used for open ocean.
 
 % Finally, this work prepares the way for other high spatial resolution sensors, such as Sentinel 2, \gls{hyspiri}, Landsat 9 and Landsat 10, by identifying and solving some of the raising problems unique to the remote sensing of coastal and inland waters and not encountered by the remote sensing of open oceans. Examples of these problems are adjacency effect and glint, among others, which could be noticed stronger with a high spatial resolution sensor as \gls{OLI}.
 

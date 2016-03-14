@@ -73,7 +73,7 @@ Notes:
 \begin{itemize}[itemsep=2pt,parsep=2pt]
   \item Never try to take samples alone. The team should be of at least two people
   \item Do not take any personal electronic device with you (recommended) to avoid dropping it on the water
-  \item Storage car keys in zipped bag in you packet
+  \item Storage car keys in zipped bag in you pocket
   \item In case of bad weather conditions that do not allow paddle the canoes, take at least water samples from the Charlotte pier with the bucket
 \end{itemize}
 
@@ -89,7 +89,7 @@ Recall that the \gls{rrs} (\autoref{eq:Rrs}) is defined as
 \begin{equation}\label{eq:RrsAppendix}
 	R_{rs}(\theta,\phi,\lambda)=\frac{L_w(\theta,\phi,\lambda)}{E_d(\lambda)}
 \end{equation}
-where $L_w$ is the water-leaving radiance in the polar and azimuthal directions $\theta$ and $\phi$, respectively, and $E_d$ is the downwelling spectral plane irradiance incident onto the water surface. A radiometer pointing down toward the water surface in direction $(\pi-\theta,\phi)$ does not directly measure $L_w$. Instead, it measures $L_w$  plus any incident sky radiance reflected $L_r$ by the water surface into the field of view of the sensor. This total radiance at the sensor $L_t$ is define as
+where $L_w$ is the water-leaving radiance in the polar and azimuthal directions $\theta$ and $\phi$, respectively, and $E_d$ is the downwelling spectral plane irradiance incident onto the water surface. A radiometer pointing down toward the water surface in direction $(\pi-\theta,\phi)$ does not directly measure $L_w$. Instead, it measures $L_w$  plus any incident sky radiance reflected $L_r$ by the water surface into the field of view of the sensor. This total radiance at the sensor $L_t$ is defined as
 
 \begin{equation}\label{eq:Lt}
 	L_t(\theta,\phi) = L_r(\theta,\phi)+L_w(\theta,\phi)\Rightarrow L_w(\theta,\phi)=L_t(\theta,\phi) - L_r(\theta,\phi)
@@ -102,7 +102,7 @@ The term $L_r$ can be replaced by
 \end{equation}
 where $\rho$ is the proportionality factor that relates the radiance measured when the sensor views the sky to the reflected sky radiance measured when the sensor views the water surface. \citet{Mobley:1999} suggests to use $\rho \approx 0.028$ for a sensor view angle $\theta_v \approx 40^\circ$ from the nadir and  $\phi_v \approx 135^\circ$ from the Sun with the constraints of a clear sky and wind speed less than $5m/s$.
 
-Although $E_d$ could be measured directly with an appropriate sensor, it will be estimated from the radiance measured from a Lambertian surface (Spectralon) because both instruments in this case (SVC and ASD) are set to measure radiance. When an irradiance $E_d$ falls in a Lambertian surface with a known irradiance reflectance $R_g$, the uniform radiance $L_g$ leaving the surface is given by 
+Although $E_d$ could be measured directly with an appropriate sensor, it will be estimated from the radiance measured from a Lambertian surface (Spectralon) because both instruments in this case (SVC and ASD) are set to measure radiance. When an irradiance $E_d$ falls on a Lambertian surface with a known irradiance reflectance $R_g$, the uniform radiance $L_g$ leaving the surface is given by 
 
 \begin{equation}\label{eq:Lg}
 	L_g = (R_g/\pi)E_d\Rightarrow E_d = L_g*\pi/R_g
@@ -121,31 +121,38 @@ Therefore, from \autoref{eq:RrsFinalAppendix}, there are three quantities that n
 
 The ASD instrument should be the ``radiance mode''. Three different radiance measurements need to be taken:
 \begin{itemize}[itemsep=2pt,parsep=2pt]
-	\item $L_g$: pointing the Spectralon
+	\item $L_g$: pointing at the Spectralon
 
-Description: $L_g$ is measured with the sensor pointing downward in the same direction as is used in viewing the water surface (see \autoref{fig:Ltmea}), while the Spectralon is inserted into the sensor FOV. The Spectralon should be normal to the water surface.
+Description: $L_g$ is measured with the sensor pointing downward in the same direction as is used in viewing the water surface (see \autoref{fig:Rrsinsitu}.(a)), while the Spectralon is inserted into the sensor FOV. The Spectralon should be normal to the water surface.
 
-	\item $L_t$: pointing the water surface
+	\item $L_t$: pointing at the water surface
 
-Description: $L_t$ is measured with the sensor pointing downward toward the water surface in the direction $\approx \pi-\theta_v = 140^\circ$ from nadir with $\theta_v = 40^\circ$ and $\phi_v \approx 135^\circ$ or $\phi_v \approx -135^\circ$ from the Sun as illustrated in \autoref{fig:Ltmea}.
+Description: $L_t$ is measured with the sensor pointing downward toward the water surface in the direction $\approx \pi-\theta_v = 140^\circ$ from nadir with $\theta_v = 40^\circ$ and $\phi_v \approx 135^\circ$ or $\phi_v \approx -135^\circ$ from the Sun as illustrated in \autoref{fig:Rrsinsitu}.(a).
 
 \begin{figure}[htb]
+\begin{minipage}[c]{1.0\linewidth}
 \centering
     \includegraphics[width=10cm]{/Users/javier/Desktop/Javier/PHD_RIT/LDCM/WaterQualityProtocols/Latex/Images/Lgmea.png}
-    \vspace{0.5cm}
-   \caption[]{\label{fig:Ltmea} $L_t$ measurement.}
-\end{figure}
-
-	\item $L_{sky}$: pointing the sky
-
-Description: $L_{sky}$ is measured with the sensor pointing upward toward the sky in the direction $\approx \theta_v = 40^\circ$ from nadir and $\phi_v \approx 135^\circ$ or $\phi_v \approx -135^\circ$ from the Sun as illustrated in \autoref{fig:Lskymea}.
-
-\begin{figure}[htb]
+    \centerline{(a) $L_t$ measurement}\medskip
+\end{minipage}  
+\hfill 
+    % \vspace{0.5cm}
+   % \caption[]{\label{fig:Ltmea} $L_t$ measurement.}
+% \centering
+\begin{minipage}[d]{1.0\linewidth}
 \centering
     \includegraphics[width=10cm]{/Users/javier/Desktop/Javier/PHD_RIT/LDCM/WaterQualityProtocols/Latex/Images/Lskymea.png}
-    \vspace{0.5cm}
-   \caption[]{\label{fig:Lskymea} $L_{sky}$ measurement.}
+    \centerline{(b) $L_{sky}$ measurement}\medskip
+\end{minipage}    
+    % \vspace{0.5cm}
+   \caption[Rrs {\it in situ} measurement]{\label{fig:Rrsinsitu} $R_{rs}$ measurement.}
 \end{figure}
+
+	\item $L_{sky}$: pointing at the sky
+
+Description: $L_{sky}$ is measured with the sensor pointing upward toward the sky in the direction $\approx \theta_v = 40^\circ$ from nadir and $\phi_v \approx 135^\circ$ or $\phi_v \approx -135^\circ$ from the Sun as illustrated in \autoref{fig:Rrsinsitu}.(b).
+
+
 
 \end{itemize}
 
@@ -154,15 +161,15 @@ Description: $L_{sky}$ is measured with the sensor pointing upward toward the sk
 The same three radiance measurements described above need to be taken:
 
 \begin{itemize}[itemsep=2pt,parsep=2pt]
-	\item $L_g$: pointing the Spectralon
+	\item $L_g$: pointing at the Spectralon
 
-Description: The measurement is taken in the same fashion described in the previous section and it is taken only once per site. When the SVC instrument is used in ``reflectance mode'', it is necessary to measure first an standard measurement (Spectralon measurement). This standard measurement is the $L_r$ and is recorded internally in the ``sig'' file. Therefore, $L_r$ needs to be extracted from the later from the ``sig'' file. 
+Description: The measurement is taken in the same fashion described in the previous section and it is taken only once per site. When the SVC instrument is used in ``reflectance mode'', it is necessary to measure first a standard measurement (Spectralon measurement). This standard measurement is the $L_r$ and is recorded internally in the ``sig'' file. Therefore, $L_r$ needs to be extracted from the later from the ``sig'' file. 
 
-	\item $L_t$: pointing the water surface
+	\item $L_t$: pointing at the water surface
 
 Description: $L_t$ is measured in the same fashion described in the previous section. However, this measurement is saved internally in the ``sig'' file after the standard measurement column ($L_g$).
 
-	\item $L_{sky}$: pointing the sky	
+	\item $L_{sky}$: pointing at the sky	
 
 Description: $L_{sky}$ is measured in the same fashion described in the previous section. However, this measurement is saved internally in the ``sig'' file after the standard measurement column ($L_g$).
 
@@ -173,8 +180,18 @@ Description: $L_{sky}$ is measured in the same fashion described in the previous
 
 	\item Wear dark clothes, preferable black, to avoid contamination from adjacent objects.
 
-	\item Avoid any reflection from nearby objects in the boat or ship by covering the ship's side with a black turf. 
+	\item Avoid any reflection from nearby objects in the boat or ship by covering the ship's side with a black tarp. 
 \end{itemize}
+
+Examples of {\it in situ} spectral remote-sensing reflectance $R_{rs}$ for the 09-29-2014 scene are shown in \autoref{fig:insituRrs}.
+
+\begin{figure}[htbp!]
+      \centering
+      \includegraphics[trim=0 0 0 0,clip,width=9.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/RrsExamplesField.png}  
+      \caption[{\it In situ} remote-sensing reflectance for the 09-29-2014 scene]{{\it In situ} remote-sensing reflectance for the different sites on the 09-29-2014 scene . \label{fig:insituRrs}}
+\end{figure}
+
+
 
 
 
@@ -188,7 +205,7 @@ This part of the appendix describes how to take the lab measurements from the wa
 \begin{figure}[htb]
 % \subfloat[]{
 \centering
-    \includegraphics[width=14cm]{/Users/javier/Desktop/Javier/PHD_RIT/LDCM/WaterQualityProtocols/Images/WaterQualityProtocolDiagram.png}%}\hspace{0.5cm}
+    \includegraphics[width=15cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/WaterQualityProtocolDiagram_g.png}%}\hspace{0.5cm}
 % \subfloat[]{   
 %     \includegraphics[width=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/20122_Winter/Instrumentation/report3/Images/SideFluoSpec.jpg}}
     \vspace{0.5cm}
@@ -208,7 +225,7 @@ The \gls{iops}, specifically the spectral absorption coefficients, are obtained 
 \begin{equation}
   a_p(\lambda) = a_\phi(\lambda) + a_d(\lambda)~~[m^{-1}] 
 \end{equation}
-\noindent where $a_\phi(\lambda)$ and $a_d(\lambda)$ are the spectral absorption coefficients of phytoplankton and de-pigmented particles, respectively. $a_\phi$, $a_d$, $a_g$ are referred in \autoref{eq:atotal} as $a_{Chl}$, $a_{SM}$ and $a_{CDOM}$, respectively. The main idea is to first measure $a_p(\lambda)$ and $a_d(\lambda)$ from a dual-beam spectrophotometer, and then obtain $a_\phi(\lambda)$ as $a_\phi(\lambda)=a_p(\lambda)$ - $a_d(\lambda)$.
+\noindent where $a_\phi(\lambda)$ and $a_d(\lambda)$ are the spectral absorption coefficients of phytoplankton and de-pigmented particles, respectively. $a_\phi$, $a_d$, $a_g$ are referred to in \autoref{eq:atotal} as $a_{Chl}$, $a_{SM}$ and $a_{CDOM}$, respectively. The main idea is to first measure $a_p(\lambda)$ and $a_d(\lambda)$ from a dual-beam spectrophotometer, and then obtain $a_\phi(\lambda)$ as $a_\phi(\lambda)=a_p(\lambda)$ - $a_d(\lambda)$.
 
 A dual-beam spectrophotometer is an instrument that measures the amount of light that passes a medium, i.e. transmittance, using two paths, one for the reference, and one for the sample. The spectrophotometer used was a Shimadzu \gls{uv}-\gls{vis} recording spectrophotometer, model UV-2100U. One the output of the instrument is the dimensionless quantity \gls{od} (a.k.a. absorbance). 
 
@@ -220,7 +237,7 @@ The water sample is filtered, and a $OD_{fp}(\lambda)$ is measured using the spe
 \begin{equation}
    OD_{susp}(\lambda) = 0.378 (OD_{fp}(\lambda)-OD_{fp}(750nm)) + 0.523 (OD_{fp}(\lambda)-OD_{fp}(750nm))^2
  \end{equation} 
- \noindent where $OD_{fp}$ is the optical density of the filter before methanol extraction. $a_d$ is obtained in a similar fashion. In the following section, the procedure to measure $OD_{fp}$ and $OD_{fd}$ in the lab are presented.
+ \noindent where $OD_{fp}$ is the optical density of the filter before methanol extraction. $a_d$ is obtained in a similar fashion. In the following section, the procedure to measure $OD_{fp}$ and $OD_{fd}$ in the lab is presented.
 
 
 \subsection{Mineral and Chlorophyll absorption coefficients}
@@ -238,6 +255,8 @@ The water sample is filtered, and a $OD_{fp}(\lambda)$ is measured using the spe
   \item Whatman Binder-Free Glass Microfiber Filters: Type GF/F - Diameter: 2.5cm
   \item Forceps
   \item Graduated cylinder
+  \item Beaker with purified water or DIW
+  \item Dropper or pipette
 \end{itemize}
 %*******************************
 \subsubsection*{Measurement}
@@ -271,11 +290,11 @@ The water sample is filtered, and a $OD_{fp}(\lambda)$ is measured using the spe
     \item Click OK
   \end{itemize}
   \item Select the Serial Port number to be used for communication with the instrument. Go to: Configure $>$ PC Configuration... In the PC Configuration Parameters, select Photometer Serial Port number where the instrument is connected and click OK
-  \item Initialize the instrument. From the menu, go to Configure $>$ Utilities. In the System Utilities window, Turn Photometer On and press OK. A new initialization window that check the system pops up. Wait until it is finished. Note: make sure the beam paths are empty before initialize the instrument
+  \item Initialize the instrument. From the menu, go to Configure $>$ Utilities. In the System Utilities window, Turn Photometer On and press OK. A new initialization window that check the system pops up. Wait until it is finished. Note: make sure the beam paths are empty before initializing the instrument
   \item Pour DIW water to two GF/F Whatman filters and stick them in the two-lenses support. Both filter should have the same amount of water. Add water with the pipette or the squirt bottle
   \item Place the two-lenses support in the spectrophotometer
   \item Press the Baseline button in the UV-2101PC software
-  \item Perform an scanner to see the baseline level of the instrument by pressing the ``Start'' button in the software
+  \item Perform a scan to see the baseline level of the instrument by pressing the ``Start'' button in the software
   \item Press the ``Go To WL'' button of the software and type $850 [nm]$. Press the ``Auto Zero'' button of the software (optional)
   \item Shake water sample bottle a couple of times to mix by turbulence and ensure large particles that settle at the bottom are re-suspended \citep{Mitchell2002}
   \item \label{item:place_filter} Using the forceps, place the filter on the filter base and place the filter cup on the base. 
@@ -302,18 +321,18 @@ Notes:
   \item Add sporadically purified water drops to the reference filter to avoid it to dry
   \item Repeat baseline measurement if needed
 \end{itemize}  
-{\bf Warning:}  Use of how methanol is risky due to flammability, and volatility. Extra precautions must be taken!!!
+{\bf Warning:}  Use of hot methanol is risky due to flammability, and volatility. Extra precautions must be taken!!!
 % %*******************************
 % \subsubsection{Calculations}
 
 
 %*******************************
 \subsection{CDOM absorption coefficients}
-\todo{complete!}The spectral absorption coefficient are calculated as \citep{Mitchell2002}
+The spectral absorption coefficient for CDOM are calculated as \citep{Mitchell2002}
 \begin{equation}
   a_g=2.303 \frac{(OD_s(\lambda)-OD_s(\lambda_{NIR}))}{l}~~[m^{-1}]
 \end{equation}
-\noindent where $OD_s(\lambda)$ is the \gls{od} of the sample measured with spectrophotometer, $\lambda_{NIR}$ is a wavelength in the \gls{nir} where the absorption by dissolved materials is assumed to be zero ,and $l$ the cuvette pathlength in meters.
+\noindent where $OD_s(\lambda)$ is the \gls{od} of the sample measured with spectrophotometer, $\lambda_{NIR}$ is a wavelength in the \gls{nir} where the absorption by dissolved materials is assumed to be zero, and $l$ the cuvette pathlength in meters.
 
 %*******************************
 \subsubsection{Equipment}
@@ -328,14 +347,17 @@ Notes:
 \begin{itemize}[itemsep=2pt,parsep=2pt]
   \item Spectrophotometer (Shimadzu UV2100V - Dual beam spectrophotometer)
   \item 2 clean quartz glass optical cuvettes (a.k.a. cells)
-  \item Purified water
+  \item Purified water or DIW
+  \item Optics paper
 \end{itemize}
 %*******************************
 \subsubsection{Procedure}
 %*******************************
 \begin{enumerate}[itemsep=2pt,parsep=2pt]
-  \item \textbf{Turn the Spectrophotometer on at least 30 minutes before measuring}. It needs to be warmed up for optimal measurements.
+  \item \textbf{Turn the Spectrophotometer on at least 30 minutes before measuring}. It needs to be warmed up for optimal measurements
   \item Wash the syringe filter out 3 times with purified water
+  \item Filter the water samples in advance with the syringe placing the filtered samples in the small glass beakers or small graduated cylinders.
+  \item Allow to reach room temperature to avoid bumps in the spectral signal in the NIR (these bumps are produced for temperature difference between the blank and the sample cells)
   \item Rinse cells a couple of times with a small amount of ethanol or acetone by shaking it (optional, if the cells seem dirty)
   \item Use cotton sweep to clean internal face (optional, if face seems dirty)
   \item Rinse cell with purified water
@@ -346,11 +368,20 @@ Notes:
   \item Place both blank and sample cells filled with purified water in the sample compartment of the spectrophotometer
   \item Press ``Auto Zero'' button in the spectrophotometer software
   \item Press ``Baseline'' button in the spectrophotometer software
-  \item Fill sample cell with filtered water from the syringe filter
+  \item Fill sample cell with filtered sample water from the small glass beakers or small graduated cylinders \label{item:fillsample}
   \item Press start button to start scan. This measurement is $OD_s(\lambda)$
-  \item Save Channel in the spectrophotometer software. Go to Data Translation $>$ ASCII Export in spectrophotometer software
+  \item Repeat from step \ref{item:fillsample} for all samples
+  \item Save Channel in the spectrophotometer software. Go to Data Translation $>$ ASCII Export in spectrophotometer software. The spectrophotometer software can only store a maximum number of ten scans 
 \end{enumerate}
-\textbf{Important:} the samples should be at room temperature. The \gls{od} measurement is sensible to temperature changes. Filter the water samples in advance and let them reach room temperature. It could take hours.
+\textbf{Important:} the samples should be at room temperature. The \gls{od} measurement is sensible to temperature changes. Filter the water samples in advance and let them reach room temperature. Be aware that it could take hours.
+
+Examples of absorption coefficients measured in the lab are shown in \autoref{fig:IOPlabmea} for the three CPAs.
+
+\begin{figure}[htb!]
+\centering
+     \includegraphics[trim=0 0 0 0,clip,width=8.0cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/ThesisPhD/Images/IOPExamplesField.png} 
+\caption{Example of absorption coefficients measured in the lab. \label{fig:IOPlabmea}}
+\end{figure}     
 % %*******************************
 % \subsubsection{Data treatment}
 %*******************************
@@ -393,15 +424,7 @@ Notes:
 % ------------------------------
 \subsection{Chlorophyll-{\it a} concentration}
 
-Methods described by \citet{Lorenzen:1967fk} and \citet{Ritchie:2008eu}.
-% ------------------------------
-\subsubsection{Procedures}
-The procedures are described by \citet{Tyler2013_chl_protocol}.
-
-% ------------------------------
-\subsubsection{Calculations}
-
-The calculations used \citep{Lorenzen:1967fk} are:
+There are two kinds of spectrometric methods to determine chlorophyll concentrations. The first methods take into account the presence of pheophytin-{\it a}, which is a common degradation product of chlorophyll-{\it a}, that can interfere with the determination of chlorophyll-{\it a} because it absorbs light and fluoresce in the same region of the spectrum as does chlorophyll-{\it a} \citep{StandardMethodsWater2011}. Examples of these methods are described by \citet{Lorenzen:1967fk}. These methods use a solvent for extraction, $90\%$ acetone in this case. The pheophytin-{\it a} concentration is estimated by adding acid to the chlorophyll-{\it a}, which results in loss of the magnesium atom, converting the chlorophyll-{\it a} to pheophytin-{\it a}. The calculations used by \citep{Lorenzen:1967fk} are:
 
 \begin{equation}
   C_a = \frac{26.7(655_o - 665_a)\times v}{V\times l}
@@ -418,7 +441,91 @@ $v = $ volume of extract in mililiters $[ml]$ \\
 $V = $ volume of water filtered in liters $[L]$ \\
 $l = $ pathlength of cuvette ($1cm$ for the cuvette used) \\
 
-Note: concentrations are in $[mg/m^3]$ or $[\mu g/L]$.
+The second kind of spectrophotometric methods do not take into account the pheophytin-{\it a} presence, and they are based only on the absorbance values at specific wavelengths (a.k.a. uncorrected methods). These are empirical methods that use non linear least squares fitting methods over a dataset with known concentrations. Examples of these methods are described by \citet{Ritchie:2008eu}. One algorithm to determine chlorophyll-{\it a} concentration with $90\%$ acetone as solvent that uses blank-corrected absorbances measured at four wavelengths (quadrichroic) is \citep{Ritchie:2008eu}
+\begin{equation}
+  C_a = -0.3319A_{630}-1.7485*A_{647}+11.9442A_{664}-1.4306A_{691} (\pm 0.0020)
+\end{equation}
+
+\begin{equation}
+  Chlorophyll a, mg/m^3 = \frac{C_a\times extract~volume, L}{volume~of~sample, m^3}
+\end{equation}
+% SM 10200 H, 17th – 20th editions & on-line (2001) edition, published by APHA
+% Chl a (10200Hb) and Chl a (10200Hc)
+% =$Y9*$E9/$D9
+% =-0.3319*$F9-1.7485*$G9+11.9442*$H9-1.4306*$J9
+
+Similar spectrophotometric methods and other kinds of methods are also described in \citet{StandardMethodsWater2011}.
+%*******************************
+% ------------------------------
+\subsubsection[Equipment]{Equipment \citep{Tyler2013_chl_protocol}}
+\begin{multicols}{2}
+\subsubsection*{Filtration}
+\begin{itemize}[itemsep=0.01cm,leftmargin=*]
+  \item Vacuum pump
+  \item Filter tower
+  \item Glass fiber filters: Whatman $4.7cm$, $0.7\mu m$
+  \item Graduate cylinder
+  \item Forceps
+  \item 15 ml Nalgene centrifuge tubes with caps
+  \item Drill
+  \item Teflon pestle and glass mortar
+  \item Cold $90\%$ acetone (spectrophotometric grade)
+  \item Squirt bottle with purified water or DIW
+  \item Optics paper
+  \item Aluminum foil envelopes
+  \item MgCO$_3$ slurry (1g/100ml - optional)
+\end{itemize}
+\subsubsection*{Measurement}
+\begin{itemize}[itemsep=0.01cm,leftmargin=*]
+  \item Spectrophotometer
+  \item 2 cuvettes
+  \item Centrifuge
+  \item $5\%$ HCl
+  \item Pipette
+
+\end{itemize}
+\end{multicols}
+% ------------------------------
+\subsubsection{Procedures}
+These procedures are described by \citet{Tyler2013_chl_protocol}.
+\subsubsection*{Filtration}
+\begin{enumerate}
+  \item Using forceps, place glass fiber filter onto tower, rough side up
+  \item Shake sample well, and pour into graduated cylinder
+  {\bf \item Record volume of water filtered}
+  \item Turn on the vacuum pump. Vacuum pressure should always stay at or below 7mm Hg to avoid breaking the cells 
+  \item Optional: Add 1 ml of MgCO$_3$ slurry to filter after all of the water has passed through
+  \item Turn off vacuum pump
+  \item Fold filter in half, and place in aluminum foil envelope (or Preti dish)
+  \item Place immediately in freezer (-80$^\circ$ is best)
+\end{enumerate}
+
+\subsubsection*{Extraction}
+\begin{enumerate}
+  \item Using forceps, tear up filter and put into glass mortar
+  \item Add 6 ml $90\%$ acetone
+  \item Using pestle attached to drill, grind sample until it is a slurry
+  \item Pour sample into Nalgene test tube
+  \item Using 3 additional ml of acetone, rinse mortar and add rinse to test tube
+  \item Cap tube, label with volume filtered, acetone volume, and date, and place immediately in freezer over night
+\end{enumerate}
+
+\subsubsection*{Spectrophotometric Measurement}
+\begin{enumerate}
+  \item Turn on spec and let it warm up for 15-20 minutes, set the wavelength to 665 nm
+  \item Pipette 3 ml of $90\%$ acetone into each cuvette, place in the spec
+  \item Rezero the instrument
+  \item Change the wavelength to 750 nm and record the blank value
+  \item Keep the blank cuvette on the instrument and empty the sample cuvette into a waste bottle, rinse once with DIW, and once with $90\%$ acetone
+  \item Remove samples tubes from freezer and shake to resuspend
+  \item Centrifuge samples tubes for 5 minutes
+  \item Shake samples tubes to remove filter particles from the wall of the tubes
+  \item Centrifuge samples tubes again for 10 minutes
+  \item Pipette 3 ml of sample into the sample cuvette
+  \item Read absorbance at 630, 647, 664, 665, 691, and 750 nm
+  \item Add two drops of $5\%$ HCl to the cuvette and wait 1 minute
+  \item Read absorbance at 665 and 750 nm
+\end{enumerate}
 
 
 \subsection{Total suspended solids (TSS)}
@@ -428,9 +535,12 @@ Note: concentrations are in $[mg/m^3]$ or $[\mu g/L]$.
 % \subsubsection*{Filtration}
 \begin{itemize}[itemsep=2pt,parsep=2pt]
 
-  \item TCLP filters ($47 mm$, $0.7\mu m$)
-  \item Vacuum
-  \item Balance
+  \item TCLP filters ($47 mm$, $0.7\mu m$) or membrane of glass fiber filter -- GF/F is standard
+  \item Vacuum pump
+  \item Filter apparatus
+  \item Petri dishes or aluminum foil envelopes
+  \item Squirt bottle with DIW
+  \item balance
   \item Graduate cylinder
   \item Forceps
 
@@ -440,31 +550,47 @@ Note: concentrations are in $[mg/m^3]$ or $[\mu g/L]$.
 \subsubsection{Procedure}
 %*******************************
 \begin{enumerate}[itemsep=2pt,parsep=2pt]
-  \item Weight filters before filtering
-  \item Record volume to filter. Use graduated cylinder
-  \item Use vacuum to filter water with the TCLP filters to filter the particles
-  \item Weight filter in balance
-  \item Put in aluminum foil with weight
-  \item Dry sample at $75^\circ C$ for a couple of hours
+  \item Weigh filters before filtering
+  \item Store weighed filter in aluminum foil with label including weight
+  \item Shake sample well, and measure sample in a graduated cylinder. 
+  \item {\bf Record volume filtered}
+  \item Using forceps, place a pre-weighed filter (if GF/F, rough side up) on the filter tower
+  \item Pour sample water from the graduated cylinder into filter tower and turn vacuum pump
+  \item After sample has filtered, place in aluminum foil using the forceps and label including sample name and date
+  \item If not analyzing samples right away, place in freezer for storage
+  \item Dry sample at $60^\circ C$ for a couple of hours or overnight. Note: Check to see if the samples are dry by checking the weight at two different times
+  \item Weigh dried filter in the balance
 \end{enumerate}
+{\bf Notes:}
+\begin{itemize}[itemsep=2pt,parsep=2pt]
+  \item If the organic fraction (SPOM) of the TSS is desired, the filters need to be combusted in a muffle furnace at $450^\circ C$ for 4 before being weighed again
+  \item The weight should be obtained using a 6 place balance and recorded on a data sheet
+\end{itemize}
+
 
  %*******************************
 \subsubsection{Calculations}
 From \citet{Tyler2013_SPM_protocol}:
 
 \begin{equation}
-TSS = \frac{[final~filter~weight~(mg) - tare~filter~weight~(mg)]}{volume~filtered~(L)}~~~\left[\frac{mg}{L}\right]~or~\left[\frac{g}{m^3}\right]
+TSS~or~SPM = \frac{[final~filter~weight~(mg) - tare~filter~weight~(mg)]}{volume~filtered~(L)}
 \end{equation}
 
+\begin{equation}
+SPOM = \frac{[final~filter~weight~(mg) - AFDM~(mg)]}{volume~filtered~(L)}
+\end{equation}
+
+\noindent Note: concentrations are in $[mg/m^3]$ or $[\mu g/L]$.
 
 % &&&&&&&&&&&&&&&&&&
 
 % @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 \chapter{Main Codes}
 
+The codes used in this research can be found at \url{https://github.com/javierconcha}.
 
 \singlespacing
-\lstset{language=bash,caption={Example of an input file used in Ecolight.},label=code:EcolightInput}
+\lstset{language=bash,rulecolor=\color{black},caption={Example of an input file used in Ecolight.},label=code:EcolightInput}
 \renewcommand{\lstlistingname}{Code}
 \begin{lstlisting}
 0,400,2500,.02,488,.00026,1,5.3
@@ -533,5 +659,451 @@ dummyComp.txt
 /home/jxc4005/hydrolight5Aaron_install/data/user/Ed_total.txt
 /home/jxc4005/hydrolight5Aaron_install/data/MyBiolumData.txt
 \end{lstlisting}
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+\singlespacing
+\lstset{language=matlab,rulecolor=\color{black},caption={Optimization Routine in MATLAB.},label=code:optimization routine}
+\renewcommand{\lstlistingname}{Code}
+\begin{lstlisting}
+% Optimization Routine
+function [XResults,residual,IMatrix] = opt(Ytest,LUT,LUTconc,LUTconcInput,LUTconcDPF)
+format short;
+
+% Xtest: water pixels concentration from the image; Dim: 2000x3
+% Ytest: water pixels reflectance from the image; Dim: 2000x8
+% LUT: LUT
+
+% global visual
+% global visual2
+%% Reading in the LUT
+Y = LUT;
+
+%% Optimization
+% [f2,f1,f3] = ndgrid(CDOMconc,SMconc,CHLconc); % CDOM SM CHL
+options = optimset('Display','off','Tolfun',1e-10);
+
+tic
+
+matlabpool open 4 % for using paralel computing
+
+XResults    = zeros(size(Ytest,1),3);
+residual    = zeros(size(Ytest));
+IMatrix     = zeros(size(Ytest,1),1);
+%%
+
+parfor i = 1:size(Ytest,1)
+%     if visual==1
+% figure(30)
+% clf
+% 
+% i
+% if i==172
+%    disp('i=172') 
+% end
+
+%     figure(68)
+%     clf
+%     ylim([0 0.05])
+%     end 
+%     
+%     if visual2==1
+%     figure(69)
+%     xlim([0 68])
+%     ylim([0 24])
+%     zlim([0 14])
+%     end
+    
+
+    % select x0
+    a=sum((Y-repmat(Ytest(i,:),size(Y,1),1)).^2,2);
+    [~,index]=min(a);
+    x0=LUTconc(index,:);
+
+    % Select from the LUT with same input. From ponds OR lake inputs
+    cond1 = LUTconcInput == LUTconcInput(index); %fix pond or lake
+    cond2 = LUTconcDPF == LUTconcDPF(index); % fix phase function
+    cond3 =  cond1&cond2;
+    
+    IMatrix(i) = index; % index in the LUT
+    
+    CDconc  = unique(LUTconc(cond3,3))';
+    SMconc  = unique(LUTconc(cond3,2))';
+    CHconc  = unique(LUTconc(cond3,1))';
+    
+    LUTconcUsed = LUTconc(cond3,:);
+    YUsed = Y(cond3,:);
+    
+    % for the extremes (myfun_mod.m error otherwise)
+    if x0(1)==max(CHconc) , x0(1)=CHconc(end-1); end
+    if x0(2)==max(SMconc) , x0(2)=SMconc(end-1); end
+    if x0(3)==max(CDconc) , x0(3)=CDconc(end-1); end
+    
+    % Y: LUT
+    % Ytest: TestSamples
+    % f1,f2,f3: Grid for the LUT
+    [XResults(i,:),~,residual(i,:)]= ...
+        lsqnonlin(@MyTrilinearInterp,x0,...
+            [min(CHconc);min(SMconc);min(CDconc)],...
+            [max(CHconc);max(SMconc);max(CDconc)],...
+            options,YUsed,Ytest(i,:),LUTconcUsed);
+    
+end
+
+
+matlabpool close % for using paralel computing
+
+disp('Elapsed time is (min):')
+disp(toc/60)
+beep
+pause(0.1)
+beep
+pause(0.1)
+beep
+pause(0.1)
+beep
+\end{lstlisting}
+
+
+
+
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+\singlespacing
+\lstset{language=matlab,rulecolor=\color{black},caption={"MyTrilinearInterp.m": Trylinear interpolation for the optimization routine.},label=code:trylinearinterp}
+\renewcommand{\lstlistingname}{Code}
+\begin{lstlisting}
+function f = MyTrilinearInterp(x0,LUT,Ytest,LUTconc)
+% Trilinear interpolation
+% By Javier A. Concha
+% 05-09-13
+% Trilinear interpolation for non uniform and monotoning grid
+%% Intialization
+% Initial Concentration
+
+nx = x0(1); 
+ny = x0(2);
+nz = x0(3);
+
+% Concentrations per components
+xx = unique(LUTconc(:,1)); % CHL
+yy = unique(LUTconc(:,2)); % SM
+zz = unique(LUTconc(:,3)); % CDOM
+%% To find index in between xx and weight for each dim
+index_up = find(xx >= nx,1);
+
+if isempty(index_up)
+    index_up = length(xx);
+end
+
+index_low = index_up-1;
+
+if index_low ~= 0
+    xl = xx(index_low); % lower concentration
+else xl = 0;
+end
+xu = xx(index_up);      % upper concentration
+
+wx = (nx-xl)/(xu-xl);
+if isnan(wx)
+    wx = 1;
+end
+%% To find index in between yy and weight for each dim
+indey_up = find(yy >= ny,1);
+
+if isempty(indey_up)
+    indey_up = length(yy);
+end
+
+indey_low = indey_up-1;
+
+if indey_low ~= 0
+    yl = yy(indey_low);
+else yl = 0;
+end
+yu = yy(indey_up);
+
+
+wy = (ny-yl)/(yu-yl);
+if isnan(wy)
+    wy = 1;
+end
+%% To find index in between zz and weight for each dim
+indez_up = find(zz >= nz,1);
+
+if isempty(indez_up)
+    indez_up = length(zz);
+end
+
+indez_low = indez_up-1;
+
+if indez_low ~= 0
+    zl = zz(indez_low);
+else zl = 0;
+end
+zu = zz(indez_up);
+
+wz = (nz-zl)/(zu-zl);
+if isnan(wz)
+    wz = 1;
+end
+%% Look up the values of the 8 points surrounding the cube
+if (index_low ~= 0 && indey_low ~= 0 && indez_low ~= 0)
+    V000 = LUT(LUTconc(:,1)==xl & ...
+        LUTconc(:,2)==yl & ...
+        LUTconc(:,3)==zl,:);
+else
+    V000 = zeros(1,size(LUT,2));
+end
+
+if (index_low ~= 0 && indey_low ~= 0)
+    V001 = LUT(LUTconc(:,1)==xl & ...
+        LUTconc(:,2)==yl & ...
+        LUTconc(:,3)==zu,:);
+else
+    V001 = zeros(1,size(LUT,2));
+end
+
+if (index_low ~= 0 && indez_low ~= 0)
+    V010 = LUT(LUTconc(:,1)==xl & ...
+        LUTconc(:,2)==yu & ...
+        LUTconc(:,3)==zl,:);
+else
+    V010 = zeros(1,size(LUT,2));
+end
+
+if index_low ~= 0
+    V011 = LUT(LUTconc(:,1)==xl & ...
+        LUTconc(:,2)==yu & ...
+        LUTconc(:,3)==zu,:);
+else
+    V011 = zeros(1,size(LUT,2));
+end
+
+if (indey_low ~= 0 && indez_low ~= 0)
+    V100 = LUT(LUTconc(:,1)==xu & ...
+        LUTconc(:,2)==yl & ...
+        LUTconc(:,3)==zl,:);
+else
+    V100 = zeros(1,size(LUT,2));
+end
+
+if indey_low ~= 0
+    V101 = LUT(LUTconc(:,1)==xu & ...
+        LUTconc(:,2)==yl & ...
+        LUTconc(:,3)==zu,:);
+else
+    V101 = zeros(1,size(LUT,2));
+end
+
+if indez_low ~= 0
+    V110 = LUT(LUTconc(:,1)==xu & ...
+        LUTconc(:,2)==yu & ...
+        LUTconc(:,3)==zl,:);
+else
+    V110 = zeros(1,size(LUT,2));
+end
+
+V111 = LUT(LUTconc(:,1)==xu & ...
+    LUTconc(:,2)==yu & ...
+    LUTconc(:,3)==zu,:);
+
+Vxyz =  ...
+    V000*(1-wx)*(1-wy)*(1-wz) +...
+    V001*(1-wx)*(1-wy)*wz + ...
+    V010*(1-wx)*wy*(1-wz) + ...
+    V011*(1-wx)*wy*wz + ...
+    V100*wx*(1-wy)*(1-wz) + ...
+    V101*wx*(1-wy)*wz + ...
+    V110*wx*wy*(1-wz) + ...
+    V111*wx*wy*wz;
+
+f = Ytest - Vxyz;
+
+
+% figure(30)
+% plot(Ytest,'r')
+% hold on
+% plot(Vxyz,'g')
+% plot(V000)
+% plot(V001)
+% plot(V010)
+% plot(V011)
+% plot(V100)
+% plot(V101)
+% plot(V110)
+% plot(V111)
+
+\end{lstlisting}
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+\singlespacing
+\lstset{language=bash,rulecolor=\color{black},caption={Bash script to create LUT in Hydrolight.},label=code:LUT creation}
+\renewcommand{\lstlistingname}{Code}
+\begin{lstlisting}
+#!/bin/bash
+rm directory_list.txt
+rm -r SITE/
+rm concentration_list.txt
+for SITE in `cat SITE_list.txt`
+do
+for CHL in `cat CHL_list.txt`
+do
+      for SM in `cat SM_list.txt`
+  do
+    for CDOM in `cat CDOM_list.txt`
+    do
+      for DPF in `cat DPF_list.txt`
+      do
+      directory="/home/jxc4005/HYDROLIGHT/EL5.2/SITE/"$SITE"/CHL/"$CHL"/SM/"$SM"/CDOM/"$CDOM"/DPF/"$DPF 
+      mkdir -p $directory
+      echo $directory
+      echo $directory >> directory_list.txt
+      echo $SITE $CHL $SM $CDOM $DPF>> concentration_list.txt 
+      mkdir -p $directory/ref 
+      
+      let i++
+      input=$SITE".txt"   
+      cat $input | sed 's"site"'$SITE'"g' | sed 's"flaCH"'$CHL'"g' | sed 's"flaCD"'$CDOM'"g' | sed 's"flaSM"'$SM'"g' | sed 's"user_dpfCHL"'$DPF'"g' | sed 's"user_dpfTSS"'$DPF'"g'  > $directory/input.txt
+
+        cat ELRun.sh | sed 's"flag"'$directory'"g' > $directory/ELRun.sh
+      #cp ./CommonInputs/* $directory/
+      #sbatch --qos=cis-normal $directory/ELRun.sh
+      sbatch --qos free --partition work --mem=12 $directory/ELRun.sh
+      #sbatch --qos schott --partition premium $directory/ELRun.sh
+    # sbatch --qos schott --partition premium --mem=12 $directory/ELRun.sh
+      echo $i
+      done
+    done
+  done
+done
+done 
+
+\end{lstlisting}
+
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+\singlespacing
+\lstset{language=bash,rulecolor=\color{black},caption={"ELRun.sh": Script to submit jobs to SLURM.},label=code:ELRun_sh}
+\renewcommand{\lstlistingname}{Code}
+\begin{lstlisting}
+#!/bin/bash -l
+# NOTE the -l flag!
+#
+
+# This is an example job file for a multi-core MPI job.
+# Note that all of the following statements below that begin
+# with #SBATCH are actually commands to the SLURM scheduler.
+# Please copy this file to your home directory and modify it
+# to suit your needs.
+# 
+# If you need any help, please email rc-help@rit.edu
+#
+
+# Name of the job - You'll probably want to customize this.
+#SBATCH -J ELRun
+
+# Standard out and Standard Error output files
+#SBATCH -o ELRun.output
+#SBATCH -e ELRun.output
+
+# Request 2 mins run time MAX, anything over will be KILLED
+#SBATCH -t 0:5:0
+
+# Put the job in the "work" partition and request FOUR cores
+# "work" is the default partition so it can be omitted without issue.
+#SBATCH -p work -n 1
+
+
+#
+# Your job script goes below this line.  
+# 
+
+#/home/jxc4005/ecolight52_install/Code/Ecolight/mainEL_stndg95.exe < ./input.txt
+
+cd flag
+
+/home/jxc4005/ecolight52_install/Code/Ecolight/mainEL_stnd.exe < ./input.txt
+
+awk 'c&&!--c;/Rrs \= Lw\/Ed/{c=3}' POutputEL.txt |awk '{ print $8 }'>tempR.txt
+
+mv tempR.txt ./ref/
+#rm ./* 2> /dev/null
+#exit
+
+\end{lstlisting}
+
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+\singlespacing
+\lstset{language=bash,rulecolor=\color{black},caption={Bash script to extract Rrs from Hydrolight runs.},label=code:Rrs extraction from Hydrolight runs}
+\renewcommand{\lstlistingname}{Code}
+\begin{lstlisting}
+#!/bin/bash
+rm ./work/Rvector.txt
+#rm file_list.txt
+rm concentration_listright.txt
+rm wrong_list.txt
+rm right_list.txt
+#find SITE/ -name "tempR.txt" > file_list.txt
+j=0
+
+for DIR in `cat directory_list.txt`
+do
+  echo $DIR
+        SITE="$(echo $DIR | cut -d/ -f7)"
+        CHL="$(echo $DIR | cut -d/ -f9)"
+        SM="$(echo $DIR | cut -d/ -f11)"
+        CDOM="$(echo $DIR | cut -d/ -f13)"
+        DPF="$(echo $DIR | cut -d/ -f15)"
+        echo $SITE $CHL $SM $CDOM $DPF
+
+  directory="/home/jxc4005/HYDROLIGHT/EL5.2/SITE/"$SITE"/CHL/"$CHL"/SM/"$SM"/CDOM/"$CDOM"/DPF/"$DPF
+
+  if [ " $(cat $DIR/ref/tempR.txt | wc -l)" -ne 120 ]
+        then
+                echo $DIR >> $PWD/wrong_list.txt
+    echo Warning: $DIR not completed yet and resubmitted!
+    
+    input=$SITE".txt"
+                cat $input | sed 's"site"'$SITE'"g' | sed 's"flaCH"'$CHL'"g' | sed 's"flaCD"'$CDOM'"g' | sed 's"flaSM"'$SM'"g' | sed 's"user_dpfCHL"'$DPF'"g' | sed 's"user_dpfTSS"'$DPF'"g'  > $directory/input.txt
+
+                 cat ELRun.sh | sed 's"flag"'$directory'"g' > $directory/ELRun.sh
+                 #sbatch --qos=cis-normal $directory/ELRun.sh
+     #sbatch --qos=cis-nopreempt $directory/ELRun.sh
+                 #sbatch --qos schott --partition premium $directory/ELRun.sh
+           sbatch --qos free  --partition work --mem=12 $directory/ELRun.sh
+     let j++
+  else
+
+                echo $DIR >> $PWD/right_list.txt
+                cat $DIR/ref/tempR.txt >> $PWD/work/Rvector.txt
+                echo $SITE $CHL $SM $CDOM $DPF>> $PWD/concentration_listright.txt
+                #rm $directory/* 2> /dev/null
+  fi
+        let i++
+        echo $i
+
+done
+echo Jobs completed correctly: $(cat ./right_list.txt|wc -l)
+echo Jobs not completed and resubmitted: $j
+
+if [ "$j" -ne 0 ]
+then
+  nohup nice ./monitor.sh 2> nohup.out &
+else
+  exit
+fi
+
+
+\end{lstlisting}
+
+
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+% \singlespacing
+% \lstset{language=matlab,caption={Example of an input file used in Ecolight.},label=code:optimization routine}
+% \renewcommand{\lstlistingname}{Code}
+% \begin{lstlisting}
+
+% \end{lstlisting}
+
 
 \end{appendices}
